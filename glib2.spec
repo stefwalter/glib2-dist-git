@@ -1,7 +1,7 @@
 Summary: A library of handy utility functions.
 Name: glib2
-Version: 2.2.1
-Release: 1
+Version: 2.2.3
+Release: 1.1
 License: LGPL
 Group: System Environment/Libraries
 Source: glib-%{version}.tar.bz2
@@ -24,12 +24,12 @@ This package provides version 2 of GLib.
 Summary: The GIMP ToolKit (GTK+) and GIMP Drawing Kit (GDK) support library
 Group: Development/Libraries
 Obsoletes: glib-gtkbeta-devel
-Requires: pkgconfig >= 0.8
+Requires: pkgconfig >= 1:0.8
 Requires: %{name} = %{version}
-Conflicts: glib-devel <= 1.2.8
+Conflicts: glib-devel <= 1:1.2.8
 
 %description devel
-The glib-devel package includes the header files for 
+The glib2-devel package includes the header files for 
 version 2 of the GLib library. 
 
 %prep
@@ -91,6 +91,21 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/*
 
 %changelog
+* Tue Aug 26 2003 Owen Taylor <otaylor@redhat.com> 2.2.3-1.1
+- Version 2.2.3
+
+* Tue Jul  8 2003 Owen Taylor <otaylor@redhat.com> 2.2.2-2.0
+- Bump for rebuild
+
+* Sun Jun  8 2003 Owen Taylor <otaylor@redhat.com>
+- Version 2.2.2
+
+* Wed Jun 04 2003 Elliot Lee <sopwith@redhat.com>
+- rebuilt
+
+* Tue Jun  3 2003 Jeff Johnson <jbj@redhat.com>
+- add explicit epoch's where needed.
+
 * Sun Feb  2 2003 Owen Taylor <otaylor@redhat.com>
 - Version 2.2.1
 
