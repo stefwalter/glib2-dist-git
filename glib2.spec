@@ -1,7 +1,7 @@
 Summary: A library of handy utility functions.
 Name: glib2
-Version: 2.4.1
-Release: 2
+Version: 2.4.2
+Release: 1
 License: LGPL
 Group: System Environment/Libraries
 Source: glib-%{version}.tar.bz2
@@ -10,6 +10,7 @@ Source3: glib2.csh
 Conflicts: libgnomeui <= 2.2.0
 BuildRoot: /var/tmp/glib-%{PACKAGE_VERSION}-root
 BuildRequires: pkgconfig >= 0.8
+BuildRequires: gettext
 Obsoletes: glib-gtkbeta
 URL: http://www.gtk.org
 
@@ -96,6 +97,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/*
 
 %changelog
+* Mon Jun 21 2004 Matthias Clasen <mclasen@redhat.com> - 2.4.2-1
+- Require gettext at build time  (#125320)
+- Update to 2.4.2 (#125736)
+
 * Tue Jun 15 2004 Elliot Lee <sopwith@redhat.com>
 - rebuilt
 
