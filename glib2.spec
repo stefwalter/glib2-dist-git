@@ -1,48 +1,95 @@
 %define __libtoolize echo
 
-Summary: A support library for C programming
+Summary: A library of handy utility functions.
 Name: glib2
-Version: 1.3.6
-Release: 6
+Version: 2.0.1
+Release: 1
 License: LGPL
 Group: System Environment/Libraries
 Source: glib-%{version}.tar.gz
 Source2: fixed-ltmain.sh
 BuildRoot: /var/tmp/glib-%{PACKAGE_VERSION}-root
-BuildRequires: pkgconfig >= 0.7
+BuildRequires: pkgconfig >= 0.8
 Obsoletes: glib-gtkbeta
 URL: http://www.gtk.org
 
-# Now in CVS, wont be needed for 1.3.6
-Patch: glib-1.3.6-fix.patch
+%description 
+GLib is the low-level core library that forms the basis
+for projects such as GTK+ and GNOME. It provides data structure
+handling for C, portability wrappers, and interfaces for such runtime
+functionality as an event loop, threads, dynamic loading, and an
+object system.
 
-%description
-GLib is a widely used library containing utility functions for
-C programming, a event loop, an object system, and other
-support functionality.
-
-This package is a beta version of the next release of GLib.
-You should only install this package if you are a developer
-who wants to start developing against new versions of GLib
-and the GTK+ widget library.
+This package provides version 2.0 of GLib.
 
 %package devel
-Summary: Header files and static libraries for the GLib package
+Summary: The GIMP ToolKit (GTK+) and GIMP Drawing Kit (GDK) support library
 Group: Development/Libraries
 Obsoletes: glib-gtkbeta-devel
-Requires: pkgconfig >= 0.7
+Requires: pkgconfig >= 0.8
 Requires: %{name} = %{version}
+Conflicts: glib-devel <= 1.2.8
 
 %description devel
-The glib2-devel package includes the static libraries and header 
-files for the GLib package.
-
-This package is a beta version of the next release of GLib.
-You should only install this package if you are a developer
-who wants to start developing against new versions of GLib
-and the GTK+ widget library.
+The glib-devel package includes the header files for 
+version 2.0 of the GLib library. 
 
 %changelog
+* Wed Apr  3 2002 Alex Larsson <alexl@redhat.com>
+- Update to version 2.0.1
+
+* Fri Mar  8 2002 Owen Taylor <otaylor@redhat.com>
+- Version 2.0.0
+
+* Mon Feb 25 2002 Alex Larsson <alexl@redhat.com>
+- Update to 1.3.15
+
+* Thu Feb 21 2002 Alex Larsson <alexl@redhat.com>
+- Bump for rebuild
+
+* Mon Feb 18 2002 Alex Larsson <alexl@redhat.com>
+- Update to 1.3.14
+
+* Fri Feb 15 2002 Havoc Pennington <hp@redhat.com>
+- add horrible buildrequires hack
+
+* Thu Feb 14 2002 Havoc Pennington <hp@redhat.com>
+- 1.3.13.91 cvs snap
+
+* Mon Feb 11 2002 Matt Wilson <msw@redhat.com>
+- rebuild from CVS snapshot
+- use setup -q
+
+* Thu Jan 31 2002 Jeremy Katz <katzj@redhat.com>
+- rebuild
+
+* Tue Jan 29 2002 Owen Taylor <otaylor@redhat.com>
+- 1.3.13
+
+* Tue Jan 22 2002 Havoc Pennington <hp@redhat.com>
+- attempting rebuild in rawhide
+
+* Wed Jan  2 2002 Havoc Pennington <hp@redhat.com>
+- remove 64-bit patch now upstream, 1.3.12.90
+
+* Mon Nov 26 2001 Havoc Pennington <hp@redhat.com>
+- add some missing files to file list, langify
+
+* Sun Nov 25 2001 Havoc Pennington <hp@redhat.com>
+- add temporary patch to fix GTypeFundamentals on 64-bit
+
+* Sun Nov 25 2001 Havoc Pennington <hp@redhat.com>
+- Version 1.3.11
+
+* Thu Oct 25 2001 Owen Taylor <otaylor@redhat.com>
+- Version 1.3.10
+
+* Tue Sep 25 2001 Owen Taylor <otaylor@redhat.com>
+- Version 1.3.9
+
+* Wed Sep 19 2001 Owen Taylor <otaylor@redhat.com>
+- Version 1.3.8
+
 * Fri Jul 20 2001 Owen Taylor <otaylor@redhat.com>
 - Make -devel package require main package (#45388)
 - Fix description and summary
@@ -165,8 +212,7 @@ and the GTK+ widget library.
 - Split out glib package
 
 %prep
-%setup -n glib-%{version}
-%patch -p1 -b .fixit
+%setup -q -n glib-%{version}
 
 %build
 rm ltmain.sh && cp %{SOURCE2} ltmain.sh
@@ -179,8 +225,10 @@ make
 %install
 rm -rf $RPM_BUILD_ROOT
 
-mkdir -p $RPM_BUILD_ROOT%{_prefix}/bin
+mkdir -p $RPM_BUILD_ROOT%{_bindir}
 %makeinstall
+
+%find_lang %name
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -189,24 +237,24 @@ rm -rf $RPM_BUILD_ROOT
 
 %postun -p /sbin/ldconfig
 
-%files
+%files -f %{name}.lang
 %defattr(-, root, root)
 
 %doc AUTHORS COPYING ChangeLog NEWS README
-%{_prefix}/lib/libglib-1.3.so.*
-%{_prefix}/lib/libgthread-1.3.so.*
-%{_prefix}/lib/libgmodule-1.3.so.*
-%{_prefix}/lib/libgobject-1.3.so.*
+%{_libdir}/libglib-2.0.so.*
+%{_libdir}/libgthread-2.0.so.*
+%{_libdir}/libgmodule-2.0.so.*
+%{_libdir}/libgobject-2.0.so.*
 
 %files devel
 %defattr(-, root, root)
 
-%{_prefix}/lib/lib*.so
-%{_prefix}/lib/*a
-%{_prefix}/lib/glib-2.0
-%{_prefix}/include/*
-# %{_mandir}/man1/*  - conflicts with glib-devel
-%{_prefix}/share/aclocal/*
-%{_prefix}/bin/*
-%{_prefix}/share/gtk-doc/
-%{_prefix}/lib/pkgconfig/*
+%{_libdir}/lib*.so
+%{_libdir}/glib-2.0
+%{_includedir}/*
+%{_datadir}/aclocal/*
+%{_datadir}/gtk-doc/
+%{_libdir}/pkgconfig/*
+%{_datadir}/glib-2.0
+%{_bindir}/*
+%{_mandir}/man1/*
