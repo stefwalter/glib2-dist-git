@@ -1,6 +1,6 @@
 Summary: A library of handy utility functions.
 Name: glib2
-Version: 2.4.4
+Version: 2.4.5
 Release: 1
 License: LGPL
 Group: System Environment/Libraries
@@ -97,6 +97,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/*
 
 %changelog
+* Fri Jul 30 2004 Matthias Clasen <mclasen@redhat.com> - 2.4.5-1
+- Update to 2.4.5
+- Escape macros in changelog section
+
 * Fri Jul 09 2004 Matthias Clasen <mclasen@redhat.com> - 2.4.4-1
 - Update to 2.4.4
 
@@ -313,7 +317,7 @@ rm -rf $RPM_BUILD_ROOT
 
 * Fri Jul 07 2000 Owen Taylor <otaylor@redhat.com>
 - Version 1.3.1
-- Move back to standard %{prefix}
+- Move back to standard %%{prefix}
 
 * Thu Jun 8 2000 Owen Taylor <otaylor@redhat.com>
 - Rebuild in /opt/gtk-beta
@@ -355,7 +359,7 @@ rm -rf $RPM_BUILD_ROOT
 - new description tags 
 
 * Sun Feb 21 1999 Michael Fulbright <drmike@redhat.com>
-- removed libtoolize from %build
+- removed libtoolize from %%build
 
 * Thu Feb 11 1999 Michael Fulbright <drmike@redhat.com>
 - added libgthread to file list
