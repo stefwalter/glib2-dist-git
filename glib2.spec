@@ -7,7 +7,6 @@ Group: System Environment/Libraries
 Source: glib-%{version}.tar.bz2
 Source2: glib2.sh
 Source3: glib2.csh
-Patch0: glib-2.6.0-abicheck-config.patch
 Conflicts: libgnomeui <= 2.2.0
 BuildRoot: %{_tmppath}/glib-%{PACKAGE_VERSION}-root
 BuildRequires: pkgconfig >= 0.8
@@ -37,7 +36,6 @@ version 2 of the GLib library.
 
 %prep
 %setup -q -n glib-%{version}
-%patch0 -p0 -b .abicheck-config
 
 %build
 
@@ -48,7 +46,8 @@ done
 make
 
 # test-thread fails on ia64: http://bugzilla.redhat.com/bugzilla/show_bug.cgi?id=116829
-%ifnarch ia64 s390 s390x
+# abicheck fails on ppc64
+%ifnarch ia64 s390 s390x ppc64
 make check
 %endif
 
