@@ -1,13 +1,10 @@
-%define __libtoolize echo
-
 Summary: A library of handy utility functions.
 Name: glib2
-Version: 2.0.1
-Release: 2
+Version: 2.0.6
+Release: 1
 License: LGPL
 Group: System Environment/Libraries
-Source: glib-%{version}.tar.gz
-Source2: fixed-ltmain.sh
+Source: glib-%{version}.tar.bz2
 BuildRoot: /var/tmp/glib-%{PACKAGE_VERSION}-root
 BuildRequires: pkgconfig >= 0.8
 Obsoletes: glib-gtkbeta
@@ -34,7 +31,70 @@ Conflicts: glib-devel <= 1.2.8
 The glib-devel package includes the header files for 
 version 2.0 of the GLib library. 
 
+%prep
+%setup -q -n glib-%{version}
+
+%build
+for i in config.guess config.sub ; do
+	test -f /usr/share/libtool/$i && cp /usr/share/libtool/$i .
+done
+%configure --disable-gtk-doc
+make
+
+%install
+rm -rf $RPM_BUILD_ROOT
+
+mkdir -p $RPM_BUILD_ROOT%{_bindir}
+%makeinstall
+
+%find_lang glib20
+
+%clean
+rm -rf $RPM_BUILD_ROOT
+
+%post -p /sbin/ldconfig
+
+%postun -p /sbin/ldconfig
+
+%files -f glib20.lang
+%defattr(-, root, root)
+
+%doc AUTHORS COPYING ChangeLog NEWS README
+%{_libdir}/libglib-2.0.so.*
+%{_libdir}/libgthread-2.0.so.*
+%{_libdir}/libgmodule-2.0.so.*
+%{_libdir}/libgobject-2.0.so.*
+
+%files devel
+%defattr(-, root, root)
+
+%{_libdir}/lib*.so
+%{_libdir}/glib-2.0
+%{_includedir}/*
+%{_datadir}/aclocal/*
+%{_datadir}/gtk-doc/
+%{_libdir}/pkgconfig/*
+%{_datadir}/glib-2.0
+%{_bindir}/*
+%{_mandir}/man1/*
+
 %changelog
+* Thu Aug  8 2002 Owen Taylor <otaylor@redhat.com>
+- Version 2.0.6
+- Remove fixed-ltmain.sh; shouldn't be needed any more.
+
+* Fri Jun 21 2002 Tim Powers <timp@redhat.com>
+- automated rebuild
+
+* Sun Jun 16 2002 Havoc Pennington <hp@redhat.com>
+- 2.0.4
+
+* Thu May 23 2002 Tim Powers <timp@redhat.com>
+- automated rebuild
+
+* Wed Apr 24 2002 Havoc Pennington <hp@redhat.com>
+ - rebuild in different environment
+
 * Mon Apr 15 2002 Owen Taylor <otaylor@redhat.com>
 - Fix missing .po files (#63336)
 
@@ -214,50 +274,3 @@ version 2.0 of the GLib library.
 * Mon Apr 13 1998 Marc Ewing <marc@redhat.com>
 - Split out glib package
 
-%prep
-%setup -q -n glib-%{version}
-
-%build
-rm ltmain.sh && cp %{SOURCE2} ltmain.sh
-for i in config.guess config.sub ; do
-	test -f /usr/share/libtool/$i && cp /usr/share/libtool/$i .
-done
-%configure --disable-gtk-doc
-make
-
-%install
-rm -rf $RPM_BUILD_ROOT
-
-mkdir -p $RPM_BUILD_ROOT%{_bindir}
-%makeinstall
-
-%find_lang glib20
-
-%clean
-rm -rf $RPM_BUILD_ROOT
-
-%post -p /sbin/ldconfig
-
-%postun -p /sbin/ldconfig
-
-%files -f glib20.lang
-%defattr(-, root, root)
-
-%doc AUTHORS COPYING ChangeLog NEWS README
-%{_libdir}/libglib-2.0.so.*
-%{_libdir}/libgthread-2.0.so.*
-%{_libdir}/libgmodule-2.0.so.*
-%{_libdir}/libgobject-2.0.so.*
-
-%files devel
-%defattr(-, root, root)
-
-%{_libdir}/lib*.so
-%{_libdir}/glib-2.0
-%{_includedir}/*
-%{_datadir}/aclocal/*
-%{_datadir}/gtk-doc/
-%{_libdir}/pkgconfig/*
-%{_datadir}/glib-2.0
-%{_bindir}/*
-%{_mandir}/man1/*
