@@ -98,7 +98,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/*
 
 %changelog
-* Mon Jan 10 2004 Matthias Clasen <mclasen@redhat.com> - 2.6.1-1
+* Mon Jan 10 2005 Matthias Clasen <mclasen@redhat.com> - 2.6.1-1
 - Upgrade to 2.6.1
 
 * Mon Dec 21 2004 Matthias Clasen <mclasen@redhat.com> - 2.6.0-1
