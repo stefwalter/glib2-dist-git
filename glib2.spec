@@ -1,14 +1,14 @@
 Summary: A library of handy utility functions.
 Name: glib2
 Version: 2.4.5
-Release: 1
+Release: 2
 License: LGPL
 Group: System Environment/Libraries
 Source: glib-%{version}.tar.bz2
 Source2: glib2.sh
 Source3: glib2.csh
 Conflicts: libgnomeui <= 2.2.0
-BuildRoot: /var/tmp/glib-%{PACKAGE_VERSION}-root
+BuildRoot: %{_tmppath}/glib-%{PACKAGE_VERSION}-root
 BuildRequires: pkgconfig >= 0.8
 BuildRequires: gettext
 Obsoletes: glib-gtkbeta
@@ -97,6 +97,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/*
 
 %changelog
+* Sun Aug 1 2004 ALan Cox <alan@redhat.com> - 2.4.5-2
+- Fixed BuildRoot to use % macro not hardcode /var/tmp
+
 * Fri Jul 30 2004 Matthias Clasen <mclasen@redhat.com> - 2.4.5-1
 - Update to 2.4.5
 - Escape macros in changelog section
