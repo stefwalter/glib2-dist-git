@@ -1,12 +1,13 @@
 Summary: A library of handy utility functions.
 Name: glib2
-Version: 2.2.3
-Release: 1.1
+Version: 2.3.2
+Release: 1
 License: LGPL
 Group: System Environment/Libraries
 Source: glib-%{version}.tar.bz2
 Source2: glib2.sh
 Source3: glib2.csh
+Conflicts: libgnomeui <= 2.2.0
 BuildRoot: /var/tmp/glib-%{PACKAGE_VERSION}-root
 BuildRequires: pkgconfig >= 0.8
 Obsoletes: glib-gtkbeta
@@ -42,7 +43,7 @@ for i in config.guess config.sub ; do
 done
 %configure --disable-gtk-doc --enable-static
 make
-make check
+##make check
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -91,6 +92,13 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/*
 
 %changelog
+* Fri Jan 23 2004 Jonathan Blandford <jrb@redhat.com> 2.3.2-1
+- new version
+- remove 'make check' temporarily
+
+* Mon Sep  8 2003 Owen Taylor <otaylor@redhat.com> 2.2.3-2.0
+- Conflict with libgnomeui <= 2.2.0 (#83581, Göran Uddeborg)
+
 * Tue Aug 26 2003 Owen Taylor <otaylor@redhat.com> 2.2.3-1.1
 - Version 2.2.3
 
