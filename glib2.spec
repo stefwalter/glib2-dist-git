@@ -46,8 +46,8 @@ done
 make
 
 # test-thread fails on ia64: http://bugzilla.redhat.com/bugzilla/show_bug.cgi?id=116829
-# abicheck fails on ppc64
-%ifnarch ia64 s390 s390x ppc64
+# abicheck fails on ppc and ppc64
+%ifnarch ia64 s390 s390x ppc ppc64
 make check
 %endif
 
