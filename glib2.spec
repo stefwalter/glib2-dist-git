@@ -1,10 +1,10 @@
 Summary: A library of handy utility functions.
 Name: glib2
-Version: 2.1.3
+Version: 2.2.1
 Release: 1
 License: LGPL
 Group: System Environment/Libraries
-Source: glib-%{version}.tar.gz
+Source: glib-%{version}.tar.bz2
 Source2: glib2.sh
 Source3: glib2.csh
 BuildRoot: /var/tmp/glib-%{PACKAGE_VERSION}-root
@@ -16,8 +16,7 @@ URL: http://www.gtk.org
 GLib is the low-level core library that forms the basis
 for projects such as GTK+ and GNOME. It provides data structure
 handling for C, portability wrappers, and interfaces for such runtime
-functionality as an event loop, threads, dynamic loading, and an
-object system.
+functionality as an event loop, threads, dynamic loading, and anobject system.
 
 This package provides version 2 of GLib.
 
@@ -37,11 +36,13 @@ version 2 of the GLib library.
 %setup -q -n glib-%{version}
 
 %build
+
 for i in config.guess config.sub ; do
 	test -f /usr/share/libtool/$i && cp /usr/share/libtool/$i .
 done
-%configure --disable-gtk-doc
+%configure --disable-gtk-doc --enable-static
 make
+make check
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -79,6 +80,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-, root, root)
 
 %{_libdir}/lib*.so
+%{_libdir}/lib*.a
 %{_libdir}/glib-2.0
 %{_includedir}/*
 %{_datadir}/aclocal/*
@@ -89,6 +91,26 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/*
 
 %changelog
+* Sun Feb  2 2003 Owen Taylor <otaylor@redhat.com>
+- Version 2.2.1
+
+* Wed Jan 22 2003 Tim Powers <timp@redhat.com>
+- rebuilt
+
+* Thu Jan  9 2003 Owen Taylor <otaylor@redhat.com>
+- Add static libraries to build (#78685, Bernd Kischnick)
+- Bump-and-rebuild for new redhat-rpm-config
+
+* Fri Dec 20 2002 Owen Taylor <otaylor@redhat.com>
+- Version 2.2.0
+- Add make check to the build process
+
+* Mon Dec 16 2002 Owen Taylor <otaylor@redhat.com>
+- Version 2.1.5
+
+* Wed Dec 11 2002 Owen Taylor <otaylor@redhat.com>
+- Version 2.1.4
+
 * Mon Dec  2 2002 Owen Taylor <otaylor@redhat.com>
 - Version 2.1.3
 
