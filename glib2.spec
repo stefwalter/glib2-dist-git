@@ -1,10 +1,12 @@
 Summary: A library of handy utility functions.
 Name: glib2
 Version: 2.0.6
-Release: 1
+Release: 2
 License: LGPL
 Group: System Environment/Libraries
 Source: glib-%{version}.tar.bz2
+Source2: glib2.sh
+Source3: glib2.csh
 BuildRoot: /var/tmp/glib-%{PACKAGE_VERSION}-root
 BuildRequires: pkgconfig >= 0.8
 Obsoletes: glib-gtkbeta
@@ -47,6 +49,13 @@ rm -rf $RPM_BUILD_ROOT
 mkdir -p $RPM_BUILD_ROOT%{_bindir}
 %makeinstall
 
+## glib2.sh and glib2.csh
+./mkinstalldirs $RPM_BUILD_ROOT%{_sysconfdir}/profile.d
+install -m 755 %{SOURCE2} $RPM_BUILD_ROOT%{_sysconfdir}/profile.d
+install -m 755 %{SOURCE3} $RPM_BUILD_ROOT%{_sysconfdir}/profile.d
+
+rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
+
 %find_lang glib20
 
 %clean
@@ -64,6 +73,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libgthread-2.0.so.*
 %{_libdir}/libgmodule-2.0.so.*
 %{_libdir}/libgobject-2.0.so.*
+%{_sysconfdir}/profile.d/*
 
 %files devel
 %defattr(-, root, root)
@@ -79,6 +89,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/*
 
 %changelog
+* Tue Aug 13 2002 Havoc Pennington <hp@redhat.com>
+- install glib2.sh and glib2.csh to set G_BROKEN_FILENAMES
+- blow away unpackaged files in install
+
 * Thu Aug  8 2002 Owen Taylor <otaylor@redhat.com>
 - Version 2.0.6
 - Remove fixed-ltmain.sh; shouldn't be needed any more.
