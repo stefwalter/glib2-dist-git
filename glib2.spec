@@ -1,6 +1,6 @@
 Summary: A library of handy utility functions.
 Name: glib2
-Version: 2.3.2
+Version: 2.4.0
 Release: 1
 License: LGPL
 Group: System Environment/Libraries
@@ -43,7 +43,11 @@ for i in config.guess config.sub ; do
 done
 %configure --disable-gtk-doc --enable-static
 make
-##make check
+
+# test-thread fails on ia64: http://bugzilla.redhat.com/bugzilla/show_bug.cgi?id=116829
+%ifnarch ia64 s390 s390x
+make check
+%endif
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -92,6 +96,27 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/*
 
 %changelog
+* Tue Mar 16 2004 Owen Taylor <otaylor@redhat.com> 2.4.0-1
+- Update to 2.4.0
+
+* Wed Mar 10 2004 Mark McLoughlin <markmc@redhat.com> 2.3.6-1
+- Update to 2.3.6
+- Remove gatomic build fix
+
+* Tue Mar 02 2004 Elliot Lee <sopwith@redhat.com>
+- rebuilt
+
+* Tue Mar 02 2004 Mark McLoughlin <markmc@redhat.com> 2.3.5-1
+- Update to 2.3.5
+- Fix build on ppc64
+- Disable make check on s390 as well - test-thread failing
+
+* Wed Feb 25 2004 Mark McLoughlin <markmc@redhat.com> 2.3.3-1
+- Update to 2.3.3
+
+* Fri Feb 13 2004 Elliot Lee <sopwith@redhat.com>
+- rebuilt
+
 * Fri Jan 23 2004 Jonathan Blandford <jrb@redhat.com> 2.3.2-1
 - new version
 - remove 'make check' temporarily
