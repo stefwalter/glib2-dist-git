@@ -3,7 +3,7 @@
 Summary: A library of handy utility functions.
 Name: glib2
 Version: 2.0.1
-Release: 1
+Release: 2
 License: LGPL
 Group: System Environment/Libraries
 Source: glib-%{version}.tar.gz
@@ -35,6 +35,9 @@ The glib-devel package includes the header files for
 version 2.0 of the GLib library. 
 
 %changelog
+* Mon Apr 15 2002 Owen Taylor <otaylor@redhat.com>
+- Fix missing .po files (#63336)
+
 * Wed Apr  3 2002 Alex Larsson <alexl@redhat.com>
 - Update to version 2.0.1
 
@@ -228,7 +231,7 @@ rm -rf $RPM_BUILD_ROOT
 mkdir -p $RPM_BUILD_ROOT%{_bindir}
 %makeinstall
 
-%find_lang %name
+%find_lang glib20
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -237,7 +240,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %postun -p /sbin/ldconfig
 
-%files -f %{name}.lang
+%files -f glib20.lang
 %defattr(-, root, root)
 
 %doc AUTHORS COPYING ChangeLog NEWS README
