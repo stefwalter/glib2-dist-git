@@ -1,10 +1,10 @@
 Summary: A library of handy utility functions.
 Name: glib2
-Version: 2.0.6
-Release: 2
+Version: 2.1.3
+Release: 1
 License: LGPL
 Group: System Environment/Libraries
-Source: glib-%{version}.tar.bz2
+Source: glib-%{version}.tar.gz
 Source2: glib2.sh
 Source3: glib2.csh
 BuildRoot: /var/tmp/glib-%{PACKAGE_VERSION}-root
@@ -19,7 +19,7 @@ handling for C, portability wrappers, and interfaces for such runtime
 functionality as an event loop, threads, dynamic loading, and an
 object system.
 
-This package provides version 2.0 of GLib.
+This package provides version 2 of GLib.
 
 %package devel
 Summary: The GIMP ToolKit (GTK+) and GIMP Drawing Kit (GDK) support library
@@ -31,7 +31,7 @@ Conflicts: glib-devel <= 1.2.8
 
 %description devel
 The glib-devel package includes the header files for 
-version 2.0 of the GLib library. 
+version 2 of the GLib library. 
 
 %prep
 %setup -q -n glib-%{version}
@@ -89,6 +89,12 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/*
 
 %changelog
+* Mon Dec  2 2002 Owen Taylor <otaylor@redhat.com>
+- Version 2.1.3
+
+* Mon Oct 07 2002 Havoc Pennington <hp@redhat.com>
+- Try rebuilding with new arches
+
 * Tue Aug 13 2002 Havoc Pennington <hp@redhat.com>
 - install glib2.sh and glib2.csh to set G_BROKEN_FILENAMES
 - blow away unpackaged files in install
