@@ -1,7 +1,7 @@
 Summary: A library of handy utility functions.
 Name: glib2
-Version: 2.4.5
-Release: 2
+Version: 2.4.6
+Release: 1
 License: LGPL
 Group: System Environment/Libraries
 Source: glib-%{version}.tar.bz2
@@ -97,6 +97,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/*
 
 %changelog
+* Fri Aug 13 2004 Matthias Clasen <mclasen@redhat.com> - 2.4.6-1
+- Update to 2.4.6
+
 * Sun Aug 1 2004 ALan Cox <alan@redhat.com> - 2.4.5-2
 - Fixed BuildRoot to use % macro not hardcode /var/tmp
 
