@@ -1,12 +1,13 @@
 Summary: A library of handy utility functions.
 Name: glib2
 Version: 2.6.3
-Release: 2
+Release: 3
 License: LGPL
 Group: System Environment/Libraries
 Source: glib-%{version}.tar.bz2
 Source2: glib2.sh
 Source3: glib2.csh
+Patch0: glib-2.6.3-gcc4.patch
 Conflicts: libgnomeui <= 2.2.0
 BuildRoot: %{_tmppath}/glib-%{PACKAGE_VERSION}-root
 BuildRequires: pkgconfig >= 0.8
@@ -36,6 +37,7 @@ version 2 of the GLib library.
 
 %prep
 %setup -q -n glib-%{version}
+%patch0 -p1 -b .gcc4
 
 %build
 
@@ -98,6 +100,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/*
 
 %changelog
+* Wed Mar  4 2005 Matthias Clasen <mclasen@redhat.com> - 2.6.3-3
+- Rebuild
+
 * Wed Mar  2 2005 Matthias Clasen <mclasen@redhat.com> - 2.6.3-2
 - Rebuild with gcc4
 
