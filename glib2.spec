@@ -45,7 +45,7 @@ done
 %configure --disable-gtk-doc --enable-static
 make
 
-%ifnarch ppc64 s390
+%ifnarch s390 s390x ppc64
 make check
 %endif
 
