@@ -2,7 +2,7 @@ ExclusiveArch: s390 s390x
 Summary: A library of handy utility functions.
 Name: glib2
 Version: 2.7.5
-Release: 1
+Release: 2
 License: LGPL
 Group: System Environment/Libraries
 Source: glib-%{version}.tar.bz2
