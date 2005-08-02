@@ -1,6 +1,6 @@
 Summary: A library of handy utility functions.
 Name: glib2
-Version: 2.7.4
+Version: 2.7.5
 Release: 1
 License: LGPL
 Group: System Environment/Libraries
@@ -44,12 +44,7 @@ for i in config.guess config.sub ; do
 done
 %configure --disable-gtk-doc --enable-static
 make
-
-# test-thread fails on ia64: http://bugzilla.redhat.com/bugzilla/show_bug.cgi?id=116829
-# abicheck fails on ppc and ppc64
-%ifnarch ia64 s390 s390x ppc ppc64
 make check
-%endif
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -98,6 +93,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/*
 
 %changelog
+* Tue Aug  2 2005 Matthias Clasen <mclasen@redhat.com> - 2.7.5-1
+- Update to 2.7.5
+
 * Fri Jul 22 2005 Matthias Clasen <mclasen@redhat.com> - 2.7.4-1
 - Update to 2.7.4
 
