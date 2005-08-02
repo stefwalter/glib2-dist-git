@@ -1,3 +1,4 @@
+ExclusiveArch: s390 s390x
 Summary: A library of handy utility functions.
 Name: glib2
 Version: 2.7.5
@@ -7,6 +8,7 @@ Group: System Environment/Libraries
 Source: glib-%{version}.tar.bz2
 Source2: glib2.sh
 Source3: glib2.csh
+Patch0: glib-2.7.5-atomic.patch
 Conflicts: libgnomeui <= 2.2.0
 BuildRoot: %{_tmppath}/glib-%{PACKAGE_VERSION}-root
 BuildRequires: pkgconfig >= 0.8
@@ -36,6 +38,7 @@ version 2 of the GLib library.
 
 %prep
 %setup -q -n glib-%{version}
+%patch0 -p1 -b .atomic
 
 %build
 
