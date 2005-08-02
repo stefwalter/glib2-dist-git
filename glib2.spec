@@ -7,7 +7,6 @@ Group: System Environment/Libraries
 Source: glib-%{version}.tar.bz2
 Source2: glib2.sh
 Source3: glib2.csh
-Patch0: glib-2.7.5-tests.patch
 Conflicts: libgnomeui <= 2.2.0
 BuildRoot: %{_tmppath}/glib-%{PACKAGE_VERSION}-root
 BuildRequires: pkgconfig >= 0.8
@@ -37,7 +36,6 @@ version 2 of the GLib library.
 
 %prep
 %setup -q -n glib-%{version}
-%patch0 -p1 -b .tests
 
 %build
 
@@ -47,7 +45,7 @@ done
 %configure --disable-gtk-doc --enable-static
 make
 
-%ifnarch ppc64
+%ifnarch ppc64 s390
 make check
 %endif
 
