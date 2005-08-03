@@ -46,7 +46,9 @@ for i in config.guess config.sub ; do
 done
 %configure --disable-gtk-doc --enable-static
 make
+%ifnarch s390 s390x ppc64
 make check
+%endif
 
 %install
 rm -rf $RPM_BUILD_ROOT
