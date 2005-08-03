@@ -1,15 +1,12 @@
-ExclusiveArch: s390 s390x
 Summary: A library of handy utility functions.
 Name: glib2
-Version: 2.7.5
-Release: 5
+Version: 2.7.6
+Release: 1
 License: LGPL
 Group: System Environment/Libraries
 Source: glib-%{version}.tar.bz2
 Source2: glib2.sh
 Source3: glib2.csh
-Patch0: glib-2.7.5-convert.patch
-Patch1: glib-2.7.5-atomic.patch
 Conflicts: libgnomeui <= 2.2.0
 BuildRoot: %{_tmppath}/glib-%{PACKAGE_VERSION}-root
 BuildRequires: pkgconfig >= 0.8
@@ -39,8 +36,6 @@ version 2 of the GLib library.
 
 %prep
 %setup -q -n glib-%{version}
-%patch0 -p1 -b .convert
-%patch1 -p1 -b .atomic
 
 %build
 
@@ -49,8 +44,7 @@ for i in config.guess config.sub ; do
 done
 %configure --disable-gtk-doc --enable-static
 make
-make check
-%ifnarch s390 s390x ppc64
+%ifnarch ppc64
 make check
 %endif
 
@@ -101,6 +95,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/*
 
 %changelog
+* Tue Aug  3 2005 Matthias Clasen <mclasen@redhat.com> - 2.7.6-1
+- Update to 2.7.6
+
 * Tue Aug  2 2005 Matthias Clasen <mclasen@redhat.com> - 2.7.5-1
 - Update to 2.7.5
 
