@@ -1,13 +1,14 @@
 Summary: A library of handy utility functions.
 Name: glib2
 Version: 2.7.6
-Release: 2
+Release: 3
 License: LGPL
 Group: System Environment/Libraries
 Source: glib-%{version}.tar.bz2
 Source2: glib2.sh
 Source3: glib2.csh
 Patch0: glib-2.7.6-atomic.patch
+Patch1: glib-2.7.6-c++.patch
 Conflicts: libgnomeui <= 2.2.0
 BuildRoot: %{_tmppath}/glib-%{PACKAGE_VERSION}-root
 BuildRequires: pkgconfig >= 0.8
@@ -38,6 +39,7 @@ version 2 of the GLib library.
 %prep
 %setup -q -n glib-%{version}
 %patch0 -p1 -b .atomic
+%patch1 -p1 -b .c++
 
 %build
 
@@ -97,6 +99,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/*
 
 %changelog
+* Fri Aug  5 2005 Matthias Clasen <mclasen@redhat.com> - 2.7.6-3
+- Fix C++ guards in gstdio.h
+
 * Thu Aug  4 2005 Matthias Clasen <mclasen@redhat.com> - 2.7.6-2
 - Another attempt to fix atomic ops on s390
 
