@@ -7,8 +7,6 @@ Group: System Environment/Libraries
 Source: glib-%{version}.tar.bz2
 Source2: glib2.sh
 Source3: glib2.csh
-Patch0: glib-2.7.6-atomic.patch
-Patch1: glib-2.7.6-c++.patch
 Conflicts: libgnomeui <= 2.2.0
 BuildRoot: %{_tmppath}/glib-%{PACKAGE_VERSION}-root
 BuildRequires: pkgconfig >= 0.8
@@ -38,8 +36,6 @@ version 2 of the GLib library.
 
 %prep
 %setup -q -n glib-%{version}
-%patch0 -p1 -b .atomic
-%patch1 -p1 -b .c++
 
 %build
 
@@ -99,6 +95,7 @@ rm -rf $RPM_BUILD_ROOT
 %changelog
 * Sat Aug 13 2005 Matthias Clasen <mclasen@redhat.com> - 2.8.0-1
 - New stable upstream version
+- Drop patches
 
 * Fri Aug  5 2005 Matthias Clasen <mclasen@redhat.com> - 2.7.6-3
 - Fix C++ guards in gstdio.h
