@@ -1,7 +1,7 @@
 Summary: A library of handy utility functions.
 Name: glib2
-Version: 2.7.6
-Release: 4
+Version: 2.8.0
+Release: 1
 License: LGPL
 Group: System Environment/Libraries
 Source: glib-%{version}.tar.bz2
@@ -97,6 +97,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/*
 
 %changelog
+* Sat Aug 13 2005 Matthias Clasen <mclasen@redhat.com> - 2.8.0-1
+- New stable upstream version
+
 * Fri Aug  5 2005 Matthias Clasen <mclasen@redhat.com> - 2.7.6-3
 - Fix C++ guards in gstdio.h
 
