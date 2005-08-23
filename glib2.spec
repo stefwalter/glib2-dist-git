@@ -1,14 +1,12 @@
 Summary: A library of handy utility functions.
 Name: glib2
-Version: 2.8.0
+Version: 2.8.1
 Release: 1
 License: LGPL
 Group: System Environment/Libraries
 Source: glib-%{version}.tar.bz2
 Source2: glib2.sh
 Source3: glib2.csh
-# make abi checking work on ia64, fixed in 2.8.1
-Patch0: glib-2.8.0-ia64.patch
 Conflicts: libgnomeui <= 2.2.0
 BuildRoot: %{_tmppath}/glib-%{PACKAGE_VERSION}-root
 BuildRequires: pkgconfig >= 0.8
@@ -38,7 +36,6 @@ version 2 of the GLib library.
 
 %prep
 %setup -q -n glib-%{version}
-%patch0 -p1 -b .ia64
 
 %build
 
@@ -96,6 +93,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/*
 
 %changelog
+* Sat Aug 23 2005 Matthias Clasen <mclasen@redhat.com> - 2.8.1-1
+- New upstream version
+- Drop patches
+
 * Sat Aug 13 2005 Matthias Clasen <mclasen@redhat.com> - 2.8.0-1
 - New stable upstream version
 - Drop patches
