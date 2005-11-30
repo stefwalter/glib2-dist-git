@@ -44,6 +44,8 @@ for i in config.guess config.sub ; do
 done
 %configure --disable-gtk-doc --enable-static
 make
+# http://bugzilla.gnome.org/show_bug.cgi?id=320463 
+LANG=en_US.UTF8
 make check
 
 %install
