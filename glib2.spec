@@ -1,6 +1,6 @@
 Summary: A library of handy utility functions.
 Name: glib2
-Version: 2.9.1.cvs20051202_1
+Version: 2.9.1.cvs20051202_2
 Release: 1
 License: LGPL
 Group: System Environment/Libraries
