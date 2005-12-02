@@ -88,7 +88,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/glib-2.0
 %{_includedir}/*
 %{_datadir}/aclocal/*
-%{_datadir}/gtk-doc/
+##%{_datadir}/gtk-doc/
 %{_libdir}/pkgconfig/*
 %{_datadir}/glib-2.0
 %{_bindir}/*
