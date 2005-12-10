@@ -1,6 +1,6 @@
 Summary: A library of handy utility functions.
 Name: glib2
-Version: 2.9.1.cvs20051202_2
+Version: 2.9.1
 Release: 1
 License: LGPL
 Group: System Environment/Libraries
@@ -88,13 +88,16 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/glib-2.0
 %{_includedir}/*
 %{_datadir}/aclocal/*
-##%{_datadir}/gtk-doc/
+%{_datadir}/gtk-doc/
 %{_libdir}/pkgconfig/*
 %{_datadir}/glib-2.0
 %{_bindir}/*
 %{_mandir}/man1/*
 
 %changelog
+* Sat Dec 10 2005 Matthias Clasen <mclasen@redhat.com> - 2.9.1-1
+- New upstream version
+
 * Wed Nov 30 2005 Matthias Clasen <mclasen@redhat.com> - 2.9.0-1
 - New upstream version
 
