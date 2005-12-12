@@ -1,4 +1,4 @@
-Summary: A library of handy utility functions.
+Summary: A library of handy utility functions
 Name: glib2
 Version: 2.9.1
 Release: 1
@@ -95,6 +95,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/*
 
 %changelog
+* Sun Dec 11 2005 Matthias Clasen <mclasen@redhat.com>
+- Specfile cosmetics
+
 * Sat Dec 10 2005 Matthias Clasen <mclasen@redhat.com> - 2.9.1-1
 - New upstream version
 
