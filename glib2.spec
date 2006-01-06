@@ -1,10 +1,10 @@
 Summary: A library of handy utility functions
 Name: glib2
-Version: 2.9.1
+Version: 2.9.2
 Release: 1
 License: LGPL
 Group: System Environment/Libraries
-Source: glib-%{version}.tar.bz2
+Source: glib-%{version}.tar.gz
 Source2: glib2.sh
 Source3: glib2.csh
 Conflicts: libgnomeui <= 2.2.0
