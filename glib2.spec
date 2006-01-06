@@ -4,7 +4,7 @@ Version: 2.9.2
 Release: 1
 License: LGPL
 Group: System Environment/Libraries
-Source: glib-%{version}.tar.gz
+Source: glib-%{version}.tar.bz2
 Source2: glib2.sh
 Source3: glib2.csh
 Conflicts: libgnomeui <= 2.2.0
@@ -18,7 +18,8 @@ URL: http://www.gtk.org
 GLib is the low-level core library that forms the basis
 for projects such as GTK+ and GNOME. It provides data structure
 handling for C, portability wrappers, and interfaces for such runtime
-functionality as an event loop, threads, dynamic loading, and anobject system.
+functionality as an event loop, threads, dynamic loading, and an 
+object system.
 
 This package provides version 2 of GLib.
 
@@ -95,6 +96,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/*
 
 %changelog
+* Fri Jan  6 2006 Matthias Clasen <mclasen@redhat.com> - 2.9.2-1
+- Update to 2.9.2
+
 * Sun Dec 11 2005 Matthias Clasen <mclasen@redhat.com>
 - Specfile cosmetics
 
