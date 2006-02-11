@@ -1,7 +1,12 @@
 Summary: A library of handy utility functions
 Name: glib2
+<<<<<<< glib2.spec
+Version: 2.9.6
+Release: 1
+=======
 Version: 2.9.5
 Release: 1.2
+>>>>>>> 1.77
 License: LGPL
 Group: System Environment/Libraries
 Source: glib-%{version}.tar.bz2
@@ -96,6 +101,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/*
 
 %changelog
+* Sat Feb 12 2006 Matthias Clasen <mclasen@redhat.com> - 2.9.6-1
+- Update to 2.9.6
+
 * Fri Feb 10 2006 Jesse Keating <jkeating@redhat.com> - 2.9.5-1.2
 - bump again for double-long bug on ppc(64)
 
