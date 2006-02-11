@@ -1,12 +1,7 @@
 Summary: A library of handy utility functions
 Name: glib2
-<<<<<<< glib2.spec
 Version: 2.9.6
 Release: 1
-=======
-Version: 2.9.5
-Release: 1.2
->>>>>>> 1.77
 License: LGPL
 Group: System Environment/Libraries
 Source: glib-%{version}.tar.bz2
