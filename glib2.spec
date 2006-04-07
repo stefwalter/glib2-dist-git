@@ -14,7 +14,7 @@ BuildRequires: gettext
 Obsoletes: glib-gtkbeta
 URL: http://www.gtk.org
 
-Patch0: test.patch
+Patch0: glib-2.10.2-test.patch
 
 %description 
 GLib is the low-level core library that forms the basis
