@@ -1,7 +1,7 @@
 Summary: A library of handy utility functions
 Name: glib2
-Version: 2.10.2
-Release: 2
+Version: 2.11.0
+Release: 1
 License: LGPL
 Group: System Environment/Libraries
 Source: glib-%{version}.tar.bz2
@@ -13,8 +13,6 @@ BuildRequires: pkgconfig >= 0.8
 BuildRequires: gettext
 Obsoletes: glib-gtkbeta
 URL: http://www.gtk.org
-
-Patch0: glib-2.10.2-test.patch
 
 %description 
 GLib is the low-level core library that forms the basis
@@ -30,7 +28,7 @@ Summary: The GIMP ToolKit (GTK+) and GIMP Drawing Kit (GDK) support library
 Group: Development/Libraries
 Obsoletes: glib-gtkbeta-devel
 Requires: pkgconfig >= 1:0.8
-Requires: %{name} = %{version}
+Requires: %{name} = %{version}-%{release}
 Conflicts: glib-devel <= 1:1.2.8
 
 %description devel
@@ -39,14 +37,13 @@ version 2 of the GLib library.
 
 %prep
 %setup -q -n glib-%{version}
-%patch0 -p1 -b .test
 
 %build
 
 for i in config.guess config.sub ; do
 	test -f /usr/share/libtool/$i && cp /usr/share/libtool/$i .
 done
-%configure --disable-gtk-doc --enable-static
+%configure --disable-gtk-doc --disable-static
 make
 # http://bugzilla.gnome.org/show_bug.cgi?id=320463 
 LANG=en_US.UTF8
@@ -63,7 +60,7 @@ mkdir -p $RPM_BUILD_ROOT%{_bindir}
 install -m 755 %{SOURCE2} $RPM_BUILD_ROOT%{_sysconfdir}/profile.d
 install -m 755 %{SOURCE3} $RPM_BUILD_ROOT%{_sysconfdir}/profile.d
 
-rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
+rm -f $RPM_BUILD_ROOT%{_libdir}/*.{a,la}
 
 %find_lang glib20
 
@@ -88,7 +85,6 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-, root, root)
 
 %{_libdir}/lib*.so
-%{_libdir}/lib*.a
 %{_libdir}/glib-2.0
 %{_includedir}/*
 %{_datadir}/aclocal/*
@@ -99,6 +95,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/*
 
 %changelog
+* Tue May 2 2006 Matthias Clasen <mclasen@redhat.com> - 2.11.0-1
+- Update to 2.11.0
+
 * Fri Apr 7 2006 Matthias Clasen <mclasen@redhat.com> - 2.10.2-2
 - Update to 2.10.2
 
