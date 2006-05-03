@@ -14,6 +14,9 @@ BuildRequires: gettext
 Obsoletes: glib-gtkbeta
 URL: http://www.gtk.org
 
+# http://bugzilla.gnome.org/show_bug.cgi?id=340538
+Patch0: glib-2.11.0-base64-test.patch
+
 %description 
 GLib is the low-level core library that forms the basis
 for projects such as GTK+ and GNOME. It provides data structure
@@ -37,6 +40,7 @@ version 2 of the GLib library.
 
 %prep
 %setup -q -n glib-%{version}
+%patch0 -p1 -b  .base64-test
 
 %build
 
@@ -47,8 +51,6 @@ done
 make
 # http://bugzilla.gnome.org/show_bug.cgi?id=320463 
 LANG=en_US.UTF8
-# this test currently fails
-rm tests/bookmarks/fail-01.xbel
 make check
 
 %install
