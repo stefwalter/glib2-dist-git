@@ -1,6 +1,6 @@
 Summary: A library of handy utility functions
 Name: glib2
-Version: 2.11.0
+Version: 2.11.1
 Release: 1
 License: LGPL
 Group: System Environment/Libraries
@@ -13,9 +13,6 @@ BuildRequires: pkgconfig >= 0.8
 BuildRequires: gettext
 Obsoletes: glib-gtkbeta
 URL: http://www.gtk.org
-
-# http://bugzilla.gnome.org/show_bug.cgi?id=340538
-Patch0: glib-2.11.0-base64-test.patch
 
 %description 
 GLib is the low-level core library that forms the basis
@@ -40,7 +37,6 @@ version 2 of the GLib library.
 
 %prep
 %setup -q -n glib-%{version}
-%patch0 -p1 -b  .base64-test
 
 %build
 
@@ -99,6 +95,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/*
 
 %changelog
+* Mon May 15 2006 Matthias Clasen <mclasen@redhat.com> - 2.11.1-1
+- Update to 2.11.1
+
 * Tue May 2 2006 Matthias Clasen <mclasen@redhat.com> - 2.11.0-1
 - Update to 2.11.0
 
