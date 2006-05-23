@@ -1,7 +1,9 @@
+%define libdir /%{_lib}
+
 Summary: A library of handy utility functions
 Name: glib2
 Version: 2.11.1
-Release: 1
+Release: 2
 License: LGPL
 Group: System Environment/Libraries
 Source: glib-%{version}.tar.bz2
@@ -43,7 +45,7 @@ version 2 of the GLib library.
 for i in config.guess config.sub ; do
 	test -f /usr/share/libtool/$i && cp /usr/share/libtool/$i .
 done
-%configure --disable-gtk-doc --disable-static
+%configure --disable-gtk-doc --disable-static --libdir=%{libdir}
 make
 # http://bugzilla.gnome.org/show_bug.cgi?id=320463 
 LANG=en_US.UTF8
@@ -52,15 +54,19 @@ make check
 %install
 rm -rf $RPM_BUILD_ROOT
 
-mkdir -p $RPM_BUILD_ROOT%{_bindir}
-%makeinstall
+make install DESTDIR=$RPM_BUILD_ROOT
 
 ## glib2.sh and glib2.csh
 ./mkinstalldirs $RPM_BUILD_ROOT%{_sysconfdir}/profile.d
 install -m 755 %{SOURCE2} $RPM_BUILD_ROOT%{_sysconfdir}/profile.d
 install -m 755 %{SOURCE3} $RPM_BUILD_ROOT%{_sysconfdir}/profile.d
 
-rm -f $RPM_BUILD_ROOT%{_libdir}/*.{a,la}
+rm -f $RPM_BUILD_ROOT%{libdir}/*.{a,la}
+
+# we install in /lib now, but the pkgconfig files still go in /usr/lib
+mkdir -p $RPM_BUILD_ROOT%{_libdir}/pkgconfig
+mv $RPM_BUILD_ROOT%{libdir}/pkgconfig/*.pc $RPM_BUILD_ROOT%{_libdir}/pkgconfig
+
 
 %find_lang glib20
 
@@ -75,17 +81,17 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-, root, root)
 
 %doc AUTHORS COPYING ChangeLog NEWS README
-%{_libdir}/libglib-2.0.so.*
-%{_libdir}/libgthread-2.0.so.*
-%{_libdir}/libgmodule-2.0.so.*
-%{_libdir}/libgobject-2.0.so.*
+%{libdir}/libglib-2.0.so.*
+%{libdir}/libgthread-2.0.so.*
+%{libdir}/libgmodule-2.0.so.*
+%{libdir}/libgobject-2.0.so.*
 %{_sysconfdir}/profile.d/*
 
 %files devel
 %defattr(-, root, root)
 
-%{_libdir}/lib*.so
-%{_libdir}/glib-2.0
+%{libdir}/lib*.so
+%{libdir}/glib-2.0
 %{_includedir}/*
 %{_datadir}/aclocal/*
 %{_datadir}/gtk-doc/
@@ -95,6 +101,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/*
 
 %changelog
+* Mon May 22 2006 Matthias Clasen <mclasen@redhat.com> - 2.11.1-2
+- Move glib to /lib
+
 * Mon May 15 2006 Matthias Clasen <mclasen@redhat.com> - 2.11.1-1
 - Update to 2.11.1
 
