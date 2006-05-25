@@ -44,6 +44,8 @@ version 2 of the GLib library.
 
 %build
 
+# .libdir touches .am 
+automake-1.7
 for i in config.guess config.sub ; do
 	test -f /usr/share/libtool/$i && cp /usr/share/libtool/$i .
 done
