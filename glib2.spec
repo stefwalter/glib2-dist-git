@@ -3,12 +3,13 @@
 Summary: A library of handy utility functions
 Name: glib2
 Version: 2.11.1
-Release: 2
+Release: 3
 License: LGPL
 Group: System Environment/Libraries
 Source: glib-%{version}.tar.bz2
 Source2: glib2.sh
 Source3: glib2.csh
+Patch0: glib-2.11.1-libdir.patch
 Conflicts: libgnomeui <= 2.2.0
 BuildRoot: %{_tmppath}/glib-%{PACKAGE_VERSION}-root
 BuildRequires: pkgconfig >= 0.8
@@ -39,6 +40,7 @@ version 2 of the GLib library.
 
 %prep
 %setup -q -n glib-%{version}
+%patch0 -p1 -b .libdir
 
 %build
 
@@ -63,11 +65,6 @@ install -m 755 %{SOURCE3} $RPM_BUILD_ROOT%{_sysconfdir}/profile.d
 
 rm -f $RPM_BUILD_ROOT%{libdir}/*.{a,la}
 
-# we install in /lib now, but the pkgconfig files still go in /usr/lib
-mkdir -p $RPM_BUILD_ROOT%{_libdir}/pkgconfig
-mv $RPM_BUILD_ROOT%{libdir}/pkgconfig/*.pc $RPM_BUILD_ROOT%{_libdir}/pkgconfig
-
-
 %find_lang glib20
 
 %clean
@@ -91,7 +88,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-, root, root)
 
 %{libdir}/lib*.so
-%{libdir}/glib-2.0
+%{_libdir}/glib-2.0
 %{_includedir}/*
 %{_datadir}/aclocal/*
 %{_datadir}/gtk-doc/
@@ -101,6 +98,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/*
 
 %changelog
+* Thu May 25 2006 Matthias Clasen <mclasen@redhat.com> - 2.11.1-3
+- Keep glibconfig.h in /usr/lib
+
 * Mon May 22 2006 Matthias Clasen <mclasen@redhat.com> - 2.11.1-2
 - Move glib to /lib
 
