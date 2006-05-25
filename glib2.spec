@@ -3,7 +3,7 @@
 Summary: A library of handy utility functions
 Name: glib2
 Version: 2.11.1
-Release: 4
+Release: 5
 License: LGPL
 Group: System Environment/Libraries
 Source: glib-%{version}.tar.bz2
@@ -99,6 +99,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/*
 
 %changelog
+* Thu May 25 2006 Matthias Clasen <mclasen@redhat.com> - 2.11.1-5
+- Fix some fallout
+
 * Thu May 25 2006 Matthias Clasen <mclasen@redhat.com> - 2.11.1-4
 - Include static libraries, since anaconda needs them (#193143)
 
