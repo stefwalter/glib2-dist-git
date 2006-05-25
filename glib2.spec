@@ -3,7 +3,7 @@
 Summary: A library of handy utility functions
 Name: glib2
 Version: 2.11.1
-Release: 3
+Release: 4
 License: LGPL
 Group: System Environment/Libraries
 Source: glib-%{version}.tar.bz2
@@ -49,7 +49,7 @@ automake-1.7
 for i in config.guess config.sub ; do
 	test -f /usr/share/libtool/$i && cp /usr/share/libtool/$i .
 done
-%configure --disable-gtk-doc --disable-static --libdir=%{libdir}
+%configure --disable-gtk-doc --enable-static --libdir=%{libdir}
 make
 # http://bugzilla.gnome.org/show_bug.cgi?id=320463 
 LANG=en_US.UTF8
@@ -65,7 +65,7 @@ make install DESTDIR=$RPM_BUILD_ROOT
 install -m 755 %{SOURCE2} $RPM_BUILD_ROOT%{_sysconfdir}/profile.d
 install -m 755 %{SOURCE3} $RPM_BUILD_ROOT%{_sysconfdir}/profile.d
 
-rm -f $RPM_BUILD_ROOT%{libdir}/*.{a,la}
+rm -f $RPM_BUILD_ROOT%{libdir}/*.la
 
 %find_lang glib20
 
@@ -90,6 +90,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-, root, root)
 
 %{libdir}/lib*.so
+%{libdir}/lib*.a
 %{_libdir}/glib-2.0
 %{_includedir}/*
 %{_datadir}/aclocal/*
@@ -100,6 +101,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/*
 
 %changelog
+* Thu May 25 2006 Matthias Clasen <mclasen@redhat.com> - 2.11.1-4
+- Include static libraries, since anaconda needs them (#193143)
+
 * Thu May 25 2006 Matthias Clasen <mclasen@redhat.com> - 2.11.1-3
 - Keep glibconfig.h in /usr/lib
 
