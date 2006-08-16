@@ -2,8 +2,8 @@
 
 Summary: A library of handy utility functions
 Name: glib2
-Version: 2.12.1
-Release: 1
+Version: 2.12.2
+Release: 1%{?dist}
 License: LGPL
 Group: System Environment/Libraries
 Source: glib-%{version}.tar.bz2
@@ -88,6 +88,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-, root, root)
 
 %{libdir}/lib*.so
+# we need the static library here
 %{libdir}/lib*.a
 %{_libdir}/glib-2.0
 %{_includedir}/*
@@ -99,6 +100,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/*
 
 %changelog
+* Tue Aug 15 2006 Matthias Clasen <mclasen@redhat.com> - 2.12.2-1.fc6
+- Update to 2.12.2
+
 * Sat Jul 22 2006 Matthias Clasen <mclasen@redhat.com> - 2.12.1-1
 - Update to 2.12.1
 
