@@ -3,17 +3,22 @@
 Summary: A library of handy utility functions
 Name: glib2
 Version: 2.12.2
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: LGPL
 Group: System Environment/Libraries
 Source: glib-%{version}.tar.bz2
 Source2: glib2.sh
 Source3: glib2.csh
 Patch0: glib-2.11.1-libdir.patch
+# fixed in upstream cvs
+Patch1: glib-2.12.2-monotonic-timer.patch
+
 Conflicts: libgnomeui <= 2.2.0
 BuildRoot: %{_tmppath}/glib-%{PACKAGE_VERSION}-root
 BuildRequires: pkgconfig >= 0.8
 BuildRequires: gettext
+# for patch1
+BuildRequires: autoconf
 Obsoletes: glib-gtkbeta
 URL: http://www.gtk.org
 
@@ -41,12 +46,15 @@ version 2 of the GLib library.
 %prep
 %setup -q -n glib-%{version}
 %patch0 -p1 -b .libdir
+%patch1 -p1 -b .monotonic-timer
 
 %build
 
 for i in config.guess config.sub ; do
 	test -f /usr/share/libtool/$i && cp /usr/share/libtool/$i .
 done
+# for patch1
+autoconf
 %configure --disable-gtk-doc --enable-static --libdir=%{libdir}
 make
 # http://bugzilla.gnome.org/show_bug.cgi?id=320463 
@@ -100,6 +108,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/*
 
 %changelog
+* Sun Aug 27 2006 Matthias Clasen <mclasen@redhat.com> - 2.12.2-2.fc6
+- Use Posix monotonic timers for GTimer
+
 * Tue Aug 15 2006 Matthias Clasen <mclasen@redhat.com> - 2.12.2-1.fc6
 - Update to 2.12.2
 
