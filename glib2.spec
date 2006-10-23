@@ -54,9 +54,11 @@ done
 autoconf
 %configure --disable-gtk-doc --enable-static --libdir=%{libdir}
 make
+%ifnarch ppc ppc64
 # http://bugzilla.gnome.org/show_bug.cgi?id=320463 
 LANG=en_US.UTF8
 make check
+%endif
 
 %install
 rm -rf $RPM_BUILD_ROOT
