@@ -3,19 +3,19 @@
 Summary: A library of handy utility functions
 Name: glib2
 Version: 2.12.4
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: LGPL
 Group: System Environment/Libraries
-Source: glib-%{version}.tar.bz2
+Source: http://ftp.gnome.org/pub/gnome/sources/glib/2.12/glib-%{version}.tar.bz2
 Source2: glib2.sh
 Source3: glib2.csh
 Patch0: glib-2.11.1-libdir.patch
 
 Conflicts: libgnomeui <= 2.2.0
-BuildRoot: %{_tmppath}/glib-%{PACKAGE_VERSION}-root
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires: pkgconfig >= 0.8
 BuildRequires: gettext
-# for patch1
+# for patch 0
 BuildRequires: autoconf
 Obsoletes: glib-gtkbeta
 URL: http://www.gtk.org
@@ -46,18 +46,18 @@ version 2 of the GLib library.
 %patch0 -p1 -b .libdir
 
 %build
-
 for i in config.guess config.sub ; do
 	test -f /usr/share/libtool/$i && cp /usr/share/libtool/$i .
 done
-# for patch1
+# for patch 0
 autoconf
 %configure --disable-gtk-doc --enable-static --libdir=%{libdir}
 make
+
+%check
 %ifnarch ppc ppc64
 # http://bugzilla.gnome.org/show_bug.cgi?id=320463 
-LANG=en_US.UTF8
-make check
+LANG=en_US.UTF8 make check
 %endif
 
 %install
@@ -100,7 +100,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/glib-2.0
 %{_includedir}/*
 %{_datadir}/aclocal/*
-%{_datadir}/gtk-doc/
+%{_datadir}/gtk-doc/html/*
 %{_libdir}/pkgconfig/*
 %{_datadir}/glib-2.0
 %{_bindir}/*
