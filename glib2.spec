@@ -2,8 +2,8 @@
 
 Summary: A library of handy utility functions
 Name: glib2
-Version: 2.12.4
-Release: 2%{?dist}
+Version: 2.12.5
+Release: 1%{?dist}
 License: LGPL
 Group: System Environment/Libraries
 Source: http://ftp.gnome.org/pub/gnome/sources/glib/2.12/glib-%{version}.tar.bz2
@@ -55,10 +55,10 @@ autoconf
 make
 
 %check
-%ifnarch ppc ppc64
+#%ifnarch ppc ppc64
 # http://bugzilla.gnome.org/show_bug.cgi?id=320463 
 LANG=en_US.UTF8 make check
-%endif
+#%endif
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -107,6 +107,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/*
 
 %changelog
+* Mon Dec 18 2006 Matthias Clasen <mclasen@redhat.com> - 2.12.5-1
+- Update to 2.12.5
+
 * Sun Oct 22 2006 Matthias Clasen <mclasen@redhat.com> - 2.12.4-1
 - Update to 2.12.4
 
