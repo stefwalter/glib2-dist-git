@@ -2,8 +2,8 @@
 
 Summary: A library of handy utility functions
 Name: glib2
-Version: 2.12.5
-Release: 2%{?dist}
+Version: 2.12.6
+Release: 1%{?dist}
 License: LGPL
 Group: System Environment/Libraries
 Source: http://ftp.gnome.org/pub/gnome/sources/glib/2.12/glib-%{version}.tar.bz2
@@ -110,6 +110,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/*
 
 %changelog
+* Wed Dec 20 2006 Matthias Clasen <mclasen@redhat.com> - 2.12.6-1
+- Update to 2.12.6
+
 * Mon Dec 18 2006 Matthias Clasen <mclasen@redhat.com> - 2.12.5-2
 - Fix the configure check for broken poll
 
