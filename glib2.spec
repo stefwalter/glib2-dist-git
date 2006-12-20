@@ -10,8 +10,6 @@ Source: http://ftp.gnome.org/pub/gnome/sources/glib/2.12/glib-%{version}.tar.bz2
 Source2: glib2.sh
 Source3: glib2.csh
 Patch0: glib-2.11.1-libdir.patch
-# fixed in upstream cvs
-Patch1: glib-2.12.5-poll-check.patch
 
 Conflicts: libgnomeui <= 2.2.0
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -46,7 +44,6 @@ version 2 of the GLib library.
 %prep
 %setup -q -n glib-%{version}
 %patch0 -p1 -b .libdir
-%patch1 -p0 -b .poll-check
 
 %build
 for i in config.guess config.sub ; do
