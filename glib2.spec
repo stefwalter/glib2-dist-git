@@ -55,7 +55,9 @@ autoconf
 make
 
 %check
+%ifnarch ppc ppc64
 make check
+%endif
 
 %install
 rm -rf $RPM_BUILD_ROOT
