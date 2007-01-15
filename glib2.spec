@@ -2,7 +2,7 @@
 
 Summary: A library of handy utility functions
 Name: glib2
-Version: 2.12.7
+Version: 2.12.8
 Release: 1%{?dist}
 License: LGPL
 Group: System Environment/Libraries
@@ -10,8 +10,6 @@ Source: http://ftp.gnome.org/pub/gnome/sources/glib/2.12/glib-%{version}.tar.bz2
 Source2: glib2.sh
 Source3: glib2.csh
 Patch0: glib-2.11.1-libdir.patch
-# Fixed upstream
-Patch1: glib-2.12.7-bit-test-x86-64.patch
 
 Conflicts: libgnomeui <= 2.2.0
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -46,7 +44,6 @@ version 2 of the GLib library.
 %prep
 %setup -q -n glib-%{version}
 %patch0 -p1 -b .libdir
-%patch1 -p1 -b .bit-test-x86-64
 
 %build
 for i in config.guess config.sub ; do
@@ -58,10 +55,7 @@ autoconf
 make
 
 %check
-%ifnarch ppc ppc64
-# http://bugzilla.gnome.org/show_bug.cgi?id=320463 
-LANG=en_US.UTF8 make check
-%endif
+make check
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -110,6 +104,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/*
 
 %changelog
+* Mon Jan 15 2007 Matthias Clasen <mclasen@redhat.com> - 2.12.8-1
+- Update to 2.12.8
+
 * Thu Jan  4 2007 Matthias Clasen <mclasen@redhat.com> - 2.12.7-1
 - Update to 2.12.7
 - Fix bit-test on x86-64
