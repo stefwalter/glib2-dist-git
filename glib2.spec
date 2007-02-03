@@ -3,7 +3,7 @@
 Summary: A library of handy utility functions
 Name: glib2
 Version: 2.12.9
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: LGPL
 Group: System Environment/Libraries
 Source: http://ftp.gnome.org/pub/gnome/sources/glib/2.12/glib-%{version}.tar.bz2
@@ -13,11 +13,10 @@ Patch0: glib-2.11.1-libdir.patch
 
 Conflicts: libgnomeui <= 2.2.0
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-BuildRequires: pkgconfig >= 0.8
+BuildRequires: pkgconfig >= 1:0.14
 BuildRequires: gettext
 # for patch 0
 BuildRequires: autoconf
-Obsoletes: glib-gtkbeta
 URL: http://www.gtk.org
 
 %description 
@@ -30,16 +29,25 @@ object system.
 This package provides version 2 of GLib.
 
 %package devel
-Summary: The GIMP ToolKit (GTK+) and GIMP Drawing Kit (GDK) support library
+Summary: A library of handy utility functions
 Group: Development/Libraries
-Obsoletes: glib-gtkbeta-devel
-Requires: pkgconfig >= 1:0.8
+Requires: pkgconfig >= 1:0.14
 Requires: %{name} = %{version}-%{release}
 Conflicts: glib-devel <= 1:1.2.8
 
 %description devel
 The glib2-devel package includes the header files for 
 version 2 of the GLib library. 
+
+# anaconda needs static GLib libraries
+%package static
+Summary: A library of handy utility functions
+Group: Development/Libraries
+Requires: %{name}-devel = %{version}-%{release}
+
+%description static
+The glib2-static package includes static libraries
+of version 2 of the GLib library. 
 
 %prep
 %setup -q -n glib-%{version}
@@ -52,9 +60,10 @@ done
 # for patch 0
 autoconf
 %configure --disable-gtk-doc --enable-static --libdir=%{libdir}
-make
+make %{?_smp_mflags}
 
 %check
+# abicheck scripts don't work on ppc
 %ifnarch ppc ppc64
 make check
 %endif
@@ -65,7 +74,6 @@ rm -rf $RPM_BUILD_ROOT
 make install DESTDIR=$RPM_BUILD_ROOT
 
 ## glib2.sh and glib2.csh
-./mkinstalldirs $RPM_BUILD_ROOT%{_sysconfdir}/profile.d
 install -m 755 %{SOURCE2} $RPM_BUILD_ROOT%{_sysconfdir}/profile.d
 install -m 755 %{SOURCE3} $RPM_BUILD_ROOT%{_sysconfdir}/profile.d
 
@@ -81,7 +89,7 @@ rm -rf $RPM_BUILD_ROOT
 %postun -p /sbin/ldconfig
 
 %files -f glib20.lang
-%defattr(-, root, root)
+%defattr(-, root, root, -)
 
 %doc AUTHORS COPYING ChangeLog NEWS README
 %{libdir}/libglib-2.0.so.*
@@ -91,11 +99,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_sysconfdir}/profile.d/*
 
 %files devel
-%defattr(-, root, root)
-
+%defattr(-, root, root, -)
 %{libdir}/lib*.so
-# we need the static library here
-%{libdir}/lib*.a
 %{_libdir}/glib-2.0
 %{_includedir}/*
 %{_datadir}/aclocal/*
@@ -105,7 +110,18 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/*
 %{_mandir}/man1/*
 
+%files static
+%defattr(-, root, root, -)
+%{libdir}/lib*.a
+
 %changelog
+* Sat Feb  3 2007 Matthias Clasen <mclasen@redhat.com> - 2.12.9-2
+- Incorporate package review feedback:
+ * drop an obsolete Provides:
+ * add a -static subpackage
+ * explain %%check ppc exception
+ * align summaries
+ 
 * Tue Jan 16 2007 Matthias Clasen <mclasen@redhat.com> - 2.12.9-1
 - Update to 2.12.9
 
