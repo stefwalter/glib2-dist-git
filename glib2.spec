@@ -74,6 +74,7 @@ rm -rf $RPM_BUILD_ROOT
 make install DESTDIR=$RPM_BUILD_ROOT
 
 ## glib2.sh and glib2.csh
+./mkinstalldirs $RPM_BUILD_ROOT%{_sysconfdir}/profile.d
 install -m 755 %{SOURCE2} $RPM_BUILD_ROOT%{_sysconfdir}/profile.d
 install -m 755 %{SOURCE3} $RPM_BUILD_ROOT%{_sysconfdir}/profile.d
 
