@@ -3,14 +3,14 @@
 Summary: A library of handy utility functions
 Name: glib2
 Version: 2.12.9
-Release: 2%{?dist}
+Release: 3%{?dist}
 License: LGPL
 Group: System Environment/Libraries
 Source: http://ftp.gnome.org/pub/gnome/sources/glib/2.12/glib-%{version}.tar.bz2
 Source2: glib2.sh
 Source3: glib2.csh
 Patch0: glib-2.11.1-libdir.patch
-
+# see RH bug #83581
 Conflicts: libgnomeui <= 2.2.0
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires: pkgconfig >= 1:0.14
@@ -33,13 +33,12 @@ Summary: A library of handy utility functions
 Group: Development/Libraries
 Requires: pkgconfig >= 1:0.14
 Requires: %{name} = %{version}-%{release}
-Conflicts: glib-devel <= 1:1.2.8
 
 %description devel
 The glib2-devel package includes the header files for 
 version 2 of the GLib library. 
 
-# anaconda needs static GLib libraries
+# anaconda needs static libs, see RH bug #193143
 %package static
 Summary: A library of handy utility functions
 Group: Development/Libraries
@@ -75,8 +74,8 @@ make install DESTDIR=$RPM_BUILD_ROOT
 
 ## glib2.sh and glib2.csh
 ./mkinstalldirs $RPM_BUILD_ROOT%{_sysconfdir}/profile.d
-install -m 755 %{SOURCE2} $RPM_BUILD_ROOT%{_sysconfdir}/profile.d
-install -m 755 %{SOURCE3} $RPM_BUILD_ROOT%{_sysconfdir}/profile.d
+install -p -m 644 %{SOURCE2} $RPM_BUILD_ROOT%{_sysconfdir}/profile.d
+install -p -m 644 %{SOURCE3} $RPM_BUILD_ROOT%{_sysconfdir}/profile.d
 
 rm -f $RPM_BUILD_ROOT%{libdir}/*.la
 
@@ -116,6 +115,12 @@ rm -rf $RPM_BUILD_ROOT
 %{libdir}/lib*.a
 
 %changelog
+* Sun Feb  4 2007 Matthias Clasen <mclasen@redhat.com> - 2.12.9-3
+- More package review feedback:
+ * install /etc/profile.d snipplets as 644
+ * explain Conflict with libgnomeui
+ * remove stale Conflict with glib-devel
+ 
 * Sat Feb  3 2007 Matthias Clasen <mclasen@redhat.com> - 2.12.9-2
 - Incorporate package review feedback:
  * drop an obsolete Provides:
