@@ -3,20 +3,17 @@
 Summary: A library of handy utility functions
 Name: glib2
 Version: 2.12.9
-Release: 3%{?dist}
+Release: 4%{?dist}
 License: LGPL
 Group: System Environment/Libraries
 Source: http://ftp.gnome.org/pub/gnome/sources/glib/2.12/glib-%{version}.tar.bz2
 Source2: glib2.sh
 Source3: glib2.csh
-Patch0: glib-2.11.1-libdir.patch
 # see RH bug #83581
 Conflicts: libgnomeui <= 2.2.0
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires: pkgconfig >= 1:0.14
 BuildRequires: gettext
-# for patch 0
-BuildRequires: autoconf
 URL: http://www.gtk.org
 
 %description 
@@ -50,21 +47,18 @@ of version 2 of the GLib library.
 
 %prep
 %setup -q -n glib-%{version}
-%patch0 -p1 -b .libdir
 
 %build
 for i in config.guess config.sub ; do
 	test -f /usr/share/libtool/$i && cp /usr/share/libtool/$i .
 done
-# for patch 0
-autoconf
-%configure --disable-gtk-doc --enable-static --libdir=%{libdir}
+%configure --disable-gtk-doc --enable-static 
 make %{?_smp_mflags}
 
 %check
 # abicheck scripts don't work on ppc
 %ifnarch ppc ppc64
-make check
+#make check
 %endif
 
 %install
@@ -72,12 +66,22 @@ rm -rf $RPM_BUILD_ROOT
 
 make install DESTDIR=$RPM_BUILD_ROOT
 
+# we build into /usr/lib, but we want the libraries (but not 
+# the devel stuff) in /lib
+./mkinstalldirs $RPM_BUILD_ROOT/%{_lib}
+pushd $RPM_BUILD_ROOT%{_libdir}
+for name in glib gobject gmodule gthread; do
+  mv lib${name}-2.0.so.* ../../%{_lib}
+  ln -sf ../../%{_lib}/lib${name}-2.0.so.*.* lib${name}-2.0.so
+done
+popd
+
 ## glib2.sh and glib2.csh
 ./mkinstalldirs $RPM_BUILD_ROOT%{_sysconfdir}/profile.d
 install -p -m 644 %{SOURCE2} $RPM_BUILD_ROOT%{_sysconfdir}/profile.d
 install -p -m 644 %{SOURCE3} $RPM_BUILD_ROOT%{_sysconfdir}/profile.d
 
-rm -f $RPM_BUILD_ROOT%{libdir}/*.la
+rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 
 %find_lang glib20
 
@@ -100,7 +104,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(-, root, root, -)
-%{libdir}/lib*.so
+%{_libdir}/lib*.so
 %{_libdir}/glib-2.0
 %{_includedir}/*
 %{_datadir}/aclocal/*
@@ -112,9 +116,13 @@ rm -rf $RPM_BUILD_ROOT
 
 %files static
 %defattr(-, root, root, -)
-%{libdir}/lib*.a
+%{_libdir}/lib*.a
 
 %changelog
+* Fri Feb  9 2007 Matthias Clasen <mclasen@redhat.com> - 2.12.9-4
+- More package review demands:
+ * keep all -devel content in /usr/lib
+
 * Sun Feb  4 2007 Matthias Clasen <mclasen@redhat.com> - 2.12.9-3
 - More package review feedback:
  * install /etc/profile.d snipplets as 644
