@@ -2,8 +2,8 @@
 
 Summary: A library of handy utility functions
 Name: glib2
-Version: 2.12.9
-Release: 4%{?dist}
+Version: 2.12.10
+Release: 1%{?dist}
 License: LGPL
 Group: System Environment/Libraries
 Source: http://ftp.gnome.org/pub/gnome/sources/glib/2.12/glib-%{version}.tar.bz2
@@ -58,7 +58,7 @@ make %{?_smp_mflags}
 %check
 # abicheck scripts don't work on ppc
 %ifnarch ppc ppc64
-#make check
+make check
 %endif
 
 %install
@@ -119,6 +119,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/lib*.a
 
 %changelog
+* Wed Mar  7 2007 Matthias Clasen <mclasen@redhat.com> - 2.12.10-1
+- Update to 2.12.10
+
 * Fri Feb  9 2007 Matthias Clasen <mclasen@redhat.com> - 2.12.9-4
 - More package review demands:
  * keep all -devel content in /usr/lib
