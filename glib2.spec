@@ -2,11 +2,11 @@
 
 Summary: A library of handy utility functions
 Name: glib2
-Version: 2.12.11
+Version: 2.13.1
 Release: 1%{?dist}
 License: LGPL
 Group: System Environment/Libraries
-Source: http://ftp.gnome.org/pub/gnome/sources/glib/2.12/glib-%{version}.tar.bz2
+Source: http://download.gnome.org/sources/glib/2.12/glib-%{version}.tar.bz2
 Source2: glib2.sh
 Source3: glib2.csh
 # see RH bug #83581
@@ -119,6 +119,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/lib*.a
 
 %changelog
+* Sat May 19 2007 Matthias Clasen <mclasen@redhat.com> - 2.13.1-1
+- Update to 2.13.1
+
 * Fri Mar  9 2007 Matthias Clasen <mclasen@redhat.com> - 2.12.11-1
 - Update to 2.12.11
 
