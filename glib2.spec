@@ -2,19 +2,17 @@
 
 Summary: A library of handy utility functions
 Name: glib2
-Version: 2.13.5
+Version: 2.13.6
 Release: 1%{?dist}
 License: LGPL
 Group: System Environment/Libraries
+URL: http://www.gtk.org
 Source: http://download.gnome.org/sources/glib/2.13/glib-%{version}.tar.bz2
 Source2: glib2.sh
 Source3: glib2.csh
-# see RH bug #83581
-Conflicts: libgnomeui <= 2.2.0
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires: pkgconfig >= 1:0.14
 BuildRequires: gettext
-URL: http://www.gtk.org
 
 %description 
 GLib is the low-level core library that forms the basis
@@ -119,6 +117,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/lib*.a
 
 %changelog
+* Fri Jun 29 2007 Matthias Clasen <mclasen@redhat.com> - 2.13.6-1
+- Update to 2.13.6
+- Drop an ancient Conflict
+
 * Mon Jun 18 2007 Matthias Clasen <mclasen@redhat.com> - 2.13.5-1
 - Update to 2.13.5
 
