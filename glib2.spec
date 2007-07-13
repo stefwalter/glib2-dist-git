@@ -3,13 +3,15 @@
 Summary: A library of handy utility functions
 Name: glib2
 Version: 2.13.7
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: LGPL
 Group: System Environment/Libraries
 URL: http://www.gtk.org
 Source: http://download.gnome.org/sources/glib/2.13/glib-%{version}.tar.bz2
 Source2: glib2.sh
 Source3: glib2.csh
+# fixed in upstream svn
+Patch0: ppc-cast.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires: pkgconfig >= 1:0.14
 BuildRequires: gettext
@@ -45,6 +47,7 @@ of version 2 of the GLib library.
 
 %prep
 %setup -q -n glib-%{version}
+%patch0 -p1 -b .ppc-cast
 
 %build
 for i in config.guess config.sub ; do
@@ -117,6 +120,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/lib*.a
 
 %changelog
+* Thu Jul 12 2007 Matthias Clasen <mclasen@redhat.com> - 2.13.7-2
+- Fix build issues on ppc
+
 * Thu Jul 12 2007 Matthias Clasen <mclasen@redhat.com> - 2.13.7-1
 - Update to 2.13.7
 
