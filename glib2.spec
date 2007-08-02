@@ -3,8 +3,8 @@
 Summary: A library of handy utility functions
 Name: glib2
 Version: 2.13.7
-Release: 2%{?dist}
-License: LGPL
+Release: 3%{?dist}
+License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
 Source: http://download.gnome.org/sources/glib/2.13/glib-%{version}.tar.bz2
@@ -96,7 +96,7 @@ rm -rf $RPM_BUILD_ROOT
 %files -f glib20.lang
 %defattr(-, root, root, -)
 
-%doc AUTHORS COPYING ChangeLog NEWS README
+%doc AUTHORS COPYING NEWS README
 %{libdir}/libglib-2.0.so.*
 %{libdir}/libgthread-2.0.so.*
 %{libdir}/libgmodule-2.0.so.*
@@ -109,17 +109,21 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/glib-2.0
 %{_includedir}/*
 %{_datadir}/aclocal/*
-%{_datadir}/gtk-doc/html/*
 %{_libdir}/pkgconfig/*
 %{_datadir}/glib-2.0
 %{_bindir}/*
-%{_mandir}/man1/*
+%doc %{_datadir}/gtk-doc/html/*
+%doc %{_mandir}/man1/*
 
 %files static
 %defattr(-, root, root, -)
 %{_libdir}/lib*.a
 
 %changelog
+* Thu Aug  2 2007 Matthias Clasen <mclasen@redhat.com> - 2.13.7-3
+- Update License field
+- Don't ship ChangeLog
+
 * Thu Jul 12 2007 Matthias Clasen <mclasen@redhat.com> - 2.13.7-2
 - Fix build issues on ppc
 
