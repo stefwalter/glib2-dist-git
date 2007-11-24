@@ -2,7 +2,7 @@
 
 Summary: A library of handy utility functions
 Name: glib2
-Version: 2.14.3
+Version: 2.14.4
 Release: 1%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
@@ -117,6 +117,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/lib*.a
 
 %changelog
+* Sat Nov 24 2007 Matthias Clasen <mclasen@redhat.com> - 2.14.4-1
+- Update to 2.14.4
+
 * Wed Nov  7 2007 Matthias Clasen <mclasen@redhat.com> - 2.14.3-1
 - Update to 2.14.3, including a new version of PCRE that
   fixes several vulnerabilities
