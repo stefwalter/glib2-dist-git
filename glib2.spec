@@ -102,7 +102,7 @@ rm -rf $RPM_BUILD_ROOT
 %{libdir}/libgobject-2.0.so.*
 %{libdir}/libgio-2.0.so.*
 %{_sysconfdir}/profile.d/*
-{_libdir}/gio/modules/libgiofam.so
+%{_libdir}/gio/modules/libgiofam.so
 
 %files devel
 %defattr(-, root, root, -)
