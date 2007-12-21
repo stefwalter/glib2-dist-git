@@ -2,16 +2,17 @@
 
 Summary: A library of handy utility functions
 Name: glib2
-Version: 2.14.4
+Version: 2.15.0
 Release: 1%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
-Source: http://download.gnome.org/sources/glib/2.14/glib-%{version}.tar.bz2
+Source: http://download.gnome.org/sources/glib/2.15/glib-%{version}.tar.bz2
 Source2: glib2.sh
 Source3: glib2.csh
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires: pkgconfig >= 1:0.14
+BuildRequires: gamin-devel
 BuildRequires: gettext
 
 %description 
@@ -69,7 +70,7 @@ make install DESTDIR=$RPM_BUILD_ROOT
 # the devel stuff) in /lib
 ./mkinstalldirs $RPM_BUILD_ROOT/%{_lib}
 pushd $RPM_BUILD_ROOT%{_libdir}
-for name in glib gobject gmodule gthread; do
+for name in glib gobject gmodule gthread gio; do
   mv lib${name}-2.0.so.* ../../%{_lib}
   ln -sf ../../%{_lib}/lib${name}-2.0.so.*.* lib${name}-2.0.so
 done
@@ -81,6 +82,7 @@ install -p -m 644 %{SOURCE2} $RPM_BUILD_ROOT%{_sysconfdir}/profile.d
 install -p -m 644 %{SOURCE3} $RPM_BUILD_ROOT%{_sysconfdir}/profile.d
 
 rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
+rm -f $RPM_BUILD_ROOT%{_libdir}/gio/modules/*.{a,la}
 
 %find_lang glib20
 
@@ -98,7 +100,9 @@ rm -rf $RPM_BUILD_ROOT
 %{libdir}/libgthread-2.0.so.*
 %{libdir}/libgmodule-2.0.so.*
 %{libdir}/libgobject-2.0.so.*
+%{libdir}/libgio-2.0.so.*
 %{_sysconfdir}/profile.d/*
+{_libdir}/gio/modules/libgiofam.so
 
 %files devel
 %defattr(-, root, root, -)
@@ -117,6 +121,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/lib*.a
 
 %changelog
+* Thu Dec 20 2007 Matthias Clasen <mclasen@redhat.com> - 2.15.0-1
+- Update to 2.15.0
+
 * Sat Nov 24 2007 Matthias Clasen <mclasen@redhat.com> - 2.14.4-1
 - Update to 2.14.4
 
