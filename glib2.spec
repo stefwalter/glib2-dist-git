@@ -10,13 +10,13 @@ URL: http://www.gtk.org
 Source: http://download.gnome.org/sources/glib/2.15/glib-%{version}.tar.bz2
 Source2: glib2.sh
 Source3: glib2.csh
-Patch0: desktopfiles.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires: pkgconfig >= 1:0.14
 BuildRequires: gamin-devel
 BuildRequires: gettext
 
 Patch0: glib-2.15.0-gtestutils.patch
+Patch1: desktopfiles.patch
 
 %description 
 GLib is the low-level core library that forms the basis
@@ -49,11 +49,8 @@ of version 2 of the GLib library.
 
 %prep
 %setup -q -n glib-%{version}
-<<<<<<< glib2.spec
-%patch0 -p1 -b .desktopfiles
-=======
 %patch0 -p1 -b .gtestutils.patch
->>>>>>> 1.146
+%patch1 -p1 -b .desktopfiles
 
 %build
 for i in config.guess config.sub ; do
