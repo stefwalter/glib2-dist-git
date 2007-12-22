@@ -3,7 +3,7 @@
 Summary: A library of handy utility functions
 Name: glib2
 Version: 2.15.0
-Release: 3%{?dist}
+Release: 4%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
@@ -126,6 +126,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/lib*.a
 
 %changelog
+* Sat Dec 22 2007 Matthias Clasen <mclasen@redhat.com> - 2.15.0-4
+- Another attempt
+
 * Sat Dec 22 2007 Matthias Clasen <mclasen@redhat.com> - 2.15.0-3
 - Fix some errors in desktop files handling
 

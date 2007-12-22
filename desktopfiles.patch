@@ -1,6 +1,6 @@
 diff -up glib-2.15.0/gio/gdesktopappinfo.c.desktopfiles glib-2.15.0/gio/gdesktopappinfo.c
---- glib-2.15.0/gio/gdesktopappinfo.c.desktopfiles	2007-12-22 12:43:05.000000000 -0500
-+++ glib-2.15.0/gio/gdesktopappinfo.c	2007-12-22 12:43:17.000000000 -0500
+--- glib-2.15.0/gio/gdesktopappinfo.c.desktopfiles	2007-12-20 10:20:45.000000000 -0500
++++ glib-2.15.0/gio/gdesktopappinfo.c	2007-12-22 13:39:30.000000000 -0500
 @@ -920,10 +920,10 @@ static gboolean
  g_desktop_app_info_supports_uris (GAppInfo *appinfo)
  {
@@ -53,18 +53,21 @@ diff -up glib-2.15.0/gio/gdesktopappinfo.c.desktopfiles glib-2.15.0/gio/gdesktop
    int i;
    GList *infos;
  
-@@ -1695,8 +1697,8 @@ g_app_info_get_all (void)
+@@ -1695,8 +1697,11 @@ g_app_info_get_all (void)
  
    infos = NULL;
    g_hash_table_iter_init (&iter, apps);
 -  while (g_hash_table_iter_next (&iter, &key, NULL))
 -    infos = g_list_prepend (infos, key);
 +  while (g_hash_table_iter_next (&iter, NULL, &value))
-+    infos = g_list_prepend (infos, value);
++    {
++      if (value)
++        infos = g_list_prepend (infos, value);
++    }
  
    g_hash_table_destroy (apps);
  
-@@ -2142,13 +2144,13 @@ append_desktop_entry (GList      *list, 
+@@ -2142,13 +2147,13 @@ append_desktop_entry (GList      *list, 
   * get_all_desktop_entries_for_mime_type:
   * @mime_type: a mime type.
   *
@@ -82,8 +85,8 @@ diff -up glib-2.15.0/gio/gdesktopappinfo.c.desktopfiles glib-2.15.0/gio/gdesktop
  static GList *
  get_all_desktop_entries_for_mime_type (const char *base_mime_type)
 diff -up glib-2.15.0/gio/gappinfo.c.desktopfiles glib-2.15.0/gio/gappinfo.c
---- glib-2.15.0/gio/gappinfo.c.desktopfiles	2007-12-22 12:42:57.000000000 -0500
-+++ glib-2.15.0/gio/gappinfo.c	2007-12-22 12:43:17.000000000 -0500
+--- glib-2.15.0/gio/gappinfo.c.desktopfiles	2007-12-20 10:20:45.000000000 -0500
++++ glib-2.15.0/gio/gappinfo.c	2007-12-22 13:38:09.000000000 -0500
 @@ -139,6 +139,9 @@ g_app_info_equal (GAppInfo *appinfo1,
   * platform dependent. For instance on Unix this is the
   * desktop file id from the xdg menu specification.
