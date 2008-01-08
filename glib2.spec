@@ -123,7 +123,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/lib*.a
 
 %changelog
-* Tue Jan  8 2007 Matthias Clasen <mclasen@redhat.com> - 2.15.1-1
+* Tue Jan  8 2008 Matthias Clasen <mclasen@redhat.com> - 2.15.1-1
+- 2.15.1
+- add new BuildRequires
 - 
 * Sat Dec 22 2007 Matthias Clasen <mclasen@redhat.com> - 2.15.0-4
 - Another attempt
