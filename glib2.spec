@@ -2,8 +2,8 @@
 
 Summary: A library of handy utility functions
 Name: glib2
-Version: 2.15.0
-Release: 4%{?dist}
+Version: 2.15.1
+Release: 1%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
@@ -14,9 +14,11 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires: pkgconfig >= 1:0.14
 BuildRequires: gamin-devel
 BuildRequires: gettext
+BuildRequires: libattr-devel
+BuildRequires: libselinux-devel
+# for sys/inotify.h
+BuildRequires: glibc-devel
 
-Patch0: glib-2.15.0-gtestutils.patch
-Patch1: desktopfiles.patch
 
 %description 
 GLib is the low-level core library that forms the basis
@@ -49,13 +51,8 @@ of version 2 of the GLib library.
 
 %prep
 %setup -q -n glib-%{version}
-%patch0 -p1 -b .gtestutils.patch
-%patch1 -p1 -b .desktopfiles
 
 %build
-for i in config.guess config.sub ; do
-	test -f /usr/share/libtool/$i && cp /usr/share/libtool/$i .
-done
 %configure --disable-gtk-doc --enable-static 
 make %{?_smp_mflags}
 
@@ -126,6 +123,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/lib*.a
 
 %changelog
+* Tue Jan  8 2007 Matthias Clasen <mclasen@redhat.com> - 2.15.1-1
+- 
 * Sat Dec 22 2007 Matthias Clasen <mclasen@redhat.com> - 2.15.0-4
 - Another attempt
 
