@@ -2,8 +2,8 @@
 
 Summary: A library of handy utility functions
 Name: glib2
-Version: 2.15.4
-Release: 2%{?dist}
+Version: 2.15.5
+Release: 1%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
@@ -123,6 +123,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/lib*.a
 
 %changelog
+* Mon Feb 11 2008 Matthias Clasen <mclasen@redhat.com> - 2.15.5-1
+- Update to 2.15.5
+
 * Thu Feb  7 2008 Matthias Clasen <mclasen@redhat.com> - 2.15.4-2
 - Update PCRE to 7.6
 
