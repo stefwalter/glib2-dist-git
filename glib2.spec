@@ -2,7 +2,7 @@
 
 Summary: A library of handy utility functions
 Name: glib2
-Version: 2.15.5
+Version: 2.15.6
 Release: 1%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
@@ -123,6 +123,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/lib*.a
 
 %changelog
+* Mon Feb 25 2008 Matthias Clasen <mclasen@redhat.com> - 2.15.6-1
+- Update to 2.15.6
+
 * Mon Feb 11 2008 Matthias Clasen <mclasen@redhat.com> - 2.15.5-1
 - Update to 2.15.5
 
