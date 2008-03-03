@@ -1,0 +1,16 @@
+diff -up glib-2.15.6/glib/gutils.h.inline glib-2.15.6/glib/gutils.h
+--- glib-2.15.6/glib/gutils.h.inline	2008-03-03 09:46:44.000000000 -0500
++++ glib-2.15.6/glib/gutils.h	2008-03-03 09:46:52.000000000 -0500
+@@ -97,7 +97,11 @@ G_BEGIN_DECLS
+ #  define G_INLINE_FUNC
+ #  undef  G_CAN_INLINE
+ #elif defined (__GNUC__) 
+-#  define G_INLINE_FUNC static __inline __attribute__ ((unused))
++#  ifdef __GNUC_STDC_INLINE__
++#   define G_INLINE_FUNC extern inline __attribute__ ((__gnu_inline__))
++#  else
++#   define G_INLINE_FUNC extern inline
++#  endif
+ #elif defined (G_CAN_INLINE) 
+ #  define G_INLINE_FUNC static inline
+ #else /* can't inline */
