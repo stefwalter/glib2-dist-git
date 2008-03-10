@@ -2,12 +2,12 @@
 
 Summary: A library of handy utility functions
 Name: glib2
-Version: 2.15.6
-Release: 2%{?dist}
+Version: 2.16.0
+Release: 1%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
-Source: http://download.gnome.org/sources/glib/2.15/glib-%{version}.tar.bz2
+Source: http://download.gnome.org/sources/glib/2.16/glib-%{version}.tar.bz2
 Source2: glib2.sh
 Source3: glib2.csh
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -18,8 +18,6 @@ BuildRequires: libattr-devel
 BuildRequires: libselinux-devel
 # for sys/inotify.h
 BuildRequires: glibc-devel
-# fixed in upstream svn
-Patch0: inline.patch
 
 
 %description 
@@ -53,7 +51,6 @@ of version 2 of the GLib library.
 
 %prep
 %setup -q -n glib-%{version}
-%patch0 -p1 -b .inline
 
 %build
 %configure --disable-gtk-doc --enable-static 
@@ -126,6 +123,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/lib*.a
 
 %changelog
+* Mon Mar 10 2008 Matthias Clasen <mclasen@redhat.com> - 2.16.0-1
+- Update to 2.16.0
+
 * Mon Mar  3 2008 Matthias Clasen <mclasen@redhat.com> - 2.15.6-2
 - Fix inline support
 
