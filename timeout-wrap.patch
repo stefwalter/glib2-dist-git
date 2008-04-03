@@ -1,0 +1,12 @@
+diff -up glib-2.16.2/glib/gmain.c.timeout-wrap glib-2.16.2/glib/gmain.c
+--- glib-2.16.2/glib/gmain.c.timeout-wrap	2008-04-03 01:39:46.000000000 -0400
++++ glib-2.16.2/glib/gmain.c	2008-04-03 01:40:08.000000000 -0400
+@@ -3320,7 +3320,7 @@ g_timeout_set_expiration (GTimeoutSource
+       if (!session_bus_address)
+         session_bus_address = g_getenv ("HOSTNAME");
+       if (session_bus_address)
+-        timer_perturb = g_str_hash (session_bus_address);
++        timer_perturb = ABS (g_str_hash (session_bus_address));
+       else
+         timer_perturb = 0;
+     }

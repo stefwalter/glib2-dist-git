@@ -3,7 +3,7 @@
 Summary: A library of handy utility functions
 Name: glib2
 Version: 2.16.2
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
@@ -19,6 +19,8 @@ BuildRequires: libselinux-devel
 # for sys/inotify.h
 BuildRequires: glibc-devel
 
+# fixed in upstream svn
+Patch0: timeout-wrap.patch
 
 %description 
 GLib is the low-level core library that forms the basis
@@ -51,6 +53,7 @@ of version 2 of the GLib library.
 
 %prep
 %setup -q -n glib-%{version}
+%patch0 -p1 -b .timeout-wrap
 
 %build
 %configure --disable-gtk-doc --enable-static 
@@ -123,6 +126,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/lib*.a
 
 %changelog
+* Thu Apr  3 2008 Matthias Clasen <mclasen@redhat.com> - 2.16.2-2
+- Fix occasional misbehaviour of g_timeout_add_seconds
+
 * Tue Apr  1 2008 Matthias Clasen <mclasen@redhat.com> - 2.16.2-1
 - Update to 2.16.2
 
