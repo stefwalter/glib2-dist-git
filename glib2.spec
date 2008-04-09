@@ -3,7 +3,7 @@
 Summary: A library of handy utility functions
 Name: glib2
 Version: 2.16.3
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
@@ -18,6 +18,9 @@ BuildRequires: libattr-devel
 BuildRequires: libselinux-devel
 # for sys/inotify.h
 BuildRequires: glibc-devel
+
+# fix a possible crasher, http://bugzilla.gnome.org/show_bug.cgi?id=527132
+Patch0: appinfo.patch
 
 %description 
 GLib is the low-level core library that forms the basis
@@ -50,6 +53,7 @@ of version 2 of the GLib library.
 
 %prep
 %setup -q -n glib-%{version}
+%patch0 -p1 -b .appinfo
 
 %build
 %configure --disable-gtk-doc --enable-static 
@@ -122,6 +126,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/lib*.a
 
 %changelog
+* Wed Apr  9 2008 Matthias Clasen <mclasen@redhat.com> - 2.16.3-2
+- Fix a possible crash in application launching (bgo#527132)
+
 * Tue Apr  8 2008 Matthias Clasen <mclasen@redhat.com> - 2.16.3-1
 - Update to 2.16.3
 

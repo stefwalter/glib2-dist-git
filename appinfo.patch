@@ -1,0 +1,19 @@
+diff -up glib-2.16.3/gio/gdesktopappinfo.c.appinfo glib-2.16.3/gio/gdesktopappinfo.c
+--- glib-2.16.3/gio/gdesktopappinfo.c.appinfo	2008-04-09 10:57:31.000000000 -0400
++++ glib-2.16.3/gio/gdesktopappinfo.c	2008-04-09 10:57:43.000000000 -0400
+@@ -1514,7 +1514,6 @@ g_app_info_create_from_commandline (cons
+     info->exec = g_strconcat (commandline, " %u", NULL);
+   else
+     info->exec = g_strconcat (commandline, " %f", NULL);
+-  info->comment = g_strdup_printf (_("Custom definition for %s"), info->name);
+   info->nodisplay = TRUE;
+   info->binary = binary_from_exec (info->exec);
+   
+@@ -1530,6 +1529,7 @@ g_app_info_create_from_commandline (cons
+       if (info->name == NULL)
+ 	info->name = g_strdup ("custom");
+     }
++  info->comment = g_strdup_printf (_("Custom definition for %s"), info->name);
+   
+   return G_APP_INFO (info);
+ }
