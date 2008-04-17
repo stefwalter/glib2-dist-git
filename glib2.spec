@@ -3,7 +3,7 @@
 Summary: A library of handy utility functions
 Name: glib2
 Version: 2.16.3
-Release: 3%{?dist}
+Release: 4%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
@@ -25,6 +25,9 @@ Patch0: appinfo.patch
 # revert a broken fix for http://bugzilla.gnome.org/show_bug.cgi?id=316221
 # committed on March 12, 2008
 Patch1: revert-316221.patch
+
+# https://bugzilla.redhat.com/show_bug.cgi?id=442835
+Patch2: gio-2.16-only-pass-uri-to-gio-apps.patch
 
 %description 
 GLib is the low-level core library that forms the basis
@@ -59,6 +62,7 @@ of version 2 of the GLib library.
 %setup -q -n glib-%{version}
 %patch0 -p1 -b .appinfo
 %patch1 -R -p1 -b .revert-316221
+%patch2 -p0 -b .only-pass-uri-to-gio-apps
 
 %build
 %configure --disable-gtk-doc --enable-static 
@@ -131,6 +135,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/lib*.a
 
 %changelog
+* Thu Apr 17 2008 David Zeuthen <davidz@redhat.com> - 2.16.3-4
+- Only pass URI's for gio apps (#442835)
+
 * Sun Apr 13 2008 Dan Williams <dcbw@redhat.com> - 2.16.3-3
 - Revert upstream changes to g_static_mutex_get_mutex_impl_shortcut that broke
     users of GMutex and GStaticMutex (bgo#316221)
