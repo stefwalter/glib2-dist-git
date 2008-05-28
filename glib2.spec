@@ -2,12 +2,12 @@
 
 Summary: A library of handy utility functions
 Name: glib2
-Version: 2.16.3
-Release: 5%{?dist}
+Version: 2.17.0
+Release: 1%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
-Source: http://download.gnome.org/sources/glib/2.16/glib-%{version}.tar.bz2
+Source: http://download.gnome.org/sources/glib/2.17/glib-%{version}.tar.bz2
 Source2: glib2.sh
 Source3: glib2.csh
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -18,13 +18,6 @@ BuildRequires: libattr-devel
 BuildRequires: libselinux-devel
 # for sys/inotify.h
 BuildRequires: glibc-devel
-
-# fix a possible crasher, http://bugzilla.gnome.org/show_bug.cgi?id=527132
-Patch0: appinfo.patch
-
-# revert a broken fix for http://bugzilla.gnome.org/show_bug.cgi?id=316221
-# committed on March 12, 2008
-Patch1: revert-316221.patch
 
 # https://bugzilla.redhat.com/show_bug.cgi?id=442835
 Patch2: gio-2.16-only-pass-uri-to-gio-apps.patch
@@ -63,8 +56,6 @@ of version 2 of the GLib library.
 
 %prep
 %setup -q -n glib-%{version}
-%patch0 -p1 -b .appinfo
-%patch1 -R -p1 -b .revert-316221
 %patch2 -p0 -b .only-pass-uri-to-gio-apps
 %patch3 -p0 -b .selinux
 
@@ -139,6 +130,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/lib*.a
 
 %changelog
+* Tue May 27 2008 Matthias Clasen <mclasen@redhat.com> - 2.17.0-1
+- Update to 2.17.0
+
 * Thu Apr 24 2008 Tomas Bzatek <tbzatek@redhat.com> - 2.16.3-5
 - Add support for GIO to set selinux attributes (gnome #529694)
 
