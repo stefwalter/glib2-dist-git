@@ -3,7 +3,7 @@
 Summary: A library of handy utility functions
 Name: glib2
 Version: 2.17.2
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
@@ -111,6 +111,8 @@ rm -rf $RPM_BUILD_ROOT
 %{libdir}/libgobject-2.0.so.*
 %{libdir}/libgio-2.0.so.*
 %{_sysconfdir}/profile.d/*
+%dir %{_libdir}/gio
+%dir %{_libdir}/gio/modules
 %{_libdir}/gio/modules/libgiofam.so
 
 %files devel
@@ -130,6 +132,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/lib*.a
 
 %changelog
+* Mon Jun 16 2008 Matthias Clasen <mclasen@redhat.com> - 2.17.2-2
+- Fix a directory ownership oversight
+
 * Thu Jun 12 2008 Matthias Clasen <mclasen@redhat.com> - 2.17.2-1
 - Update to 2.17.2
 
