@@ -56,7 +56,7 @@ of version 2 of the GLib library.
 
 %prep
 %setup -q -n glib-%{version}
-%patch2 -p0 -b .only-pass-uri-to-gio-apps
+%patch2 -p1 -b .only-pass-uri-to-gio-apps
 %patch3 -p0 -b .selinux
 
 %build
