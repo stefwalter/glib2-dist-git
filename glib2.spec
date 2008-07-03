@@ -3,7 +3,7 @@
 Summary: A library of handy utility functions
 Name: glib2
 Version: 2.17.3
-Release: 2%{?dist}
+Release: 3%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
@@ -24,6 +24,9 @@ Patch2: gio-2.16-only-pass-uri-to-gio-apps.patch
 
 # https://bugzilla.gnome.org/show_bug.cgi?id=529694
 Patch3: gio-2.16-selinux-set-support.diff
+
+# Fixed in upstream svn
+Patch4: crash.patch
 
 %description 
 GLib is the low-level core library that forms the basis
@@ -58,6 +61,7 @@ of version 2 of the GLib library.
 %setup -q -n glib-%{version}
 %patch2 -p1 -b .only-pass-uri-to-gio-apps
 %patch3 -p0 -b .selinux
+%patch4 -p1 -b .crash
 
 %build
 %configure --disable-gtk-doc --enable-static 
@@ -132,6 +136,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/lib*.a
 
 %changelog
+* Thu Jul  3 2008 Matthias Clasen <mclasen@redhat.com> - 2.17.3-3
+- Fix a stupid crash
+
 * Wed Jul  2 2008 Matthias Clasen <mclasen@redhat.com> - 2.17.3-1
 - Update to 2.17.3
 
