@@ -1,0 +1,78 @@
+diff -up glib-2.17.4/configure.in.statfs-check glib-2.17.4/configure.in
+--- glib-2.17.4/configure.in.statfs-check	2008-07-21 18:24:45.000000000 -0400
++++ glib-2.17.4/configure.in	2008-07-21 18:25:19.000000000 -0400
+@@ -847,6 +847,7 @@ AC_CHECK_HEADERS([mntent.h sys/mnttab.h 
+ AC_CHECK_MEMBERS([struct stat.st_mtimensec, struct stat.st_mtim.tv_nsec, struct stat.st_atimensec, struct stat.st_atim.tv_nsec, struct stat.st_ctimensec, struct stat.st_ctim.tv_nsec])
+ AC_CHECK_MEMBERS([struct stat.st_blksize, struct stat.st_blocks, struct statfs.f_fstypename, struct statfs.f_bavail],,, [#include <sys/types.h>
+ #include <sys/stat.h>
++#include <sys/statfs.h>
+ #include <unistd.h>
+ #ifdef HAVE_SYS_PARAM_H
+ #include <sys/param.h>
+diff -up glib-2.17.4/configure.statfs-check glib-2.17.4/configure
+--- glib-2.17.4/configure.statfs-check	2008-07-21 18:25:36.000000000 -0400
++++ glib-2.17.4/configure	2008-07-21 18:25:47.000000000 -0400
+@@ -33300,6 +33300,7 @@ cat >>conftest.$ac_ext <<_ACEOF
+ /* end confdefs.h.  */
+ #include <sys/types.h>
+ #include <sys/stat.h>
++#include <sys/statfs.h>
+ #include <unistd.h>
+ #ifdef HAVE_SYS_PARAM_H
+ #include <sys/param.h>
+@@ -33349,6 +33350,7 @@ cat >>conftest.$ac_ext <<_ACEOF
+ /* end confdefs.h.  */
+ #include <sys/types.h>
+ #include <sys/stat.h>
++#include <sys/statfs.h>
+ #include <unistd.h>
+ #ifdef HAVE_SYS_PARAM_H
+ #include <sys/param.h>
+@@ -33421,6 +33423,7 @@ cat >>conftest.$ac_ext <<_ACEOF
+ /* end confdefs.h.  */
+ #include <sys/types.h>
+ #include <sys/stat.h>
++#include <sys/statfs.h>
+ #include <unistd.h>
+ #ifdef HAVE_SYS_PARAM_H
+ #include <sys/param.h>
+@@ -33470,6 +33473,7 @@ cat >>conftest.$ac_ext <<_ACEOF
+ /* end confdefs.h.  */
+ #include <sys/types.h>
+ #include <sys/stat.h>
++#include <sys/statfs.h>
+ #include <unistd.h>
+ #ifdef HAVE_SYS_PARAM_H
+ #include <sys/param.h>
+@@ -33542,6 +33546,7 @@ cat >>conftest.$ac_ext <<_ACEOF
+ /* end confdefs.h.  */
+ #include <sys/types.h>
+ #include <sys/stat.h>
++#include <sys/statfs.h>
+ #include <unistd.h>
+ #ifdef HAVE_SYS_PARAM_H
+ #include <sys/param.h>
+@@ -33591,6 +33596,7 @@ cat >>conftest.$ac_ext <<_ACEOF
+ /* end confdefs.h.  */
+ #include <sys/types.h>
+ #include <sys/stat.h>
++#include <sys/statfs.h>
+ #include <unistd.h>
+ #ifdef HAVE_SYS_PARAM_H
+ #include <sys/param.h>
+@@ -33663,6 +33669,7 @@ cat >>conftest.$ac_ext <<_ACEOF
+ /* end confdefs.h.  */
+ #include <sys/types.h>
+ #include <sys/stat.h>
++#include <sys/statfs.h>
+ #include <unistd.h>
+ #ifdef HAVE_SYS_PARAM_H
+ #include <sys/param.h>
+@@ -33712,6 +33719,7 @@ cat >>conftest.$ac_ext <<_ACEOF
+ /* end confdefs.h.  */
+ #include <sys/types.h>
+ #include <sys/stat.h>
++#include <sys/statfs.h>
+ #include <unistd.h>
+ #ifdef HAVE_SYS_PARAM_H
+ #include <sys/param.h>
