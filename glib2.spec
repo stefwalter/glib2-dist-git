@@ -3,7 +3,7 @@
 Summary: A library of handy utility functions
 Name: glib2
 Version: 2.17.4
-Release: 2%{?dist}
+Release: 3%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
@@ -27,6 +27,10 @@ Patch3: gio-2.16-selinux-set-support.diff
 
 # fixed in svn
 Patch4: statfs-check.patch
+
+# http://bugzilla.gnome.org/show_bug.cgi?id=544599 (upstream) +
+# bump version to 2.17.5 since gvfs will require this version
+Patch5: glib-2.17.4-gio-guess-content-sync.patch
 
 %description 
 GLib is the low-level core library that forms the basis
@@ -62,6 +66,7 @@ of version 2 of the GLib library.
 %patch2 -p1 -b .only-pass-uri-to-gio-apps
 %patch3 -p0 -b .selinux
 %patch4 -p1 -b .statfs-check
+%patch5 -p1 -b .guess-content-type-sync
 
 %build
 %configure --disable-gtk-doc --enable-static 
@@ -136,6 +141,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/lib*.a
 
 %changelog
+* Thu Jul 24 2008 David Zeuthen <davidz@redhat.com> - 2.17.4-3
+- Backport patch for g_mount_guess_content_type_sync
+
 * Mon Jul 21 2008 Matthias Clasen <mclasen@redhat.com> - 2.17.4-2
 - Fix statfs configure check
 
