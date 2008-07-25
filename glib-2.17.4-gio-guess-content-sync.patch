@@ -127,3 +127,13 @@
  m4_define([glib_interface_age], [0])
  m4_define([glib_binary_age],
            [m4_eval(100 * glib_minor_version + glib_micro_version)])
+--- trunk/tests/Makefile.am	2008/07/20 02:09:05	7209
++++ trunk/tests/Makefile.am	2008/07/23 16:22:32	7243
+@@ -186,7 +186,6 @@
+ module_test_LDFLAGS = $(G_MODULE_LDFLAGS)
+ node_test_LDADD = $(progs_ldadd)
+ onceinit_LDADD = $(thread_ldadd)
+-option_test_LDADD = $(progs_ldadd)
+ printf_test_LDADD = $(progs_ldadd)
+ queue_test_LDADD = $(progs_ldadd)
+ asyncqueue_test_LDADD = $(thread_ldadd)

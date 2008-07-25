@@ -3,7 +3,7 @@
 Summary: A library of handy utility functions
 Name: glib2
 Version: 2.17.4
-Release: 4%{?dist}
+Release: 5%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
@@ -33,7 +33,7 @@ Patch4: statfs-check.patch
 #
 Patch5: glib-2.17.4-gio-guess-content-sync.patch
 # this patch requires autoreconf
-BuildRequires: autoconf automake libtool gettext-devel
+BuildRequires: autoconf automake libtool gettext-devel gtk-doc
 
 %description 
 GLib is the low-level core library that forms the basis
@@ -145,6 +145,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/lib*.a
 
 %changelog
+* Thu Jul 24 2008 David Zeuthen <davidz@redhat.com> - 2.17.4-5
+- rebuild
+
 * Thu Jul 24 2008 David Zeuthen <davidz@redhat.com> - 2.17.4-4
 - autoreconf
 
