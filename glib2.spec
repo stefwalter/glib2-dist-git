@@ -2,8 +2,8 @@
 
 Summary: A library of handy utility functions
 Name: glib2
-Version: 2.17.4
-Release: 5%{?dist}
+Version: 2.17.6
+Release: 1%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
@@ -22,16 +22,7 @@ BuildRequires: glibc-devel
 # https://bugzilla.redhat.com/show_bug.cgi?id=442835
 Patch2: gio-2.16-only-pass-uri-to-gio-apps.patch
 
-# https://bugzilla.gnome.org/show_bug.cgi?id=529694
-Patch3: gio-2.16-selinux-set-support.diff
 
-# fixed in svn
-Patch4: statfs-check.patch
-
-# http://bugzilla.gnome.org/show_bug.cgi?id=544599 (upstream) +
-# bump version to 2.17.5 since gvfs will require this version
-#
-Patch5: glib-2.17.4-gio-guess-content-sync.patch
 # this patch requires autoreconf
 BuildRequires: autoconf automake libtool gettext-devel gtk-doc
 
@@ -67,9 +58,6 @@ of version 2 of the GLib library.
 %prep
 %setup -q -n glib-%{version}
 %patch2 -p1 -b .only-pass-uri-to-gio-apps
-%patch3 -p0 -b .selinux
-%patch4 -p1 -b .statfs-check
-%patch5 -p1 -b .guess-content-type-sync
 
 %build
 autoreconf
