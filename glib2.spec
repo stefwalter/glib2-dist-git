@@ -2,7 +2,7 @@
 
 Summary: A library of handy utility functions
 Name: glib2
-Version: 2.18.0
+Version: 2.18.1
 Release: 1%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
@@ -21,7 +21,6 @@ BuildRequires: glibc-devel
 
 # https://bugzilla.redhat.com/show_bug.cgi?id=442835
 Patch2: gio-2.16-only-pass-uri-to-gio-apps.patch
-
 
 # this patch requires autoreconf
 BuildRequires: autoconf automake libtool gettext-devel gtk-doc
@@ -59,8 +58,9 @@ of version 2 of the GLib library.
 %setup -q -n glib-%{version}
 %patch2 -p1 -b .only-pass-uri-to-gio-apps
 
-%build
 autoreconf
+
+%build
 %configure --disable-gtk-doc --enable-static 
 make %{?_smp_mflags}
 
@@ -133,6 +133,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/lib*.a
 
 %changelog
+* Wed Sep 17 2008 Matthias Clasen <mclasen@redhat.com> - 2.18.1-1
+- Update to 2.18.1
+
 * Tue Sep  2 2008 Matthias Clasen <mclasen@redhat.com> - 2.18.0-1
 - Update to 2.18.0
 
