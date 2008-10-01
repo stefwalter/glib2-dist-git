@@ -3,7 +3,7 @@
 Summary: A library of handy utility functions
 Name: glib2
 Version: 2.18.1
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
@@ -20,7 +20,8 @@ BuildRequires: libselinux-devel
 BuildRequires: glibc-devel
 
 # https://bugzilla.redhat.com/show_bug.cgi?id=442835
-Patch2: gio-2.16-only-pass-uri-to-gio-apps.patch
+# http://bugzilla.gnome.org/show_bug.cgi?id=528670
+Patch2: gio-2.18-always-pass-fuse-file-uri.patch
 
 # this patch requires autoreconf
 BuildRequires: autoconf automake libtool gettext-devel gtk-doc
@@ -56,7 +57,7 @@ of version 2 of the GLib library.
 
 %prep
 %setup -q -n glib-%{version}
-%patch2 -p1 -b .only-pass-uri-to-gio-apps
+%patch2 -p1 -b .always-pass-fuse-file-uri
 
 autoreconf
 
@@ -133,6 +134,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/lib*.a
 
 %changelog
+* Wed Oct  1 2008 David Zeuthen <davidz@redhat.com> - 2.18.1-2
+- Update the patch to always pass FUSE POSIX URI's
+
 * Wed Sep 17 2008 Matthias Clasen <mclasen@redhat.com> - 2.18.1-1
 - Update to 2.18.1
 
