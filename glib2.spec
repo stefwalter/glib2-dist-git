@@ -2,8 +2,8 @@
 
 Summary: A library of handy utility functions
 Name: glib2
-Version: 2.18.1
-Release: 2%{?dist}
+Version: 2.18.2
+Release: 1%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
@@ -134,6 +134,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/lib*.a
 
 %changelog
+* Thu Oct 16 2008 Matthias Clasen <mclasen@redhat.com> - 2.18.2-1
+- Update to 2.18.2
+
 * Wed Oct  1 2008 David Zeuthen <davidz@redhat.com> - 2.18.1-2
 - Update the patch to always pass FUSE POSIX URI's
 
