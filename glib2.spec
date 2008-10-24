@@ -3,7 +3,7 @@
 Summary: A library of handy utility functions
 Name: glib2
 Version: 2.18.2
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
@@ -22,6 +22,8 @@ BuildRequires: glibc-devel
 # https://bugzilla.redhat.com/show_bug.cgi?id=442835
 # http://bugzilla.gnome.org/show_bug.cgi?id=528670
 Patch2: gio-2.18-always-pass-fuse-file-uri.patch
+# http://bugzilla.gnome.org/show_bug.cgi?id=528320 (from svn)
+Patch3: glib-2.18.2-no-generic-icons.patch
 
 # this patch requires autoreconf
 BuildRequires: autoconf automake libtool gettext-devel gtk-doc
@@ -58,6 +60,7 @@ of version 2 of the GLib library.
 %prep
 %setup -q -n glib-%{version}
 %patch2 -p1 -b .always-pass-fuse-file-uri
+%patch3 -p0 -b .no-generic-icons
 
 autoreconf
 
@@ -134,6 +137,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/lib*.a
 
 %changelog
+* Fri Oct 24 2008 Alexander Larsson <alexl@redhat.com> - 2.18.2-2
+- Don't return generic fallback icons for files,
+  as this means custom mimetypes don't work (from svn)
+
 * Thu Oct 16 2008 Matthias Clasen <mclasen@redhat.com> - 2.18.2-1
 - Update to 2.18.2
 
