@@ -3,7 +3,7 @@
 Summary: A library of handy utility functions
 Name: glib2
 Version: 2.19.1
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
@@ -18,12 +18,6 @@ BuildRequires: libattr-devel
 BuildRequires: libselinux-devel
 # for sys/inotify.h
 BuildRequires: glibc-devel
-
-# https://bugzilla.redhat.com/show_bug.cgi?id=442835
-# http://bugzilla.gnome.org/show_bug.cgi?id=528670
-Patch2: gio-2.18-always-pass-fuse-file-uri.patch
-# http://bugzilla.gnome.org/show_bug.cgi?id=528320 (from svn)
-Patch3: glib-2.18.2-no-generic-icons.patch
 
 Patch4: glib-i386-atomic.patch
 
@@ -61,8 +55,6 @@ of version 2 of the GLib library.
 
 %prep
 %setup -q -n glib-%{version}
-%patch2 -p1 -b .always-pass-fuse-file-uri
-%patch3 -p0 -b .no-generic-icons
 %patch4 -p1 -b .i386-atomic
 
 libtoolize --force --copy
@@ -141,7 +133,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/lib*.a
 
 %changelog
-* Mon Dec  1 2008 Matthias Clasen <mclasen@redhat.com> - 2.19.1-1
+* Mon Dec  1 2008 Matthias Clasen <mclasen@redhat.com> - 2.19.1-2
 - Update to 2.19.1
 
 * Mon Oct 27 2008 Matthias Clasen <mclasen@redhat.com> - 2.18.2-3
