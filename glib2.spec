@@ -2,12 +2,12 @@
 
 Summary: A library of handy utility functions
 Name: glib2
-Version: 2.18.2
-Release: 3%{?dist}
+Version: 2.19.1
+Release: 1%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
-Source: http://download.gnome.org/sources/glib/2.18/glib-%{version}.tar.bz2
+Source: http://download.gnome.org/sources/glib/2.19/glib-%{version}.tar.bz2
 Source2: glib2.sh
 Source3: glib2.csh
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -65,6 +65,7 @@ of version 2 of the GLib library.
 %patch3 -p0 -b .no-generic-icons
 %patch4 -p1 -b .i386-atomic
 
+libtoolize --force --copy
 autoreconf
 
 %build
@@ -140,6 +141,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/lib*.a
 
 %changelog
+* Mon Dec  1 2008 Matthias Clasen <mclasen@redhat.com> - 2.19.1-1
+- Update to 2.19.1
+
 * Mon Oct 27 2008 Matthias Clasen <mclasen@redhat.com> - 2.18.2-3
 - Use asm implementation for atomic ops on x86
 
