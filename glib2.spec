@@ -2,8 +2,8 @@
 
 Summary: A library of handy utility functions
 Name: glib2
-Version: 2.19.2
-Release: 2%{?dist}
+Version: 2.19.3
+Release: 1%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
@@ -19,7 +19,7 @@ BuildRequires: libselinux-devel
 # for sys/inotify.h
 BuildRequires: glibc-devel
 
-Patch4: glib-i386-atomic.patch
+Patch0: glib-i386-atomic.patch
 
 # this patch requires autoreconf
 BuildRequires: autoconf automake libtool gettext-devel gtk-doc
@@ -55,7 +55,7 @@ of version 2 of the GLib library.
 
 %prep
 %setup -q -n glib-%{version}
-%patch4 -p1 -b .i386-atomic
+%patch0 -p1 -b .i386-atomic
 
 libtoolize --force --copy
 autoreconf
@@ -133,6 +133,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/lib*.a
 
 %changelog
+* Mon Dec 15 2008 Matthias Clasen <mclasen@redhat.com> - 2.19.3-1
+- Update to 2.19.3
+
 * Tue Dec  2 2008 Matthias Clasen <mclasen@redhat.com> - 2.19.2-2
 - Rebuild
 
