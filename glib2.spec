@@ -61,14 +61,6 @@ autoreconf
 %configure --disable-gtk-doc --enable-static 
 make %{?_smp_mflags}
 
-%check
-# abicheck scripts don't work on ppc
-%ifnarch ppc ppc64
-# FIXME need to make make check work without --enable-debug
-#make check
-%endif
-make check
-
 %install
 rm -rf $RPM_BUILD_ROOT
 
