@@ -2,8 +2,8 @@
 
 Summary: A library of handy utility functions
 Name: glib2
-Version: 2.19.8
-Release: 2%{?dist}
+Version: 2.19.10
+Release: 1%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
@@ -67,6 +67,7 @@ make %{?_smp_mflags}
 # FIXME need to make make check work without --enable-debug
 #make check
 %endif
+make check
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -130,6 +131,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/lib*.a
 
 %changelog
+* Mon Mar  2 2009 Matthias Clasen <mclasen@redhat.com> - 2.19.10-1
+- Update to 2.19.10
+
 * Tue Feb 24 2009 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.19.8-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_11_Mass_Rebuild
 
