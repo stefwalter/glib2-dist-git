@@ -19,9 +19,6 @@ BuildRequires: libselinux-devel
 # for sys/inotify.h
 BuildRequires: glibc-devel
 
-# this patch requires autoreconf
-BuildRequires: autoconf automake libtool gettext-devel gtk-doc
-
 Patch0: glib2-CVE-2008-4316.patch
 
 %description
@@ -55,10 +52,7 @@ of version 2 of the GLib library.
 
 %prep
 %setup -q -n glib-%{version}
-%patch0 -p1 -b .CVE-2008-4316
-
-libtoolize --force --copy
-autoreconf
+%patch0 -p0 -b .CVE-2008-4316
 
 %build
 %configure --disable-gtk-doc --enable-static
