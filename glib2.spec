@@ -3,7 +3,7 @@
 Summary: A library of handy utility functions
 Name: glib2
 Version: 2.19.10
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
@@ -22,11 +22,13 @@ BuildRequires: glibc-devel
 # this patch requires autoreconf
 BuildRequires: autoconf automake libtool gettext-devel gtk-doc
 
-%description 
+Patch0: glib2-CVE-2008-4316.patch
+
+%description
 GLib is the low-level core library that forms the basis
 for projects such as GTK+ and GNOME. It provides data structure
 handling for C, portability wrappers, and interfaces for such runtime
-functionality as an event loop, threads, dynamic loading, and an 
+functionality as an event loop, threads, dynamic loading, and an
 object system.
 
 This package provides version 2 of GLib.
@@ -38,8 +40,8 @@ Requires: pkgconfig >= 1:0.14
 Requires: %{name} = %{version}-%{release}
 
 %description devel
-The glib2-devel package includes the header files for 
-version 2 of the GLib library. 
+The glib2-devel package includes the header files for
+version 2 of the GLib library.
 
 # anaconda needs static libs, see RH bug #193143
 %package static
@@ -49,16 +51,17 @@ Requires: %{name}-devel = %{version}-%{release}
 
 %description static
 The glib2-static package includes static libraries
-of version 2 of the GLib library. 
+of version 2 of the GLib library.
 
 %prep
 %setup -q -n glib-%{version}
+%patch0 -p1 -b .CVE-2008-4316
 
 libtoolize --force --copy
 autoreconf
 
 %build
-%configure --disable-gtk-doc --enable-static 
+%configure --disable-gtk-doc --enable-static
 make %{?_smp_mflags}
 
 %install
@@ -66,7 +69,7 @@ rm -rf $RPM_BUILD_ROOT
 
 make install DESTDIR=$RPM_BUILD_ROOT
 
-# we build into /usr/lib, but we want the libraries (but not 
+# we build into /usr/lib, but we want the libraries (but not
 # the devel stuff) in /lib
 ./mkinstalldirs $RPM_BUILD_ROOT/%{_lib}
 pushd $RPM_BUILD_ROOT%{_libdir}
@@ -123,6 +126,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/lib*.a
 
 %changelog
+* Thu Mar 12 2009 Matthias Clasen <mclasen@redhat.com> - 2.19.10-2
+- Fix integer overflows in the base64 handling functions. CVE-2008-4316
+
 * Mon Mar  2 2009 Matthias Clasen <mclasen@redhat.com> - 2.19.10-1
 - Update to 2.19.10
 
