@@ -2,12 +2,12 @@
 
 Summary: A library of handy utility functions
 Name: glib2
-Version: 2.19.10
-Release: 2%{?dist}
+Version: 2.20.0
+Release: 1%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
-Source: http://download.gnome.org/sources/glib/2.19/glib-%{version}.tar.bz2
+Source: http://download.gnome.org/sources/glib/2.20/glib-%{version}.tar.bz2
 Source2: glib2.sh
 Source3: glib2.csh
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -120,6 +120,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/lib*.a
 
 %changelog
+* Fri Mar 13 2009 Matthias Clasen <mclasen@redhat.com> - 2.20.0-1
+- Update to 2.20.0
+
 * Thu Mar 12 2009 Matthias Clasen <mclasen@redhat.com> - 2.19.10-2
 - Fix integer overflows in the base64 handling functions. CVE-2008-4316
 
