@@ -19,8 +19,6 @@ BuildRequires: libselinux-devel
 # for sys/inotify.h
 BuildRequires: glibc-devel
 
-Patch0: glib2-CVE-2008-4316.patch
-
 %description
 GLib is the low-level core library that forms the basis
 for projects such as GTK+ and GNOME. It provides data structure
@@ -52,7 +50,6 @@ of version 2 of the GLib library.
 
 %prep
 %setup -q -n glib-%{version}
-%patch0 -p0 -b .CVE-2008-4316
 
 %build
 %configure --disable-gtk-doc --enable-static
