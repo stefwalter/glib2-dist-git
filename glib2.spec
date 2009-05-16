@@ -117,7 +117,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/lib*.a
 
 %changelog
-* Fri Mat 15 2009 Matthias Clasen <mclasen@redhat.com> - 2.21.0-1
+* Fri May 15 2009 Matthias Clasen <mclasen@redhat.com> - 2.21.0-1
 - Update to 2.21.0
 
 * Thu Apr  9 2009 Matthias Clasen <mclasen@redhat.com> - 2.20.1-1
