@@ -3,7 +3,7 @@
 Summary: A library of handy utility functions
 Name: glib2
 Version: 2.21.3
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
@@ -52,23 +52,13 @@ of version 2 of the GLib library.
 %setup -q -n glib-%{version}
 
 %build
-%configure --disable-gtk-doc --enable-static
+%configure --disable-gtk-doc --enable-static --with-runtime-libdir=../../%{_lib}
 make %{?_smp_mflags}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
 make install DESTDIR=$RPM_BUILD_ROOT
-
-# we build into /usr/lib, but we want the libraries (but not
-# the devel stuff) in /lib
-./mkinstalldirs $RPM_BUILD_ROOT/%{_lib}
-pushd $RPM_BUILD_ROOT%{_libdir}
-for name in glib gobject gmodule gthread gio; do
-  mv lib${name}-2.0.so.* ../../%{_lib}
-  ln -sf ../../%{_lib}/lib${name}-2.0.so.*.* lib${name}-2.0.so
-done
-popd
 
 ## glib2.sh and glib2.csh
 ./mkinstalldirs $RPM_BUILD_ROOT%{_sysconfdir}/profile.d
@@ -117,6 +107,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/lib*.a
 
 %changelog
+* Mon Jul  6 2009 Matthias Clasen <mclasen@redhat.com> - 2.21.3-2
+- Use --with-runtime-libdir
+
 * Mon Jul  6 2009 Matthias Clasen <mclasen@redhat.com> - 2.21.3-1
 - Update to 2.21.3
 
