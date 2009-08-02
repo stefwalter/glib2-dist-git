@@ -3,7 +3,7 @@
 Summary: A library of handy utility functions
 Name: glib2
 Version: 2.21.4
-Release: 2%{?dist}
+Release: 3%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
@@ -54,6 +54,12 @@ of version 2 of the GLib library.
 %build
 %configure --disable-gtk-doc --enable-static --with-runtime-libdir=../../%{_lib}
 make %{?_smp_mflags}
+
+# truncate NEWS
+awk '/^Overview of Changes/ { seen+=1 }
+{ if (seen < 2) print }
+{ if (seen == 2) { print "For older news, see http://git.gnome.org/cgit/glib/plain/NEWS"; exit } }' NEWS > tmp; mv tmp NEWS
+
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -107,6 +113,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/lib*.a
 
 %changelog
+* Sun Aug  2 2009 Matthias Clasen <mclasen@redhat.com> - 2.21.4-3
+- Save some space
+
 * Fri Jul 24 2009 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.21.4-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_12_Mass_Rebuild
 
