@@ -2,8 +2,8 @@
 
 Summary: A library of handy utility functions
 Name: glib2
-Version: 2.21.4
-Release: 3%{?dist}
+Version: 2.21.5
+Release: 1%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
@@ -113,6 +113,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/lib*.a
 
 %changelog
+* Mon Aug 24 2009 Matthias Clasen <mclasen@redhat.com> - 2.21.5-1
+- Update to 2.21.5
+
 * Sun Aug  2 2009 Matthias Clasen <mclasen@redhat.com> - 2.21.4-3
 - Save some space
 
