@@ -107,6 +107,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/*
 %doc %{_datadir}/gtk-doc/html/*
 %doc %{_mandir}/man1/*
+%{_datadir}/gdb/auto-load/usr/lib64/libglib-2.0.so.*-gdb.py*
+%{_datadir}/gdb/auto-load/usr/lib64/libgobject-2.0.so.*-gdb.py*
+
 
 %files static
 %defattr(-, root, root, -)
