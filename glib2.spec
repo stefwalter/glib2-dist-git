@@ -3,7 +3,7 @@
 Summary: A library of handy utility functions
 Name: glib2
 Version: 2.22.0
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
@@ -18,6 +18,9 @@ BuildRequires: libattr-devel
 BuildRequires: libselinux-devel
 # for sys/inotify.h
 BuildRequires: glibc-devel
+BuildRequires: automake autoconf libtool
+
+Patch0: pyloc.patch
 
 %description
 GLib is the low-level core library that forms the basis
@@ -50,6 +53,9 @@ of version 2 of the GLib library.
 
 %prep
 %setup -q -n glib-%{version}
+%patch0 -p1 -b .pyloc
+
+autoreconf -f -i
 
 %build
 %configure --disable-gtk-doc --enable-static --with-runtime-libdir=../../%{_lib}
@@ -107,8 +113,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/*
 %doc %{_datadir}/gtk-doc/html/*
 %doc %{_mandir}/man1/*
-%{_datadir}/gdb/auto-load%{_libdir}/libglib-2.0.so.*-gdb.py*
-%{_datadir}/gdb/auto-load%{_libdir}/libgobject-2.0.so.*-gdb.py*
+%{_datadir}/gdb/auto-load%{libdir}/libglib-2.0.so.*-gdb.py*
+%{_datadir}/gdb/auto-load%{libdir}/libgobject-2.0.so.*-gdb.py*
 
 
 %files static
@@ -116,6 +122,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/lib*.a
 
 %changelog
+* Wed Sep 23 2009 Matthias Clasen <mclasen@redhat.com> - 2.22.0-2
+- Fix location of gdb macros
+
 * Tue Sep 22 2009 Matthias Clasen <mclasen@redhat.com> - 2.22.0-1
 - Update to 2.22.0
 
