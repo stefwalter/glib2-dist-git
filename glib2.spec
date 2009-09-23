@@ -19,6 +19,7 @@ BuildRequires: libselinux-devel
 # for sys/inotify.h
 BuildRequires: glibc-devel
 BuildRequires: automake autoconf libtool
+BuildRequires: gtk-doc
 
 Patch0: pyloc.patch
 
