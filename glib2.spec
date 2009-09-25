@@ -3,7 +3,7 @@
 Summary: A library of handy utility functions
 Name: glib2
 Version: 2.22.0
-Release: 3%{?dist}
+Release: 4%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
@@ -81,8 +81,6 @@ install -p -m 644 %{SOURCE3} $RPM_BUILD_ROOT%{_sysconfdir}/profile.d
 rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 rm -f $RPM_BUILD_ROOT%{_libdir}/gio/modules/*.{a,la}
 
-# These cause multilib conflicts, and we don't really need precompiled
-# versions of these tiny scripts
 rm -f $RPM_BUILD_ROOT%{_datadir}/glib-2.0/gdb/*.{pyc,pyo}
 
 %find_lang glib20
@@ -115,6 +113,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/aclocal/*
 %{_libdir}/pkgconfig/*
 %{_datadir}/glib-2.0
+%exclude %{_datadir}/glib-2.0/gdb/*.pyo
+%exclude %{_datadir}/glib-2.0/gdb/*.pyc
 %{_bindir}/*
 %doc %{_datadir}/gtk-doc/html/*
 %doc %{_mandir}/man1/*
@@ -127,6 +127,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/lib*.a
 
 %changelog
+* Fri Sep 25 2009 Matthias Clasen <mclasen@redhat.com> - 2.22.0-4
+- Avoid multilib conflicts even harder
+
 * Thu Sep 24 2009 Matthias Clasen <mclasen@redhat.com> - 2.22.0-3
 - Avoid multilib conflicts (#525213)
 
