@@ -18,6 +18,7 @@ BuildRequires: libattr-devel
 BuildRequires: libselinux-devel
 # for sys/inotify.h
 BuildRequires: glibc-devel
+BuildRequires: zlib-devel
 BuildRequires: automake autoconf libtool
 BuildRequires: gtk-doc
 
