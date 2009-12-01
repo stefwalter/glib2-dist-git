@@ -21,8 +21,6 @@ BuildRequires: glibc-devel
 BuildRequires: automake autoconf libtool
 BuildRequires: gtk-doc
 
-Patch0: pyloc.patch
-
 %description
 GLib is the low-level core library that forms the basis
 for projects such as GTK+ and GNOME. It provides data structure
@@ -54,7 +52,6 @@ of version 2 of the GLib library.
 
 %prep
 %setup -q -n glib-%{version}
-%patch0 -p1 -b .pyloc
 
 autoreconf -f -i
 
