@@ -2,12 +2,12 @@
 
 Summary: A library of handy utility functions
 Name: glib2
-Version: 2.22.0
-Release: 4%{?dist}
+Version: 2.23.0
+Release: 1%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
-Source: http://download.gnome.org/sources/glib/2.22/glib-%{version}.tar.bz2
+Source: http://download.gnome.org/sources/glib/2.23/glib-%{version}.tar.bz2
 Source2: glib2.sh
 Source3: glib2.csh
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -127,6 +127,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/lib*.a
 
 %changelog
+* Mon Nov 30 2009 Matthias Clasen <mclasen@redhat.com> - 2.23.0-1
+- Update to 2.23.0
+
 * Fri Sep 25 2009 Matthias Clasen <mclasen@redhat.com> - 2.22.0-4
 - Avoid multilib conflicts even harder
 
