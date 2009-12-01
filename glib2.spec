@@ -53,8 +53,6 @@ of version 2 of the GLib library.
 %prep
 %setup -q -n glib-%{version}
 
-autoreconf -f -i
-
 %build
 %configure --disable-gtk-doc --enable-static --with-runtime-libdir=../../%{_lib}
 make %{?_smp_mflags}
