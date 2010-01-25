@@ -2,7 +2,7 @@
 
 Summary: A library of handy utility functions
 Name: glib2
-Version: 2.23.1
+Version: 2.23.2
 Release: 1%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
@@ -66,7 +66,6 @@ awk '/^Overview of Changes/ { seen+=1 }
 
 %install
 rm -rf $RPM_BUILD_ROOT
-
 make install DESTDIR=$RPM_BUILD_ROOT
 
 ## glib2.sh and glib2.csh
@@ -79,14 +78,45 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/gio/modules/*.{a,la}
 
 rm -f $RPM_BUILD_ROOT%{_datadir}/glib-2.0/gdb/*.{pyc,pyo}
 
+case "$host" in 
+  alpha*|ia64*|powerpc64*|ppc64*|s390x*|sparc64*|x86_64*)
+    mv $RPM_BUILD_ROOT%{_bindir}/gio-querymodules $RPM_BUILD_ROOT%{_bindir}/gio-querymodules-64
+    ;;
+  *)
+    mv $RPM_BUILD_ROOT%{_bindir}/gio-querymodules $RPM_BUILD_ROOT%{_bindir}/gio-querymodules-32
+    ;;
+esac
+
 %find_lang glib20
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post -p /sbin/ldconfig
+%post
+/sbin/ldconfig
 
-%postun -p /sbin/ldconfig
+case "$host" in
+  alpha*|ia64*|powerpc64*|ppc64*|s390x*|sparc64*|x86_64*)
+    %{_bindir}/gio-querymodules-64 %{_libdir}/gio/modules
+    ;;
+  *)
+    %{_bindir}/gio-querymodules-32 %{_libdir}/gio/modules
+    ;;
+esac
+
+
+%postun
+/sbin/ldconfig
+
+case "$host" in
+  alpha*|ia64*|powerpc64*|ppc64*|s390x*|sparc64*|x86_64*)
+    %{_bindir}/gio-querymodules-64 %{_libdir}/gio/modules
+    ;;
+  *)
+    %{_bindir}/gio-querymodules-32 %{_libdir}/gio/modules
+    ;;
+esac
+
 
 %files -f glib20.lang
 %defattr(-, root, root, -)
@@ -100,6 +130,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_libdir}/gio
 %dir %{_libdir}/gio/modules
 %{_libdir}/gio/modules/libgiofam.so
+%{_bindir}/gio-querymodules*
 
 %files devel
 %defattr(-, root, root, -)
@@ -123,6 +154,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/lib*.a
 
 %changelog
+* Mon Jan 25 2010 Matthias Clasen <mclasen@redhat.com> - 2.23.2-1
+- Update to 2.23.2
+
 * Mon Dec 20 2009 Matthias Clasen <mclasen@redhat.com> - 2.23.1-1
 - Update to 2.23.1
 
