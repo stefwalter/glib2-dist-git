@@ -1,0 +1,17 @@
+diff -up glib-2.23.2/glib/gtestutils.c.abort_msg glib-2.23.2/glib/gtestutils.c
+--- glib-2.23.2/glib/gtestutils.c.abort_msg	2010-01-25 18:32:10.793495994 -0500
++++ glib-2.23.2/glib/gtestutils.c	2010-01-25 18:33:23.898497049 -0500
+@@ -40,7 +40,12 @@
+ #ifdef HAVE_SYS_SELECT_H
+ #include <sys/select.h>
+ #endif /* HAVE_SYS_SELECT_H */
+- 
++
++/* We can't use the libc variable, since rpm doesn't let us depend on
++ * GLIBC_PRIVATE symbols.
++ */
++#undef HAVE_LIBC_ABORT_MSG
++
+ /* if we have a recent enough glibc, use its __abort_msg variable for storing
+  * assertion messages (just like assert()). If not, declare our own variable,
+  * so that platforms with older glibc or different libc implementations can use
