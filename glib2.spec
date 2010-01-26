@@ -3,7 +3,7 @@
 Summary: A library of handy utility functions
 Name: glib2
 Version: 2.23.2
-Release: 2%{?dist}
+Release: 3%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
@@ -56,6 +56,7 @@ of version 2 of the GLib library.
 
 %prep
 %setup -q -n glib-%{version}
+%patch0 -p1 -b .abort-msg
 
 %build
 %configure --disable-gtk-doc --enable-static --with-runtime-libdir=../../%{_lib}
@@ -157,6 +158,9 @@ esac
 %{_libdir}/lib*.a
 
 %changelog
+* Mon Jan 25 2010 Matthias Clasen <mclasen@redhat.com> - 2.23.2-3
+- Actually apply the patch, too
+
 * Mon Jan 25 2010 Matthias Clasen <mclasen@redhat.com> - 2.23.2-2
 - Drop the dependency on a GLIBC_PRIVATE symbol
 
