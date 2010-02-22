@@ -2,7 +2,7 @@
 
 Summary: A library of handy utility functions
 Name: glib2
-Version: 2.23.3
+Version: 2.23.4
 Release: 1%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
@@ -154,8 +154,11 @@ esac
 %{_libdir}/lib*.a
 
 %changelog
+* Sun Feb 21 2010 Matthias Clasen <mclasen@redhat.com> - 2.23.4-1
+- Update to 2.23.4
+
 * Thu Feb 11 2010 Matthias Clasen <mclasen@redhat.com> - 2.23.3-1
-= Update to 2.23.3
+- Update to 2.23.3
 
 * Mon Jan 25 2010 Matthias Clasen <mclasen@redhat.com> - 2.23.2-3
 - Actually apply the patch, too
