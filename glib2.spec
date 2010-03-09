@@ -2,15 +2,15 @@
 
 Summary: A library of handy utility functions
 Name: glib2
-Version: 2.23.4
+Version: 2.23.5
 Release: 1%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
+#VCS: git:git://git.gnome.org/glib
 Source: http://download.gnome.org/sources/glib/2.23/glib-%{version}.tar.bz2
 Source2: glib2.sh
 Source3: glib2.csh
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires: pkgconfig >= 1:0.14
 BuildRequires: gamin-devel
 BuildRequires: gettext
@@ -65,7 +65,6 @@ awk '/^Overview of Changes/ { seen+=1 }
 
 
 %install
-rm -rf $RPM_BUILD_ROOT
 make install DESTDIR=$RPM_BUILD_ROOT
 
 ## glib2.sh and glib2.csh
@@ -78,7 +77,7 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/gio/modules/*.{a,la}
 
 rm -f $RPM_BUILD_ROOT%{_datadir}/glib-2.0/gdb/*.{pyc,pyo}
 
-case "$host" in 
+case "$host" in
   alpha*|ia64*|powerpc64*|ppc64*|s390x*|sparc64*|x86_64*)
     mv $RPM_BUILD_ROOT%{_bindir}/gio-querymodules $RPM_BUILD_ROOT%{_bindir}/gio-querymodules-64
     ;;
@@ -154,6 +153,9 @@ esac
 %{_libdir}/lib*.a
 
 %changelog
+* Tue Mar  9 2010 Matthias Clasen <mclasen@redhat.com> - 2.23.5-1
+- Update to 2.23.5
+
 * Sun Feb 21 2010 Matthias Clasen <mclasen@redhat.com> - 2.23.4-1
 - Update to 2.23.4
 
