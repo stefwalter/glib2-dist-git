@@ -3,7 +3,7 @@
 Summary: A library of handy utility functions
 Name: glib2
 Version: 2.23.5
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
@@ -56,6 +56,10 @@ of version 2 of the GLib library.
 
 %build
 %configure --disable-gtk-doc --enable-static --with-runtime-libdir=../../%{_lib}
+# remove rpaths
+sed -i 's|^hardcode_libdir_flag_spec=.*|hardcode_libdir_flag_spec=""|g' libtool
+sed -i 's|^runpath_var=LD_RUN_PATH|runpath_var=DIE_RPATH_DIE|g' libtool
+
 make %{?_smp_mflags}
 
 # truncate NEWS
@@ -141,7 +145,12 @@ esac
 %{_datadir}/glib-2.0
 %exclude %{_datadir}/glib-2.0/gdb/*.pyo
 %exclude %{_datadir}/glib-2.0/gdb/*.pyc
-%{_bindir}/*
+%{_bindir}/glib-genmarshal
+%{_bindir}/glib-gettextize
+%{_bindir}/glib-mkenums
+%{_bindir}/gobject-query
+%{_bindir}/gtester
+%attr (0755, root, root) %{_bindir}/gtester-report
 %doc %{_datadir}/gtk-doc/html/*
 %doc %{_mandir}/man1/*
 %{_datadir}/gdb/auto-load%{libdir}/libglib-2.0.so.*-gdb.py*
@@ -153,6 +162,9 @@ esac
 %{_libdir}/lib*.a
 
 %changelog
+* Wed Mar 10 2010 Matthias Clasen <mclasen@redhat.com> - 2.23.5-2
+- Fix some rpmlint complaints
+
 * Tue Mar  9 2010 Matthias Clasen <mclasen@redhat.com> - 2.23.5-1
 - Update to 2.23.5
 
