@@ -2,8 +2,8 @@
 
 Summary: A library of handy utility functions
 Name: glib2
-Version: 2.23.5
-Release: 2%{?dist}
+Version: 2.23.6
+Release: 1%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
@@ -162,6 +162,9 @@ esac
 %{_libdir}/lib*.a
 
 %changelog
+* Mon Mar 22 2010 Matthias Clasen <mclasen@redhat.com> - 2.23.6-1
+- Update to 2.23.6
+
 * Wed Mar 10 2010 Matthias Clasen <mclasen@redhat.com> - 2.23.5-2
 - Fix some rpmlint complaints
 
