@@ -2,13 +2,13 @@
 
 Summary: A library of handy utility functions
 Name: glib2
-Version: 2.23.6
+Version: 2.24.0
 Release: 1%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
 #VCS: git:git://git.gnome.org/glib
-Source: http://download.gnome.org/sources/glib/2.23/glib-%{version}.tar.bz2
+Source: http://download.gnome.org/sources/glib/2.24/glib-%{version}.tar.bz2
 Source2: glib2.sh
 Source3: glib2.csh
 BuildRequires: pkgconfig >= 1:0.14
@@ -23,13 +23,10 @@ BuildRequires: automake autoconf libtool
 BuildRequires: gtk-doc
 
 %description
-GLib is the low-level core library that forms the basis
-for projects such as GTK+ and GNOME. It provides data structure
-handling for C, portability wrappers, and interfaces for such runtime
-functionality as an event loop, threads, dynamic loading, and an
-object system.
-
-This package provides version 2 of GLib.
+GLib is the low-level core library that forms the basis for projects
+such as GTK+ and GNOME. It provides data structure handling for C,
+portability wrappers, and interfaces for such runtime functionality
+as an event loop, threads, dynamic loading, and an object system.
 
 %package devel
 Summary: A library of handy utility functions
@@ -38,8 +35,7 @@ Requires: pkgconfig >= 1:0.14
 Requires: %{name} = %{version}-%{release}
 
 %description devel
-The glib2-devel package includes the header files for
-version 2 of the GLib library.
+The glib2-devel package includes the header files for the GLib library.
 
 # anaconda needs static libs, see RH bug #193143
 %package static
@@ -48,8 +44,7 @@ Group: Development/Libraries
 Requires: %{name}-devel = %{version}-%{release}
 
 %description static
-The glib2-static package includes static libraries
-of version 2 of the GLib library.
+The glib2-static package includes static libraries of the GLib library.
 
 %prep
 %setup -q -n glib-%{version}
@@ -162,6 +157,9 @@ esac
 %{_libdir}/lib*.a
 
 %changelog
+* Sun Mar 28 2010 Matthias Clasen <mclasen@redhat.com> - 2.24.0-1
+- Update to 2.24.0
+
 * Mon Mar 22 2010 Matthias Clasen <mclasen@redhat.com> - 2.23.6-1
 - Update to 2.23.6
 
