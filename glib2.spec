@@ -2,13 +2,13 @@
 
 Summary: A library of handy utility functions
 Name: glib2
-Version: 2.24.0
+Version: 2.25.1
 Release: 1%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
 #VCS: git:git://git.gnome.org/glib
-Source: http://download.gnome.org/sources/glib/2.24/glib-%{version}.tar.bz2
+Source: http://download.gnome.org/sources/glib/2.25/glib-%{version}.tar.bz2
 Source2: glib2.sh
 Source3: glib2.csh
 BuildRequires: pkgconfig >= 1:0.14
@@ -138,8 +138,11 @@ esac
 %{_datadir}/aclocal/*
 %{_libdir}/pkgconfig/*
 %{_datadir}/glib-2.0
+%{_datadir}/glib-2.0/schemas/gschema.dtd
 %exclude %{_datadir}/glib-2.0/gdb/*.pyo
 %exclude %{_datadir}/glib-2.0/gdb/*.pyc
+%{_bindir}/gschema-compile
+%{_bindir}/gsettings-schema-convert
 %{_bindir}/glib-genmarshal
 %{_bindir}/glib-gettextize
 %{_bindir}/glib-mkenums
@@ -157,6 +160,9 @@ esac
 %{_libdir}/lib*.a
 
 %changelog
+* Mon Apr 19 2010 Matthias Clasen <mclasen@redhat.com> - 2.25.1-1
+- Update to 2.25.1
+
 * Sun Mar 28 2010 Matthias Clasen <mclasen@redhat.com> - 2.24.0-1
 - Update to 2.24.0
 
