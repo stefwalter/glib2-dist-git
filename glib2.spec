@@ -3,12 +3,13 @@
 Summary: A library of handy utility functions
 Name: glib2
 Version: 2.25.1
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
 #VCS: git:git://git.gnome.org/glib
 Source: http://download.gnome.org/sources/glib/2.25/glib-%{version}.tar.bz2
+Source1: update-gio-modules
 Source2: glib2.sh
 Source3: glib2.csh
 BuildRequires: pkgconfig >= 1:0.14
@@ -76,6 +77,9 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/gio/modules/*.{a,la}
 
 rm -f $RPM_BUILD_ROOT%{_datadir}/glib-2.0/gdb/*.{pyc,pyo}
 
+# Install multilib wrappers for the binaries
+cp %{SOURCE1} $RPM_BUILD_ROOT{_bindir}/update-gio-modules
+
 case "$host" in
   alpha*|ia64*|powerpc64*|ppc64*|s390x*|sparc64*|x86_64*)
     mv $RPM_BUILD_ROOT%{_bindir}/gio-querymodules $RPM_BUILD_ROOT%{_bindir}/gio-querymodules-64
@@ -84,6 +88,7 @@ case "$host" in
     mv $RPM_BUILD_ROOT%{_bindir}/gio-querymodules $RPM_BUILD_ROOT%{_bindir}/gio-querymodules-32
     ;;
 esac
+
 
 %find_lang glib20
 
@@ -129,6 +134,7 @@ esac
 %dir %{_libdir}/gio/modules
 %{_libdir}/gio/modules/libgiofam.so
 %{_bindir}/gio-querymodules*
+%{_bindir}/update-gio-modules
 
 %files devel
 %defattr(-, root, root, -)
@@ -160,6 +166,9 @@ esac
 %{_libdir}/lib*.a
 
 %changelog
+* Mon Apr 19 2010 Matthias Clasen <mclasen@redhat.com> - 2.25.1-2
+- Add a multilib wrapper for gio-querymodules
+
 * Mon Apr 19 2010 Matthias Clasen <mclasen@redhat.com> - 2.25.1-1
 - Update to 2.25.1
 
