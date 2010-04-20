@@ -78,7 +78,7 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/gio/modules/*.{a,la}
 rm -f $RPM_BUILD_ROOT%{_datadir}/glib-2.0/gdb/*.{pyc,pyo}
 
 # Install multilib wrappers for the binaries
-cp %{SOURCE1} $RPM_BUILD_ROOT{_bindir}/update-gio-modules
+install -p -m 644 %{SOURCE1} $RPM_BUILD_ROOT%{_bindir}/update-gio-modules
 
 case "$host" in
   alpha*|ia64*|powerpc64*|ppc64*|s390x*|sparc64*|x86_64*)
