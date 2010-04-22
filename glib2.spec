@@ -3,7 +3,7 @@
 Summary: A library of handy utility functions
 Name: glib2
 Version: 2.25.1
-Release: 2%{?dist}
+Release: 3%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
@@ -135,6 +135,7 @@ esac
 %{_libdir}/gio/modules/libgiofam.so
 %{_bindir}/gio-querymodules*
 %{_bindir}/update-gio-modules
+%{_bindir}/gschema-compile
 
 %files devel
 %defattr(-, root, root, -)
@@ -147,7 +148,6 @@ esac
 %{_datadir}/glib-2.0/schemas/gschema.dtd
 %exclude %{_datadir}/glib-2.0/gdb/*.pyo
 %exclude %{_datadir}/glib-2.0/gdb/*.pyc
-%{_bindir}/gschema-compile
 %{_bindir}/gsettings-schema-convert
 %{_bindir}/glib-genmarshal
 %{_bindir}/glib-gettextize
@@ -166,6 +166,10 @@ esac
 %{_libdir}/lib*.a
 
 %changelog
+* Thu Apr 22 2010 Matthias Clasen <mclasen@redhat.com> - 2.25.1-3
+- Move schema compiler to the main package, since it is
+  needed by other rpm's %%post at runtime
+
 * Mon Apr 19 2010 Matthias Clasen <mclasen@redhat.com> - 2.25.1-2
 - Add a multilib wrapper for gio-querymodules
 
