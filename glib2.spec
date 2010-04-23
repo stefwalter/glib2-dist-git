@@ -2,8 +2,8 @@
 
 Summary: A library of handy utility functions
 Name: glib2
-Version: 2.25.1
-Release: 3%{?dist}
+Version: 2.25.2
+Release: 1%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
@@ -136,6 +136,10 @@ esac
 %{_bindir}/gio-querymodules*
 %{_bindir}/update-gio-modules
 %{_bindir}/gschema-compile
+%{_bindir}/gsettings
+%doc %{_mandir}/man1/gio-querymodules.1.gz
+%doc %{_mandir}/man1/gschema-compile.1.gz
+%doc %{_mandir}/man1/gsettings.1.gz
 
 %files devel
 %defattr(-, root, root, -)
@@ -156,7 +160,13 @@ esac
 %{_bindir}/gtester
 %attr (0755, root, root) %{_bindir}/gtester-report
 %doc %{_datadir}/gtk-doc/html/*
-%doc %{_mandir}/man1/*
+%doc %{_mandir}/man1/glib-genmarshal.1.gz
+%doc %{_mandir}/man1/glib-gettextize.1.gz
+%doc %{_mandir}/man1/glib-mkenums.1.gz
+%doc %{_mandir}/man1/gobject-query.1.gz
+%doc %{_mandir}/man1/gtester-report.1.gz
+%doc %{_mandir}/man1/gtester.1.gz
+%doc %{_mandir}/man1/gsettings-schema-convert.1.gz
 %{_datadir}/gdb/auto-load%{libdir}/libglib-2.0.so.*-gdb.py*
 %{_datadir}/gdb/auto-load%{libdir}/libgobject-2.0.so.*-gdb.py*
 
@@ -166,9 +176,11 @@ esac
 %{_libdir}/lib*.a
 
 %changelog
-* Thu Apr 22 2010 Matthias Clasen <mclasen@redhat.com> - 2.25.1-3
+* Fir Apr 23 2010 Matthias Clasen <mclasen@redhat.com> - 2.25.2-1
+- Update to 2.25.2
 - Move schema compiler to the main package, since it is
   needed by other rpm's %%post at runtime
+- Split up man pages to go along with their binaries
 
 * Mon Apr 19 2010 Matthias Clasen <mclasen@redhat.com> - 2.25.1-2
 - Add a multilib wrapper for gio-querymodules
