@@ -51,7 +51,10 @@ The glib2-static package includes static libraries of the GLib library.
 %setup -q -n glib-%{version}
 
 %build
-%configure --disable-gtk-doc --enable-static --with-runtime-libdir=../../%{_lib}
+%configure --disable-gtk-doc \
+           --enable-man      \
+           --enable-static   \
+           --with-runtime-libdir=../../%{_lib}
 # remove rpaths
 sed -i 's|^hardcode_libdir_flag_spec=.*|hardcode_libdir_flag_spec=""|g' libtool
 sed -i 's|^runpath_var=LD_RUN_PATH|runpath_var=DIE_RPATH_DIE|g' libtool
