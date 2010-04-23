@@ -176,7 +176,7 @@ esac
 %{_libdir}/lib*.a
 
 %changelog
-* Fir Apr 23 2010 Matthias Clasen <mclasen@redhat.com> - 2.25.2-1
+* Fri Apr 23 2010 Matthias Clasen <mclasen@redhat.com> - 2.25.2-1
 - Update to 2.25.2
 - Move schema compiler to the main package, since it is
   needed by other rpm's %%post at runtime
