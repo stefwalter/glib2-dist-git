@@ -2,7 +2,7 @@
 
 Summary: A library of handy utility functions
 Name: glib2
-Version: 2.25.2
+Version: 2.25.3
 Release: 1%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
@@ -52,9 +52,9 @@ The glib2-static package includes static libraries of the GLib library.
 
 %build
 %configure --disable-gtk-doc \
-           --enable-man      \
            --enable-static   \
            --with-runtime-libdir=../../%{_lib}
+
 # remove rpaths
 sed -i 's|^hardcode_libdir_flag_spec=.*|hardcode_libdir_flag_spec=""|g' libtool
 sed -i 's|^runpath_var=LD_RUN_PATH|runpath_var=DIE_RPATH_DIE|g' libtool
@@ -138,10 +138,10 @@ esac
 %{_libdir}/gio/modules/libgiofam.so
 %{_bindir}/gio-querymodules*
 %{_bindir}/update-gio-modules
-%{_bindir}/gschema-compile
+%{_bindir}/glib-compile-schemas
 %{_bindir}/gsettings
 %doc %{_mandir}/man1/gio-querymodules.1.gz
-%doc %{_mandir}/man1/gschema-compile.1.gz
+%doc %{_mandir}/man1/glib-compile-schemas.1.gz
 %doc %{_mandir}/man1/gsettings.1.gz
 
 %files devel
@@ -179,8 +179,8 @@ esac
 %{_libdir}/lib*.a
 
 %changelog
-* Fri Apr 23 2010 Matthias Clasen <mclasen@redhat.com> - 2.25.2-1
-- Update to 2.25.2
+* Fri Apr 23 2010 Matthias Clasen <mclasen@redhat.com> - 2.25.3-1
+- Update to 2.25.3
 - Move schema compiler to the main package, since it is
   needed by other rpm's %%post at runtime
 - Split up man pages to go along with their binaries
