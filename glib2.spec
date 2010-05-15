@@ -2,7 +2,7 @@
 
 Summary: A library of handy utility functions
 Name: glib2
-Version: 2.25.3
+Version: 2.25.5
 Release: 1%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
@@ -77,7 +77,6 @@ install -p -m 644 %{SOURCE3} $RPM_BUILD_ROOT%{_sysconfdir}/profile.d
 
 rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 rm -f $RPM_BUILD_ROOT%{_libdir}/gio/modules/*.{a,la}
-
 rm -f $RPM_BUILD_ROOT%{_datadir}/glib-2.0/gdb/*.{pyc,pyo}
 
 # Install multilib wrappers for the binaries
@@ -140,9 +139,11 @@ esac
 %{_bindir}/update-gio-modules
 %{_bindir}/glib-compile-schemas
 %{_bindir}/gsettings
+%{_bindir}/gdbus
 %doc %{_mandir}/man1/gio-querymodules.1.gz
 %doc %{_mandir}/man1/glib-compile-schemas.1.gz
 %doc %{_mandir}/man1/gsettings.1.gz
+%doc %{_mandir}/man1/gdbus.1.gz
 
 %files devel
 %defattr(-, root, root, -)
@@ -179,6 +180,9 @@ esac
 %{_libdir}/lib*.a
 
 %changelog
+* Fri May 14 2010 Matthias Clasen <mclasen@redhat.com> - 2.25.5-1
+- Update to 2.25.5
+
 * Fri Apr 23 2010 Matthias Clasen <mclasen@redhat.com> - 2.25.3-1
 - Update to 2.25.3
 - Move schema compiler to the main package, since it is
