@@ -132,6 +132,9 @@ esac
 %{libdir}/libgobject-2.0.so.*
 %{libdir}/libgio-2.0.so.*
 %{_sysconfdir}/profile.d/*
+%{_sysconfdir}/bash_completion.d/gdbus-bash-completion.sh
+%dir %{_datadir}/glib-2.0
+%dir %{_datadir}/glib-2.0/schemas
 %dir %{_libdir}/gio
 %dir %{_libdir}/gio/modules
 %{_libdir}/gio/modules/libgiofam.so
@@ -152,7 +155,6 @@ esac
 %{_includedir}/*
 %{_datadir}/aclocal/*
 %{_libdir}/pkgconfig/*
-%{_datadir}/glib-2.0
 %{_datadir}/glib-2.0/schemas/gschema.dtd
 %exclude %{_datadir}/glib-2.0/gdb/*.pyo
 %exclude %{_datadir}/glib-2.0/gdb/*.pyc
