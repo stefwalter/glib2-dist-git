@@ -78,6 +78,7 @@ install -p -m 644 %{SOURCE3} $RPM_BUILD_ROOT%{_sysconfdir}/profile.d
 rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 rm -f $RPM_BUILD_ROOT%{_libdir}/gio/modules/*.{a,la}
 rm -f $RPM_BUILD_ROOT%{_datadir}/glib-2.0/gdb/*.{pyc,pyo}
+rm -rf $RPM_BUILD_ROOT%{_datadir}/glib-2.0/gettext
 
 # Install multilib wrappers for the binaries
 install -p -m 644 %{SOURCE1} $RPM_BUILD_ROOT%{_bindir}/update-gio-modules
@@ -155,6 +156,7 @@ esac
 %{_includedir}/*
 %{_datadir}/aclocal/*
 %{_libdir}/pkgconfig/*
+%{_datadir}/glib-2.0/gdb
 %{_datadir}/glib-2.0/schemas/gschema.dtd
 %exclude %{_datadir}/glib-2.0/gdb/*.pyo
 %exclude %{_datadir}/glib-2.0/gdb/*.pyc
