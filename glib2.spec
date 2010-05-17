@@ -3,7 +3,7 @@
 Summary: A library of handy utility functions
 Name: glib2
 Version: 2.25.5
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
@@ -78,7 +78,6 @@ install -p -m 644 %{SOURCE3} $RPM_BUILD_ROOT%{_sysconfdir}/profile.d
 rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 rm -f $RPM_BUILD_ROOT%{_libdir}/gio/modules/*.{a,la}
 rm -f $RPM_BUILD_ROOT%{_datadir}/glib-2.0/gdb/*.{pyc,pyo}
-rm -rf $RPM_BUILD_ROOT%{_datadir}/glib-2.0/gettext
 
 # Install multilib wrappers for the binaries
 install -p -m 644 %{SOURCE1} $RPM_BUILD_ROOT%{_bindir}/update-gio-modules
@@ -157,6 +156,7 @@ esac
 %{_datadir}/aclocal/*
 %{_libdir}/pkgconfig/*
 %{_datadir}/glib-2.0/gdb
+%{_datadir}/glib-2.0/gettext
 %{_datadir}/glib-2.0/schemas/gschema.dtd
 %exclude %{_datadir}/glib-2.0/gdb/*.pyo
 %exclude %{_datadir}/glib-2.0/gdb/*.pyc
@@ -184,6 +184,9 @@ esac
 %{_libdir}/lib*.a
 
 %changelog
+* Mon May 17 2010 Matthias Clasen <mclasen@redhat.com> - 2.25.5-2
+- Remove an erroneous removal
+
 * Fri May 14 2010 Matthias Clasen <mclasen@redhat.com> - 2.25.5-1
 - Update to 2.25.5
 
