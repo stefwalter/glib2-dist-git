@@ -2,8 +2,8 @@
 
 Summary: A library of handy utility functions
 Name: glib2
-Version: 2.25.5
-Release: 2%{?dist}
+Version: 2.25.6
+Release: 1%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
@@ -82,45 +82,19 @@ rm -f $RPM_BUILD_ROOT%{_datadir}/glib-2.0/gdb/*.{pyc,pyo}
 # Install multilib wrappers for the binaries
 install -p -m 644 %{SOURCE1} $RPM_BUILD_ROOT%{_bindir}/update-gio-modules
 
-case "$host" in
-  alpha*|ia64*|powerpc64*|ppc64*|s390x*|sparc64*|x86_64*)
-    mv $RPM_BUILD_ROOT%{_bindir}/gio-querymodules $RPM_BUILD_ROOT%{_bindir}/gio-querymodules-64
-    ;;
-  *)
-    mv $RPM_BUILD_ROOT%{_bindir}/gio-querymodules $RPM_BUILD_ROOT%{_bindir}/gio-querymodules-32
-    ;;
-esac
-
+mv  $RPM_BUILD_ROOT%{_bindir}/gio-querymodules $RPM_BUILD_ROOT%{_bindir}/gio-querymodules-%{__isa_bits}
 
 %find_lang glib20
 
-%clean
-rm -rf $RPM_BUILD_ROOT
 
 %post
 /sbin/ldconfig
-
-case "$host" in
-  alpha*|ia64*|powerpc64*|ppc64*|s390x*|sparc64*|x86_64*)
-    %{_bindir}/gio-querymodules-64 %{_libdir}/gio/modules
-    ;;
-  *)
-    %{_bindir}/gio-querymodules-32 %{_libdir}/gio/modules
-    ;;
-esac
+gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 
 
 %postun
 /sbin/ldconfig
-
-case "$host" in
-  alpha*|ia64*|powerpc64*|ppc64*|s390x*|sparc64*|x86_64*)
-    %{_bindir}/gio-querymodules-64 %{_libdir}/gio/modules
-    ;;
-  *)
-    %{_bindir}/gio-querymodules-32 %{_libdir}/gio/modules
-    ;;
-esac
+gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 
 
 %files -f glib20.lang
@@ -184,6 +158,10 @@ esac
 %{_libdir}/lib*.a
 
 %changelog
+* Wed May 19 2010 Matthias Clasen <mclasen@redhat.com> - 2.25.6-1
+- Update to 2.25.6
+- Simplify gio-querymodules handling
+
 * Mon May 17 2010 Matthias Clasen <mclasen@redhat.com> - 2.25.5-2
 - Remove an erroneous removal
 
