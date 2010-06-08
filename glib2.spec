@@ -2,8 +2,8 @@
 
 Summary: A library of handy utility functions
 Name: glib2
-Version: 2.25.7
-Release: 2%{?dist}
+Version: 2.25.8
+Release: 1%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
@@ -161,7 +161,10 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 %{_libdir}/lib*.a
 
 %changelog
-* Tue May 25 2010 Matthias Clasen <mclasen@redhat.com> - 2.25.7-2
+* Tue Jun  8 2010 Matthias Clasen <mclasen@redhat.com> - 2.25.8-1
+- Update to 2.25.8
+
+* Tue May 25 2010 Matthias Clasen <mclasen@redhat.com> - 2.25.7-2 
 - Require shared-mime-info
 
 * Mon May 24 2010 Matthias Clasen <mclasen@redhat.com> - 2.25.7-1
