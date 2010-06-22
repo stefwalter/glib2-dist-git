@@ -3,7 +3,7 @@
 Summary: A library of handy utility functions
 Name: glib2
 Version: 2.25.9
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
@@ -25,6 +25,9 @@ BuildRequires: gtk-doc
 
 # required for GIO content-type support
 Requires: shared-mime-info
+
+# already upstream
+Patch1: 0003-Fix-bug-in-strinfo.patch
 
 %description
 GLib is the low-level core library that forms the basis for projects
@@ -52,6 +55,7 @@ The glib2-static package includes static libraries of the GLib library.
 
 %prep
 %setup -q -n glib-%{version}
+%patch1 -p1 -b .strinfo-bug
 
 %build
 %configure --disable-gtk-doc \
@@ -161,6 +165,10 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 %{_libdir}/lib*.a
 
 %changelog
+* Tue Jun 22 2010 Richard Hughes <rhughes@redhat.com> - 2.25.9-2
+- Backport a patch from git master to avoid a segfault when doing the
+  schema file check for several GNOME projects.
+
 * Fri Jun 18 2010 Matthias Clasen <mclasen@redhat.com> - 2.25.9-1
 - Update to 2.25.9
 
