@@ -3,7 +3,7 @@
 Summary: A library of handy utility functions
 Name: glib2
 Version: 2.25.9
-Release: 2%{?dist}
+Release: 3%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
@@ -22,6 +22,7 @@ BuildRequires: glibc-devel
 BuildRequires: zlib-devel
 BuildRequires: automake autoconf libtool
 BuildRequires: gtk-doc
+BuildRequires: chrpath
 
 # required for GIO content-type support
 Requires: shared-mime-info
@@ -62,10 +63,6 @@ The glib2-static package includes static libraries of the GLib library.
            --enable-static   \
            --with-runtime-libdir=../../%{_lib}
 
-# remove rpaths
-sed -i 's|^hardcode_libdir_flag_spec=.*|hardcode_libdir_flag_spec=""|g' libtool
-sed -i 's|^runpath_var=LD_RUN_PATH|runpath_var=DIE_RPATH_DIE|g' libtool
-
 make %{?_smp_mflags}
 
 # truncate NEWS
@@ -76,6 +73,7 @@ awk '/^Overview of Changes/ { seen+=1 }
 
 %install
 make install DESTDIR=$RPM_BUILD_ROOT
+(cd $RPM_BUILD_ROOT; find | while read f; do if file $f | grep -q ': ELF .*executable,'; then chrpath --delete $f; fi; done)
 
 ## glib2.sh and glib2.csh
 ./mkinstalldirs $RPM_BUILD_ROOT%{_sysconfdir}/profile.d
@@ -165,6 +163,11 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 %{_libdir}/lib*.a
 
 %changelog
+* Wed Jun 23 2010 Colin Walters <walters@verbum.org> - 2.25.9-3
+- Only strip rpath at install time, not before build.  Neutering
+  libtool sabotages gtk-doc, since it needs those rpaths to run
+  an in-tree binary.
+
 * Tue Jun 22 2010 Richard Hughes <rhughes@redhat.com> - 2.25.9-2
 - Backport a patch from git master to avoid a segfault when doing the
   schema file check for several GNOME projects.
