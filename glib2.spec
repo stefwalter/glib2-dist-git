@@ -2,8 +2,8 @@
 
 Summary: A library of handy utility functions
 Name: glib2
-Version: 2.25.9
-Release: 3%{?dist}
+Version: 2.25.10
+Release: 1%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
@@ -26,9 +26,6 @@ BuildRequires: chrpath
 
 # required for GIO content-type support
 Requires: shared-mime-info
-
-# already upstream
-Patch1: 0003-Fix-bug-in-strinfo.patch
 
 %description
 GLib is the low-level core library that forms the basis for projects
@@ -56,7 +53,6 @@ The glib2-static package includes static libraries of the GLib library.
 
 %prep
 %setup -q -n glib-%{version}
-%patch1 -p1 -b .strinfo-bug
 
 %build
 %configure --disable-gtk-doc \
@@ -139,7 +135,6 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 %{_datadir}/glib-2.0/schemas/gschema.dtd
 %exclude %{_datadir}/glib-2.0/gdb/*.pyo
 %exclude %{_datadir}/glib-2.0/gdb/*.pyc
-%{_bindir}/gsettings-schema-convert
 %{_bindir}/glib-genmarshal
 %{_bindir}/glib-gettextize
 %{_bindir}/glib-mkenums
@@ -153,7 +148,6 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 %doc %{_mandir}/man1/gobject-query.1.gz
 %doc %{_mandir}/man1/gtester-report.1.gz
 %doc %{_mandir}/man1/gtester.1.gz
-%doc %{_mandir}/man1/gsettings-schema-convert.1.gz
 %{_datadir}/gdb/auto-load%{libdir}/libglib-2.0.so.*-gdb.py*
 %{_datadir}/gdb/auto-load%{libdir}/libgobject-2.0.so.*-gdb.py*
 
@@ -163,6 +157,9 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 %{_libdir}/lib*.a
 
 %changelog
+* Sat Jun 26 2010 Matthias Clasen <mclasen@redhat.com> - 2.25.10-1
+- Update to 2.25.10
+
 * Wed Jun 23 2010 Colin Walters <walters@verbum.org> - 2.25.9-3
 - Only strip rpath at install time, not before build.  Neutering
   libtool sabotages gtk-doc, since it needs those rpaths to run
