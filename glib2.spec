@@ -3,7 +3,7 @@
 Summary: A library of handy utility functions
 Name: glib2
 Version: 2.25.10
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
@@ -26,6 +26,9 @@ BuildRequires: chrpath
 
 # required for GIO content-type support
 Requires: shared-mime-info
+
+# upstream fix
+Patch0: 0001-Fix-a-alloc-free-mismatch.patch
 
 %description
 GLib is the low-level core library that forms the basis for projects
@@ -53,6 +56,7 @@ The glib2-static package includes static libraries of the GLib library.
 
 %prep
 %setup -q -n glib-%{version}
+%patch0 -p1 -b .free-mismatch
 
 %build
 %configure --disable-gtk-doc \
@@ -157,6 +161,9 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 %{_libdir}/lib*.a
 
 %changelog
+* Sun Jun 27 2010 Matthias Clasen <mclasen@redhat.com> - 2.25.10-2
+- Fix an evince crash
+
 * Sat Jun 26 2010 Matthias Clasen <mclasen@redhat.com> - 2.25.10-1
 - Update to 2.25.10
 

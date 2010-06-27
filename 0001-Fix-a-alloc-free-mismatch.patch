@@ -1,0 +1,27 @@
+From eb454a1cb4d8ea16f6b5575c69e58c2877ea350e Mon Sep 17 00:00:00 2001
+From: Matthias Clasen <mclasen@redhat.com>
+Date: Sun, 27 Jun 2010 19:27:04 -0400
+Subject: [PATCH] Fix a alloc/free mismatch
+
+Pointed out in http://bugzilla.redhat.com/show_bug.cgi?id=608453
+by David Tardon.
+---
+ glib/gbuffer.c |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+diff --git a/glib/gbuffer.c b/glib/gbuffer.c
+index 4eb83df..5830f04 100644
+--- a/glib/gbuffer.c
++++ b/glib/gbuffer.c
+@@ -138,7 +138,7 @@ g_buffer_free_usernotify (GBuffer *buffer)
+   GUserNotifyBuffer *ubuffer = (GUserNotifyBuffer *) buffer;
+ 
+   ubuffer->user_destroy (ubuffer->user_data);
+-  g_slice_free (GBuffer, buffer);
++  g_slice_free (GUserNotifyBuffer, ubuffer);
+ }
+ 
+ /* < private >
+-- 
+1.7.1
+
