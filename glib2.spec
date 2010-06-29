@@ -3,7 +3,7 @@
 Summary: A library of handy utility functions
 Name: glib2
 Version: 2.25.10
-Release: 2%{?dist}
+Release: 3%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
@@ -20,9 +20,9 @@ BuildRequires: libselinux-devel
 # for sys/inotify.h
 BuildRequires: glibc-devel
 BuildRequires: zlib-devel
+# Bootstrap build requirements
 BuildRequires: automake autoconf libtool
 BuildRequires: gtk-doc
-BuildRequires: chrpath
 
 # required for GIO content-type support
 Requires: shared-mime-info
@@ -59,9 +59,11 @@ The glib2-static package includes static libraries of the GLib library.
 %patch0 -p1 -b .free-mismatch
 
 %build
-%configure --disable-gtk-doc \
-           --enable-static   \
-           --with-runtime-libdir=../../%{_lib}
+# Support builds of both git snapshots and tarballs packed with autogoo
+(if ! test -x configure; then NOCONFIGURE=1 ./autogen.sh; CONFIGFLAGS=--enable-gtk-doc; fi;
+ %configure $CONFIGFLAGS \
+ 	   --enable-static \
+	   --with-runtime-libdir=../../%{_lib})
 
 make %{?_smp_mflags}
 
@@ -73,7 +75,6 @@ awk '/^Overview of Changes/ { seen+=1 }
 
 %install
 make install DESTDIR=$RPM_BUILD_ROOT
-(cd $RPM_BUILD_ROOT; find | while read f; do if file $f | grep -q ': ELF .*executable,'; then chrpath --delete $f; fi; done)
 
 ## glib2.sh and glib2.csh
 ./mkinstalldirs $RPM_BUILD_ROOT%{_sysconfdir}/profile.d
@@ -161,6 +162,13 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 %{_libdir}/lib*.a
 
 %changelog
+* Mon Jun 28 2010 Colin Walters <walters@verbum.org> - 2.25.10-3
+- Revert rpath change; Fedora's libtool is supposed to not generate
+  them for system paths.
+- Add changes to spec file to support being built from snapshot as
+  well as "make dist"-ball.  This includes BuildRequires and autogen.sh
+  handling, and gtk-doc enabling if we're bootstrapping.
+
 * Sun Jun 27 2010 Matthias Clasen <mclasen@redhat.com> - 2.25.10-2
 - Fix an evince crash
 
