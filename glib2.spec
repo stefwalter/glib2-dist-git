@@ -3,7 +3,7 @@
 Summary: A library of handy utility functions
 Name: glib2
 Version: 2.25.10
-Release: 3%{?dist}
+Release: 4%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
@@ -112,7 +112,7 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 %{libdir}/libgobject-2.0.so.*
 %{libdir}/libgio-2.0.so.*
 %{_sysconfdir}/profile.d/*
-%{_sysconfdir}/bash_completion.d/gdbus-bash-completion.sh
+%{_sysconfdir}/bash_completion.d/*.sh
 %dir %{_datadir}/glib-2.0
 %dir %{_datadir}/glib-2.0/schemas
 %dir %{_libdir}/gio
@@ -162,6 +162,9 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 %{_libdir}/lib*.a
 
 %changelog
+* Tue Jun 29 2010 Colin Walters <walters@verbum.org> - 2.25.10-4
+- Include gsettings bash completion
+
 * Mon Jun 28 2010 Colin Walters <walters@verbum.org> - 2.25.10-3
 - Revert rpath change; Fedora's libtool is supposed to not generate
   them for system paths.
