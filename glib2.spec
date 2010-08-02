@@ -3,7 +3,7 @@
 Summary: A library of handy utility functions
 Name: glib2
 Version: 2.25.13
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
@@ -20,6 +20,8 @@ BuildRequires: libselinux-devel
 # for sys/inotify.h
 BuildRequires: glibc-devel
 BuildRequires: zlib-devel
+# for sys/sdt.h
+BuildRequires: systemtap-sdt-devel
 # Bootstrap build requirements
 BuildRequires: automake autoconf libtool
 BuildRequires: gtk-doc
@@ -58,6 +60,7 @@ The glib2-static package includes static libraries of the GLib library.
 # Support builds of both git snapshots and tarballs packed with autogoo
 (if ! test -x configure; then NOCONFIGURE=1 ./autogen.sh; CONFIGFLAGS=--enable-gtk-doc; fi;
  %configure $CONFIGFLAGS \
+	   --enable-systemtap \
  	   --enable-static \
 	   --with-runtime-libdir=../../%{_lib})
 
@@ -151,6 +154,7 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 %doc %{_mandir}/man1/gtester.1.gz
 %{_datadir}/gdb/auto-load%{libdir}/libglib-2.0.so.*-gdb.py*
 %{_datadir}/gdb/auto-load%{libdir}/libgobject-2.0.so.*-gdb.py*
+%{_datadir}/systemtap/tapset/*.stp
 
 
 %files static
@@ -158,6 +162,10 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 %{_libdir}/lib*.a
 
 %changelog
+* Mon Aug  9 2010 Colin Walters <walters@verbum.org> - 2.25.13-2
+- Add patch from mjw to enable systemtap
+  For background, see: https://bugzilla.gnome.org/show_bug.cgi?id=606044
+
 * Fri Aug  6 2010 Matthias Clasen <mclasen@redhat.com> - 2.25.13-1
 - Update to 2.25.13
 
