@@ -2,8 +2,8 @@
 
 Summary: A library of handy utility functions
 Name: glib2
-Version: 2.25.13
-Release: 2%{?dist}
+Version: 2.25.14
+Release: 1%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
@@ -162,6 +162,9 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 %{_libdir}/lib*.a
 
 %changelog
+* Tue Aug 17 2010 Matthias Clasen <mclasen@redhat.com> - 2.25.14-1
+- Update to 2.25.14
+
 * Mon Aug  9 2010 Colin Walters <walters@verbum.org> - 2.25.13-2
 - Add patch from mjw to enable systemtap
   For background, see: https://bugzilla.gnome.org/show_bug.cgi?id=606044
