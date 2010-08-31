@@ -2,8 +2,8 @@
 
 Summary: A library of handy utility functions
 Name: glib2
-Version: 2.25.14
-Release: 2%{?dist}
+Version: 2.25.15
+Release: 1%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
@@ -28,9 +28,6 @@ BuildRequires: gtk-doc
 
 # required for GIO content-type support
 Requires: shared-mime-info
-
-# Upstream fix for a problem with PolicyKit problems
-Patch0: 0001-GDBusProxy-Call-into-well-known-name-if-no-name-owne.patch
 
 %description
 GLib is the low-level core library that forms the basis for projects
@@ -58,7 +55,6 @@ The glib2-static package includes static libraries of the GLib library.
 
 %prep
 %setup -q -n glib-%{version}
-%patch0 -p1 -b .wellknown-call
 
 %build
 # Support builds of both git snapshots and tarballs packed with autogoo
@@ -166,6 +162,9 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 %{_libdir}/lib*.a
 
 %changelog
+* Tue Aug 31 2010 Matthias Clasen <mclasen@redhat.com> - 2.25.15-1
+- Update to 2.25.15
+
 * Wed Aug 18 2010 Matthias Clasen <mclasen@redhat.com> - 2.25.14-2
 - Fix a PolicyKit problem
 
