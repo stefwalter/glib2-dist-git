@@ -3,7 +3,7 @@
 Summary: A library of handy utility functions
 Name: glib2
 Version: 2.27.0
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
@@ -85,9 +85,12 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/gio/modules/*.{a,la}
 rm -f $RPM_BUILD_ROOT%{_datadir}/glib-2.0/gdb/*.{pyc,pyo}
 
 # Install multilib wrappers for the binaries
-install -p -m 644 %{SOURCE1} $RPM_BUILD_ROOT%{_bindir}/update-gio-modules
+install -p -m 755 %{SOURCE1} $RPM_BUILD_ROOT%{_bindir}/update-gio-modules
 
 mv  $RPM_BUILD_ROOT%{_bindir}/gio-querymodules $RPM_BUILD_ROOT%{_bindir}/gio-querymodules-%{__isa_bits}
+
+# bash-completion scripts need not be executable
+chmod 644 $RPM_BUILD_ROOT%{_sysconfdir}/bash_completion.d/*.sh
 
 %find_lang glib20
 
@@ -162,6 +165,10 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 %{_libdir}/lib*.a
 
 %changelog
+* Mon Sep 20 2010 Matthias Clasen <mclasen@redhat.com> - 2.27.0-2
+- Make /usr/bin/update-gio-modules executable
+- Make /etc/bash_completion.d/*.sh not executable
+
 * Mon Sep 20 2010 Matthias Clasen <mclasen@redhat.com> - 2.27.0-1
 - Update to 2.27.0
 
