@@ -3,7 +3,7 @@
 Summary: A library of handy utility functions
 Name: glib2
 Version: 2.27.0
-Release: 2%{?dist}
+Release: 3%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
@@ -165,6 +165,9 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 %{_libdir}/lib*.a
 
 %changelog
+* Wed Sep 29 2010 jkeating - 2.27.0-3
+- Rebuilt for gcc bug 634757
+
 * Mon Sep 20 2010 Matthias Clasen <mclasen@redhat.com> - 2.27.0-2
 - Make /usr/bin/update-gio-modules executable
 - Make /etc/bash_completion.d/*.sh not executable
