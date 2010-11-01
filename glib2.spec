@@ -168,6 +168,9 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 * Mon Nov  1 2010 Matthias Clasen <mclasen@redhat.com> - 2.27.2-1
 - Update to 2.27.2
 
+* Wed Sep 29 2010 jkeating - 2.27.0-3
+- Rebuilt for gcc bug 634757
+
 * Mon Sep 20 2010 Matthias Clasen <mclasen@redhat.com> - 2.27.0-2
 - Make /usr/bin/update-gio-modules executable
 - Make /etc/bash_completion.d/*.sh not executable
