@@ -166,10 +166,10 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 
 %changelog
 * Wed Dec  1 2010 Tomas Bzatek <tbzatek@redhat.com> - 2.27.4-1
-- Upate to 2.27.4
+- Update to 2.27.4
 
 * Thu Nov 11 2010 Matthias Clasen <mclasen@redhat.com> - 2.27.3-1
-- Upate to 2.27.3
+- Update to 2.27.3
 
 * Mon Nov  1 2010 Matthias Clasen <mclasen@redhat.com> - 2.27.2-1
 - Update to 2.27.2
