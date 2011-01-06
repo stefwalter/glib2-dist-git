@@ -5,6 +5,8 @@ if test $# != 1; then
   exit 1
 fi
 
+echo "Warning: update-gio-modules is deprecated and will be removed in glib2-2.28.0"
+
 umask 022
 
 case "$host" in
