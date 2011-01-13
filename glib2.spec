@@ -8,7 +8,7 @@ License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
 #VCS: git:git://git.gnome.org/glib
-Source: http://download.gnome.org/sources/glib/2.27/glib-%{version}.tar.bz2
+Source: http://download.gnome.org/sources/glib/2.27/glib-%{version}.tar.gz
 Source1: update-gio-modules
 Source2: glib2.sh
 Source3: glib2.csh
