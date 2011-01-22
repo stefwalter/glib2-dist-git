@@ -2,7 +2,7 @@
 
 Summary: A library of handy utility functions
 Name: glib2
-Version: 2.27.91
+Version: 2.27.92
 Release: 1%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
@@ -12,7 +12,7 @@ Source: http://download.gnome.org/sources/glib/2.27/glib-%{version}.tar.gz
 Source1: update-gio-modules
 Source2: glib2.sh
 Source3: glib2.csh
-BuildRequires: pkgconfig >= 1:0.14
+BuildRequires: pkgconfig
 BuildRequires: gamin-devel
 BuildRequires: gettext
 BuildRequires: libattr-devel
@@ -35,14 +35,15 @@ such as GTK+ and GNOME. It provides data structure handling for C,
 portability wrappers, and interfaces for such runtime functionality
 as an event loop, threads, dynamic loading, and an object system.
 
+
 %package devel
 Summary: A library of handy utility functions
 Group: Development/Libraries
-Requires: pkgconfig >= 1:0.14
 Requires: %{name} = %{version}-%{release}
 
 %description devel
 The glib2-devel package includes the header files for the GLib library.
+
 
 # anaconda needs static libs, see RH bug #193143
 %package static
@@ -53,16 +54,18 @@ Requires: %{name}-devel = %{version}-%{release}
 %description static
 The glib2-static package includes static libraries of the GLib library.
 
+
 %prep
 %setup -q -n glib-%{version}
+
 
 %build
 # Support builds of both git snapshots and tarballs packed with autogoo
 (if ! test -x configure; then NOCONFIGURE=1 ./autogen.sh; CONFIGFLAGS=--enable-gtk-doc; fi;
  %configure $CONFIGFLAGS \
-	   --enable-systemtap \
- 	   --enable-static \
-	   --with-runtime-libdir=../../%{_lib})
+           --enable-systemtap \
+           --enable-static \
+           --with-runtime-libdir=../../%{_lib})
 
 make %{?_smp_mflags}
 
@@ -130,6 +133,7 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 %doc %{_mandir}/man1/gsettings.1.gz
 %doc %{_mandir}/man1/gdbus.1.gz
 
+
 %files devel
 %defattr(-, root, root, -)
 %{_libdir}/lib*.so
@@ -164,7 +168,11 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 %defattr(-, root, root, -)
 %{_libdir}/lib*.a
 
+
 %changelog
+* Sat Jan 22 2011 Matthias Clasen <mclasen@redhat.com> - 2.27.92-1
+- Update to 2.27.92
+
 * Tue Jan 11 2011 Matthias Clasen <mclasen@redhat.com> - 2.27.91-1
 - Update to 2.27.91
 
