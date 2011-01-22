@@ -8,8 +8,7 @@ License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
 #VCS: git:git://git.gnome.org/glib
-Source: http://download.gnome.org/sources/glib/2.27/glib-%{version}.tar.gz
-Source1: update-gio-modules
+Source: http://download.gnome.org/sources/glib/2.27/glib-%{version}.tar.bz2
 Source2: glib2.sh
 Source3: glib2.csh
 BuildRequires: pkgconfig
@@ -87,9 +86,6 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 rm -f $RPM_BUILD_ROOT%{_libdir}/gio/modules/*.{a,la}
 rm -f $RPM_BUILD_ROOT%{_datadir}/glib-2.0/gdb/*.{pyc,pyo}
 
-# Install multilib wrappers for the binaries
-install -p -m 755 %{SOURCE1} $RPM_BUILD_ROOT%{_bindir}/update-gio-modules
-
 mv  $RPM_BUILD_ROOT%{_bindir}/gio-querymodules $RPM_BUILD_ROOT%{_bindir}/gio-querymodules-%{__isa_bits}
 
 # bash-completion scripts need not be executable
@@ -124,7 +120,6 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 %dir %{_libdir}/gio/modules
 %{_libdir}/gio/modules/libgiofam.so
 %{_bindir}/gio-querymodules*
-%{_bindir}/update-gio-modules
 %{_bindir}/glib-compile-schemas
 %{_bindir}/gsettings
 %{_bindir}/gdbus
@@ -172,6 +167,7 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 %changelog
 * Sat Jan 22 2011 Matthias Clasen <mclasen@redhat.com> - 2.27.92-1
 - Update to 2.27.92
+- Drop update-gio-modules wrapper
 
 * Tue Jan 11 2011 Matthias Clasen <mclasen@redhat.com> - 2.27.91-1
 - Update to 2.27.91
