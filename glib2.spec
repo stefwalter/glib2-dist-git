@@ -3,7 +3,7 @@
 Summary: A library of handy utility functions
 Name: glib2
 Version: 2.27.92
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
@@ -101,6 +101,7 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 
 %postun
 /sbin/ldconfig
+[ ! -x %{_bindir}/gio-querymodules-%{__isa_bits} ] || \
 gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 
 
@@ -165,6 +166,9 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 
 
 %changelog
+* Mon Jan 24 2011 Ville Skyttä <ville.skytta@iki.fi> - 2.27.92-2
+- Don't run gio-querymodules* in %%postun if it no longer exists.
+
 * Sat Jan 22 2011 Matthias Clasen <mclasen@redhat.com> - 2.27.92-1
 - Update to 2.27.92
 - Drop update-gio-modules wrapper
