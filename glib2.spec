@@ -2,8 +2,8 @@
 
 Summary: A library of handy utility functions
 Name: glib2
-Version: 2.28.0
-Release: 2%{?dist}
+Version: 2.28.1
+Release: 1%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
@@ -67,12 +67,6 @@ The glib2-static package includes static libraries of the GLib library.
            --with-runtime-libdir=../../%{_lib})
 
 make %{?_smp_mflags}
-
-# truncate NEWS
-awk '/^Overview of Changes/ { seen+=1 }
-{ if (seen < 2) print }
-{ if (seen == 2) { print "For older news, see http://git.gnome.org/cgit/glib/plain/NEWS"; exit } }' NEWS > tmp; mv tmp NEWS
-
 
 %install
 make install DESTDIR=$RPM_BUILD_ROOT
@@ -166,6 +160,10 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 
 
 %changelog
+* Fri Feb 18 2011 Matthias Clasen <mclasen@redhat.com> - 2.28.1-1
+- Update to 2.28.1
+- Drop another space-saving hack from the spec
+
 * Tue Feb 08 2011 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.28.0-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_15_Mass_Rebuild
 
