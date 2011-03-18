@@ -3,7 +3,7 @@
 Summary: A library of handy utility functions
 Name: glib2
 Version: 2.28.3
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
@@ -160,6 +160,12 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 
 
 %changelog
+* Fri Mar 18 2011 Colin Walters <walters@verbum.org> - 2.28.3-2
+- Rebuild to hopefully pick up new systemtap mark ABI
+  The current version doesn't seem to be triggering the stock
+  marks; a local rebuild of the RPM does, so let's do a rebuild
+  here.
+
 * Mon Mar 14 2011 Matthias Clasen <mclasen@redhat.com> - 2.28.3-1
 - Update to 2.28.3
 
