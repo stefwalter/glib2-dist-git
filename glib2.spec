@@ -11,6 +11,9 @@ URL: http://www.gtk.org
 Source: http://download.gnome.org/sources/glib/2.28/glib-%{version}.tar.bz2
 Source2: glib2.sh
 Source3: glib2.csh
+
+# upstream fix
+Patch0: 0001-introspection-add-annotations-for-g_file_load_conten.patch
 BuildRequires: pkgconfig
 BuildRequires: gamin-devel
 BuildRequires: gettext
@@ -56,7 +59,7 @@ The glib2-static package includes static libraries of the GLib library.
 
 %prep
 %setup -q -n glib-%{version}
-
+%patch0 -p1 -b .annotations
 
 %build
 # Support builds of both git snapshots and tarballs packed with autogoo
@@ -160,6 +163,9 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 
 
 %changelog
+* Tue Mar 29 2011 Matthias Clasen <mclasen@redhat.com> - 2.28.4-2
+- Fix some introspection annotations
+
 * Mon Mar 21 2011 Matthias Clasen <mclasen@redhat.com> - 2.28.4-1
 - Update to 2.28.4
 
