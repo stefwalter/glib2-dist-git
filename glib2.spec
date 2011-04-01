@@ -2,7 +2,7 @@
 
 Summary: A library of handy utility functions
 Name: glib2
-Version: 2.28.4
+Version: 2.28.5
 Release: 2%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
@@ -12,8 +12,6 @@ Source: http://download.gnome.org/sources/glib/2.28/glib-%{version}.tar.bz2
 Source2: glib2.sh
 Source3: glib2.csh
 
-# upstream fix
-Patch0: 0001-introspection-add-annotations-for-g_file_load_conten.patch
 BuildRequires: pkgconfig
 BuildRequires: gamin-devel
 BuildRequires: gettext
@@ -59,7 +57,6 @@ The glib2-static package includes static libraries of the GLib library.
 
 %prep
 %setup -q -n glib-%{version}
-%patch0 -p1 -b .annotations
 
 %build
 # Support builds of both git snapshots and tarballs packed with autogoo
@@ -163,6 +160,9 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 
 
 %changelog
+* Fri Apr  1 2011 Matthias Clasen <mclasen@redhat.com> - 2.28.5-1
+- Update to 2.28.5
+
 * Tue Mar 29 2011 Matthias Clasen <mclasen@redhat.com> - 2.28.4-2
 - Fix some introspection annotations
 
