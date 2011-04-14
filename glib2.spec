@@ -134,8 +134,8 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 %{_datadir}/glib-2.0/gdb
 %{_datadir}/glib-2.0/gettext
 %{_datadir}/glib-2.0/schemas/gschema.dtd
-%exclude %{_datadir}/glib-2.0/gdb/*.pyo
-%exclude %{_datadir}/glib-2.0/gdb/*.pyc
+%{_datadir}/glib-2.0/gdb/*.pyo
+%{_datadir}/glib-2.0/gdb/*.pyc
 %{_bindir}/glib-genmarshal
 %{_bindir}/glib-gettextize
 %{_bindir}/glib-mkenums
@@ -160,6 +160,9 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 
 
 %changelog
+* Thu Apr 14 2011 Matthias Clasen <mclasen@redhat.com> - 2.28.6-2
+- Include byte-compiled files, it seems to be required (#670861)
+
 * Thu Apr 14 2011 Matthias Clasen <mclasen@redhat.com> - 2.28.6-1
 - Update to 2.28.6
 
