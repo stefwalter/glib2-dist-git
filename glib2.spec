@@ -26,6 +26,7 @@ BuildRequires: systemtap-sdt-devel
 BuildRequires: automake autoconf libtool
 BuildRequires: gtk-doc
 BuildRequires: python-devel
+BuildRequires: libffi-devel
 
 # required for GIO content-type support
 Requires: shared-mime-info
