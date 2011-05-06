@@ -2,13 +2,13 @@
 
 Summary: A library of handy utility functions
 Name: glib2
-Version: 2.28.6
-Release: 2%{?dist}
+Version: 2.29.4
+Release: 1%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
 #VCS: git:git://git.gnome.org/glib
-Source: http://download.gnome.org/sources/glib/2.28/glib-%{version}.tar.bz2
+Source: http://download.gnome.org/sources/glib/2.29/glib-%{version}.tar.bz2
 Source2: glib2.sh
 Source3: glib2.csh
 
@@ -25,6 +25,7 @@ BuildRequires: systemtap-sdt-devel
 # Bootstrap build requirements
 BuildRequires: automake autoconf libtool
 BuildRequires: gtk-doc
+BuildRequires: python-devel
 
 # required for GIO content-type support
 Requires: shared-mime-info
@@ -79,6 +80,7 @@ install -p -m 644 %{SOURCE3} $RPM_BUILD_ROOT%{_sysconfdir}/profile.d
 rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 rm -f $RPM_BUILD_ROOT%{_libdir}/gio/modules/*.{a,la}
 rm -f $RPM_BUILD_ROOT%{_datadir}/glib-2.0/gdb/*.{pyc,pyo}
+rm -f $RPM_BUILD_ROOT%{_libdir}/gdbus-codegen/*.{pyc,pyo}
 
 mv  $RPM_BUILD_ROOT%{_bindir}/gio-querymodules $RPM_BUILD_ROOT%{_bindir}/gio-querymodules-%{__isa_bits}
 
@@ -134,13 +136,16 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 %{_datadir}/glib-2.0/gdb
 %{_datadir}/glib-2.0/gettext
 %{_datadir}/glib-2.0/schemas/gschema.dtd
-%{_datadir}/glib-2.0/gdb/*.pyo
-%{_datadir}/glib-2.0/gdb/*.pyc
+# %{_datadir}/glib-2.0/gdb/*.pyo
+# %{_datadir}/glib-2.0/gdb/*.pyc
 %{_bindir}/glib-genmarshal
 %{_bindir}/glib-gettextize
 %{_bindir}/glib-mkenums
 %{_bindir}/gobject-query
 %{_bindir}/gtester
+%{_bindir}/gdbus-codegen
+%dir %{_libdir}/gdbus-codegen
+%{_libdir}/gdbus-codegen
 %attr (0755, root, root) %{_bindir}/gtester-report
 %doc %{_datadir}/gtk-doc/html/*
 %doc %{_mandir}/man1/glib-genmarshal.1.gz
@@ -149,6 +154,7 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 %doc %{_mandir}/man1/gobject-query.1.gz
 %doc %{_mandir}/man1/gtester-report.1.gz
 %doc %{_mandir}/man1/gtester.1.gz
+%doc %{_mandir}/man1/gdbus-codegen.1.gz
 %{_datadir}/gdb/auto-load%{libdir}/libglib-2.0.so.*-gdb.py*
 %{_datadir}/gdb/auto-load%{libdir}/libgobject-2.0.so.*-gdb.py*
 %{_datadir}/systemtap/tapset/*.stp
@@ -160,6 +166,9 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 
 
 %changelog
+* Fri May  6 2011 Tomas Bzatek <tbzatek@redhat.com> - 2.29.4-1
+- Update to 2.29.4
+
 * Thu Apr 14 2011 Matthias Clasen <mclasen@redhat.com> - 2.28.6-2
 - Include byte-compiled files, it seems to be required (#670861)
 
