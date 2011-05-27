@@ -3,14 +3,12 @@
 Summary: A library of handy utility functions
 Name: glib2
 Version: 2.29.4
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
 #VCS: git:git://git.gnome.org/glib
 Source: http://download.gnome.org/sources/glib/2.29/glib-%{version}.tar.bz2
-Source2: glib2.sh
-Source3: glib2.csh
 
 BuildRequires: pkgconfig
 BuildRequires: gamin-devel
@@ -73,11 +71,6 @@ make %{?_smp_mflags}
 %install
 make install DESTDIR=$RPM_BUILD_ROOT
 
-## glib2.sh and glib2.csh
-./mkinstalldirs $RPM_BUILD_ROOT%{_sysconfdir}/profile.d
-install -p -m 644 %{SOURCE2} $RPM_BUILD_ROOT%{_sysconfdir}/profile.d
-install -p -m 644 %{SOURCE3} $RPM_BUILD_ROOT%{_sysconfdir}/profile.d
-
 rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 rm -f $RPM_BUILD_ROOT%{_libdir}/gio/modules/*.{a,la}
 rm -f $RPM_BUILD_ROOT%{_datadir}/glib-2.0/gdb/*.{pyc,pyo}
@@ -110,7 +103,6 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 %{libdir}/libgmodule-2.0.so.*
 %{libdir}/libgobject-2.0.so.*
 %{libdir}/libgio-2.0.so.*
-%{_sysconfdir}/profile.d/*
 %{_sysconfdir}/bash_completion.d/*.sh
 %dir %{_datadir}/glib-2.0
 %dir %{_datadir}/glib-2.0/schemas
@@ -167,6 +159,9 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 
 
 %changelog
+* Fri May 27 2011 Colin Walters <walters@verbum.org> - 2.29.4-2
+- Remove G_BROKEN_FILENAMES; Closes: #708536
+
 * Fri May  6 2011 Tomas Bzatek <tbzatek@redhat.com> - 2.29.4-1
 - Update to 2.29.4
 
