@@ -60,7 +60,7 @@ The glib2-static package includes static libraries of the GLib library.
 
 %prep
 %setup -q -n glib-%{version}
-%patch -p1 -b .datalist-deadlock
+%patch0 -p1 -b .datalist-deadlock
 
 %build
 # Support builds of both git snapshots and tarballs packed with autogoo
