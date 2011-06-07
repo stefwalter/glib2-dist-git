@@ -10,6 +10,9 @@ URL: http://www.gtk.org
 #VCS: git:git://git.gnome.org/glib
 Source: http://download.gnome.org/sources/glib/2.29/glib-%{version}.tar.xz
 
+# upstream fix
+Patch0: 0001-GDataList-don-t-hold-the-bitlock-over-callbacks.patch
+
 BuildRequires: pkgconfig
 BuildRequires: gamin-devel
 BuildRequires: gettext
@@ -57,6 +60,7 @@ The glib2-static package includes static libraries of the GLib library.
 
 %prep
 %setup -q -n glib-%{version}
+%patch -p1 -b .datalist-deadlock
 
 %build
 # Support builds of both git snapshots and tarballs packed with autogoo
@@ -159,6 +163,9 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 
 
 %changelog
+* Mon Jun  6 2011 Matthias Clasen <mclasen@redhat.com> - 2.29.6-2
+- Fix a deadlock when finalizing e.g. widgets
+
 * Sun Jun  5 2011 Matthias Clasen <mclasen@redhat.com> - 2.29.6-1
 - Update to 2.29.6
 
