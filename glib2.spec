@@ -3,7 +3,7 @@
 Summary: A library of handy utility functions
 Name: glib2
 Version: 2.29.6
-Release: 2%{?dist}
+Release: 3%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
@@ -163,7 +163,7 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 
 
 %changelog
-* Mon Jun  6 2011 Matthias Clasen <mclasen@redhat.com> - 2.29.6-2
+* Mon Jun  6 2011 Matthias Clasen <mclasen@redhat.com> - 2.29.6-3
 - Fix a deadlock when finalizing e.g. widgets
 
 * Sun Jun  5 2011 Matthias Clasen <mclasen@redhat.com> - 2.29.6-1
