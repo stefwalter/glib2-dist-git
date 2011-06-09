@@ -3,7 +3,7 @@
 Summary: A library of handy utility functions
 Name: glib2
 Version: 2.29.6
-Release: 3%{?dist}
+Release: 4%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
@@ -82,6 +82,8 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/gdbus-codegen/*.{pyc,pyo}
 
 mv  $RPM_BUILD_ROOT%{_bindir}/gio-querymodules $RPM_BUILD_ROOT%{_bindir}/gio-querymodules-%{__isa_bits}
 
+touch $RPM_BUILD_ROOT%{_libdir}/gio/modules/giomodule.cache
+
 # bash-completion scripts need not be executable
 chmod 644 $RPM_BUILD_ROOT%{_sysconfdir}/bash_completion.d/*.sh
 
@@ -112,6 +114,7 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 %dir %{_datadir}/glib-2.0/schemas
 %dir %{_libdir}/gio
 %dir %{_libdir}/gio/modules
+%ghost %{_libdir}/gio/modules/giomodule.cache
 %{_libdir}/gio/modules/libgiofam.so
 %{_bindir}/gio-querymodules*
 %{_bindir}/glib-compile-schemas
@@ -163,6 +166,9 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 
 
 %changelog
+* Thu Jun  9 2011 Ville Skyttä <ville.skytta@iki.fi> - 2.29.6-4
+- Own %%ghost /usr/lib*/gio/modules/giomodule.cache.
+
 * Mon Jun  6 2011 Matthias Clasen <mclasen@redhat.com> - 2.29.6-3
 - Fix a deadlock when finalizing e.g. widgets
 
