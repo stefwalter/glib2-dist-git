@@ -2,16 +2,13 @@
 
 Summary: A library of handy utility functions
 Name: glib2
-Version: 2.29.6
-Release: 4%{?dist}
+Version: 2.29.8
+Release: 1%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
 #VCS: git:git://git.gnome.org/glib
 Source: http://download.gnome.org/sources/glib/2.29/glib-%{version}.tar.xz
-
-# upstream fix
-Patch0: 0001-GDataList-don-t-hold-the-bitlock-over-callbacks.patch
 
 BuildRequires: pkgconfig
 BuildRequires: gamin-devel
@@ -60,7 +57,6 @@ The glib2-static package includes static libraries of the GLib library.
 
 %prep
 %setup -q -n glib-%{version}
-%patch0 -p1 -b .datalist-deadlock
 
 %build
 # Support builds of both git snapshots and tarballs packed with autogoo
@@ -166,6 +162,9 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 
 
 %changelog
+* Tue Jun 14 2011 Matthias Clasen <mclasen@redhat.com> - 2.29.8-1
+- Update to 2.29.8
+
 * Thu Jun  9 2011 Ville Skyttä <ville.skytta@iki.fi> - 2.29.6-4
 - Own %%ghost /usr/lib*/gio/modules/giomodule.cache.
 
