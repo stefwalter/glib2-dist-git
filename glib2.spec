@@ -2,7 +2,7 @@
 
 Summary: A library of handy utility functions
 Name: glib2
-Version: 2.29.16
+Version: 2.29.18
 Release: 1%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
@@ -98,7 +98,6 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 
 
 %files -f glib20.lang
-%defattr(-, root, root, -)
 %doc AUTHORS COPYING NEWS README
 %{libdir}/libglib-2.0.so.*
 %{libdir}/libgthread-2.0.so.*
@@ -123,7 +122,6 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 
 
 %files devel
-%defattr(-, root, root, -)
 %{_libdir}/lib*.so
 %{_libdir}/glib-2.0
 %{_includedir}/*
@@ -157,11 +155,13 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 
 
 %files static
-%defattr(-, root, root, -)
 %{_libdir}/lib*.a
 
 
 %changelog
+* Tue Aug 30 2011 Matthias Clasen <mclasen@redhat.com> - 2.29.18-1
+- Update to 2.29.18
+
 * Tue Aug 16 2011 Matthias Clasen <mclasen@redhat.com> - 2.29.16-1
 - Update to 2.29.16
 
