@@ -138,8 +138,8 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 %{_bindir}/gobject-query
 %{_bindir}/gtester
 %{_bindir}/gdbus-codegen
-%dir %{_libdir}/gdbus-codegen
-%{_libdir}/gdbus-codegen
+%dir %{_libdir}/gdbus-2.0/codegen
+%{_libdir}/gdbus-2.0/codegen
 %attr (0755, root, root) %{_bindir}/gtester-report
 %doc %{_datadir}/gtk-doc/html/*
 %doc %{_mandir}/man1/glib-genmarshal.1.gz
