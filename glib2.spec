@@ -10,6 +10,8 @@ URL: http://www.gtk.org
 #VCS: git:git://git.gnome.org/glib
 Source: http://download.gnome.org/sources/glib/2.29/glib-%{version}.tar.xz
 
+Patch0: 0001-closure-fix-handling-of-ENUMs-and-integral-return-ty.patch
+
 BuildRequires: pkgconfig
 BuildRequires: gamin-devel
 BuildRequires: gettext
@@ -57,6 +59,7 @@ The glib2-static package includes static libraries of the GLib library.
 
 %prep
 %setup -q -n glib-%{version}
+%patch0 -p1 -b .ffi
 
 %build
 # Support builds of both git snapshots and tarballs packed with autogoo
@@ -159,6 +162,9 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 
 
 %changelog
+* Wed Oct 05 2011 Dan Williams <dcbw@redhat.com> - 2.30.0-2
+- Fix signal marshalling on 64-bit big-endian platforms (rh #736489)
+
 * Mon Sep 26 2011 Ray <rstrode@redhat.com> - 2.30.0-1
 - Update to 2.30.0
 
