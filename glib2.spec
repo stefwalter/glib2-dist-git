@@ -2,15 +2,13 @@
 
 Summary: A library of handy utility functions
 Name: glib2
-Version: 2.30.1
+Version: 2.31.0
 Release: 1%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
 #VCS: git:git://git.gnome.org/glib
-Source: http://download.gnome.org/sources/glib/2.30/glib-%{version}.tar.xz
-
-Patch0: 0001-closure-fix-handling-of-ENUMs-and-integral-return-ty.patch
+Source: http://download.gnome.org/sources/glib/2.31/glib-%{version}.tar.xz
 
 BuildRequires: pkgconfig
 BuildRequires: gamin-devel
@@ -59,7 +57,6 @@ The glib2-static package includes static libraries of the GLib library.
 
 %prep
 %setup -q -n glib-%{version}
-%patch0 -p1 -b .ffi
 
 %build
 # Support builds of both git snapshots and tarballs packed with autogoo
@@ -162,6 +159,9 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 
 
 %changelog
+* Fri Oct 21 2011 Tomas Bzatek <tbzatek@redhat.com> - 2.31.0-1
+- Update to 2.31.0
+
 * Fri Oct 14 2011 Matthias Clasen <mclasen@redhat.com> - 2.30.1-1
 - Update to 2.30.1
 
