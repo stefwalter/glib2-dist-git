@@ -2,7 +2,7 @@
 
 Summary: A library of handy utility functions
 Name: glib2
-Version: 2.31.0
+Version: 2.31.2
 Release: 1%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
@@ -159,6 +159,9 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 
 
 %changelog
+* Mon Nov 21 2011 Matthias Clasen <mclasen@redhat.com> - 2.31.2-1
+- Update to 2.31.2
+
 * Fri Oct 21 2011 Tomas Bzatek <tbzatek@redhat.com> - 2.31.0-1
 - Update to 2.31.0
 
