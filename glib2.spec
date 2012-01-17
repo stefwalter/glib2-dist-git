@@ -121,6 +121,7 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 %doc %{_mandir}/man1/gdbus.1.gz
 
 
+
 %files devel
 %{_libdir}/lib*.so
 %{_libdir}/glib-2.0
@@ -138,6 +139,7 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 %{_bindir}/gobject-query
 %{_bindir}/gtester
 %{_bindir}/gdbus-codegen
+%{_bindir}/glib-compile-resources
 %dir %{_libdir}/gdbus-2.0/codegen
 %{_libdir}/gdbus-2.0/codegen
 %attr (0755, root, root) %{_bindir}/gtester-report
@@ -149,10 +151,10 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 %doc %{_mandir}/man1/gtester-report.1.gz
 %doc %{_mandir}/man1/gtester.1.gz
 %doc %{_mandir}/man1/gdbus-codegen.1.gz
+%doc %{_mandir}/man1/glib-compile-resources.1.gz
 %{_datadir}/gdb/auto-load%{libdir}/libglib-2.0.so.*-gdb.py*
 %{_datadir}/gdb/auto-load%{libdir}/libgobject-2.0.so.*-gdb.py*
 %{_datadir}/systemtap/tapset/*.stp
-
 
 %files static
 %{_libdir}/lib*.a
