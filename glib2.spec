@@ -140,7 +140,6 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 %{_bindir}/gtester
 %{_bindir}/gdbus-codegen
 %{_bindir}/glib-compile-resources
-%dir %{_libdir}/gdbus-2.0/codegen
 %{_libdir}/gdbus-2.0/codegen
 %attr (0755, root, root) %{_bindir}/gtester-report
 %doc %{_datadir}/gtk-doc/html/*
