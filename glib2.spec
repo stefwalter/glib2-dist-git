@@ -2,16 +2,13 @@
 
 Summary: A library of handy utility functions
 Name: glib2
-Version: 2.31.10
-Release: 2%{?dist}
+Version: 2.31.12
+Release: 1%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
 #VCS: git:git://git.gnome.org/glib
 Source: http://download.gnome.org/sources/glib/2.31/glib-%{version}.tar.xz
-
-# upstream fix
-Patch0: glib-mscver.patch
 
 BuildRequires: pkgconfig
 BuildRequires: gamin-devel
@@ -164,6 +161,9 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 
 
 %changelog
+* Fri Jan 20 2012 Matthias Clasen <mclasen@redhat.com> 2.31.12-1
+- Update to 2.31.12
+
 * Tue Jan 17 2012 Matthias Clasen <mclasen@redhat.com> 2.31.10-2
 - Fix a header problem that was causing build failures
 
