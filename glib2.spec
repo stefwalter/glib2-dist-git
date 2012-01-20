@@ -57,7 +57,6 @@ The glib2-static package includes static libraries of the GLib library.
 
 %prep
 %setup -q -n glib-%{version}
-%patch0 -p1
 
 %build
 # Support builds of both git snapshots and tarballs packed with autogoo
