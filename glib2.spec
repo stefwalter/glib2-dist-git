@@ -1,5 +1,3 @@
-%define libdir /%{_lib}
-
 Summary: A library of handy utility functions
 Name: glib2
 Version: 2.31.16
@@ -64,6 +62,7 @@ The glib2-static package includes static libraries of the GLib library.
  %configure $CONFIGFLAGS \
            --enable-systemtap \
            --enable-static
+)
 
 make %{?_smp_mflags}
 
@@ -98,12 +97,13 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 
 %files -f glib20.lang
 %doc AUTHORS COPYING NEWS README
-%{libdir}/libglib-2.0.so.*
-%{libdir}/libgthread-2.0.so.*
-%{libdir}/libgmodule-2.0.so.*
-%{libdir}/libgobject-2.0.so.*
-%{libdir}/libgio-2.0.so.*
-%{_sysconfdir}/bash_completion.d/*.sh
+%{_libdir}/libglib-2.0.so.*
+%{_libdir}/libgthread-2.0.so.*
+%{_libdir}/libgmodule-2.0.so.*
+%{_libdir}/libgobject-2.0.so.*
+%{_libdir}/libgio-2.0.so.*
+%{_sysconfdir}/bash_completion.d/gdbus-bash-completion.sh
+%{_sysconfdir}/bash_completion.d/gsettings-bash-completion.sh
 %dir %{_datadir}/glib-2.0
 %dir %{_datadir}/glib-2.0/schemas
 %dir %{_libdir}/gio
@@ -119,8 +119,6 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 %doc %{_mandir}/man1/gsettings.1.gz
 %doc %{_mandir}/man1/gdbus.1.gz
 
-
-
 %files devel
 %{_libdir}/lib*.so
 %{_libdir}/glib-2.0
@@ -130,6 +128,7 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 %{_datadir}/glib-2.0/gdb
 %{_datadir}/glib-2.0/gettext
 %{_datadir}/glib-2.0/schemas/gschema.dtd
+%{_sysconfdir}/bash_completion.d/gresource-bash-completion.sh
 # %{_datadir}/glib-2.0/gdb/*.pyo
 # %{_datadir}/glib-2.0/gdb/*.pyc
 %{_bindir}/glib-genmarshal
@@ -139,6 +138,7 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 %{_bindir}/gtester
 %{_bindir}/gdbus-codegen
 %{_bindir}/glib-compile-resources
+%{_bindir}/gresource
 %{_libdir}/gdbus-2.0/codegen
 %attr (0755, root, root) %{_bindir}/gtester-report
 %doc %{_datadir}/gtk-doc/html/*
@@ -150,8 +150,9 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 %doc %{_mandir}/man1/gtester.1.gz
 %doc %{_mandir}/man1/gdbus-codegen.1.gz
 %doc %{_mandir}/man1/glib-compile-resources.1.gz
-%{_datadir}/gdb/auto-load%{libdir}/libglib-2.0.so.*-gdb.py*
-%{_datadir}/gdb/auto-load%{libdir}/libgobject-2.0.so.*-gdb.py*
+%doc %{_mandir}/man1/gresource.1.gz
+%{_datadir}/gdb/auto-load%{_libdir}/libglib-2.0.so.*-gdb.py*
+%{_datadir}/gdb/auto-load%{_libdir}/libgobject-2.0.so.*-gdb.py*
 %{_datadir}/systemtap/tapset/*.stp
 
 %files static
