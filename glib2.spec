@@ -2,7 +2,7 @@
 
 Summary: A library of handy utility functions
 Name: glib2
-Version: 2.31.12
+Version: 2.31.16
 Release: 1%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
@@ -63,8 +63,7 @@ The glib2-static package includes static libraries of the GLib library.
 (if ! test -x configure; then NOCONFIGURE=1 ./autogen.sh; CONFIGFLAGS=--enable-gtk-doc; fi;
  %configure $CONFIGFLAGS \
            --enable-systemtap \
-           --enable-static \
-           --with-runtime-libdir=../../%{_lib})
+           --enable-static
 
 make %{?_smp_mflags}
 
@@ -158,8 +157,11 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 %files static
 %{_libdir}/lib*.a
 
-
 %changelog
+* Mon Feb  6 2012 Matthias Clasen <mclasen@redhat.com> 2.31.16-1
+- Update to 2.31.16
+- Drop --with-runtime-libdir, since we have /lib -> /usr/lib now
+
 * Fri Jan 20 2012 Matthias Clasen <mclasen@redhat.com> 2.31.12-1
 - Update to 2.31.12
 
