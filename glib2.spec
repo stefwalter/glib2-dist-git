@@ -1,7 +1,7 @@
 Summary: A library of handy utility functions
 Name: glib2
 Version: 2.31.16
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
@@ -23,6 +23,7 @@ BuildRequires: automake autoconf libtool
 BuildRequires: gtk-doc
 BuildRequires: python-devel
 BuildRequires: libffi-devel
+BuildRequires: elfutils-libelf-devel
 
 # required for GIO content-type support
 Requires: shared-mime-info
@@ -159,6 +160,9 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 %{_libdir}/lib*.a
 
 %changelog
+* Tue Feb 21 2012 Richard Hughes <rhughes@redhat.com> 2.31.16-2
+- Add BR: elfutils-libelf-devel for the GResource functionality
+
 * Mon Feb  6 2012 Matthias Clasen <mclasen@redhat.com> 2.31.16-1
 - Update to 2.31.16
 - Drop --with-runtime-libdir, since we have /lib -> /usr/lib now
