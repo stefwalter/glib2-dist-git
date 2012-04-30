@@ -1,7 +1,7 @@
 Summary: A library of handy utility functions
 Name: glib2
 Version: 2.32.1
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
@@ -43,17 +43,6 @@ Requires: %{name} = %{version}-%{release}
 %description devel
 The glib2-devel package includes the header files for the GLib library.
 
-
-# anaconda needs static libs, see RH bug #193143
-%package static
-Summary: A library of handy utility functions
-Group: Development/Libraries
-Requires: %{name}-devel = %{version}-%{release}
-
-%description static
-The glib2-static package includes static libraries of the GLib library.
-
-
 %prep
 %setup -q -n glib-%{version}
 
@@ -62,7 +51,7 @@ The glib2-static package includes static libraries of the GLib library.
 (if ! test -x configure; then NOCONFIGURE=1 ./autogen.sh; CONFIGFLAGS=--enable-gtk-doc; fi;
  %configure $CONFIGFLAGS \
            --enable-systemtap \
-           --enable-static
+           --disable-static
 )
 
 make %{?_smp_mflags}
@@ -156,10 +145,11 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 %{_datadir}/gdb/auto-load%{_libdir}/libgobject-2.0.so.*-gdb.py*
 %{_datadir}/systemtap/tapset/*.stp
 
-%files static
-%{_libdir}/lib*.a
-
 %changelog
+* Mon Apr 30 2012 Colin Walters <walters@verbum.org> - 2.32.1-2
+- Drop glib2-static subpackage; anaconda hasn't required it since
+  2007.  See bug 193143.
+
 * Fri Apr 13 2012 Matthias Clasen <mclasen@redhat.com> 2.32.1-1
 - Update to 2.32.1
 
