@@ -1,7 +1,7 @@
 Summary: A library of handy utility functions
 Name: glib2
 Version: 2.32.1
-Release: 2%{?dist}
+Release: 3%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
@@ -39,6 +39,7 @@ as an event loop, threads, dynamic loading, and an object system.
 Summary: A library of handy utility functions
 Group: Development/Libraries
 Requires: %{name} = %{version}-%{release}
+Obsoletes: glib2-static < 2.32.1-2
 
 %description devel
 The glib2-devel package includes the header files for the GLib library.
@@ -146,6 +147,9 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 %{_datadir}/systemtap/tapset/*.stp
 
 %changelog
+* Mon Apr 30 2012 Kalev Lember <kalevlember@gmail.com> - 2.32.1-3
+- Obsolete the removed -static subpackage
+
 * Mon Apr 30 2012 Colin Walters <walters@verbum.org> - 2.32.1-2
 - Drop glib2-static subpackage; anaconda hasn't required it since
   2007.  See bug 193143.
