@@ -93,8 +93,10 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 %{_libdir}/libgmodule-2.0.so.*
 %{_libdir}/libgobject-2.0.so.*
 %{_libdir}/libgio-2.0.so.*
-%{_sysconfdir}/bash_completion.d/gdbus-bash-completion.sh
-%{_sysconfdir}/bash_completion.d/gsettings-bash-completion.sh
+%dir %{_datadir}/bash-completion
+%dir %{_datadir}/bash-completion/completions
+%{_datadir}/bash-completion/completions/gdbus
+%{_datadir}/bash-completion/completions/gsettings
 %dir %{_datadir}/glib-2.0
 %dir %{_datadir}/glib-2.0/schemas
 %dir %{_libdir}/gio
@@ -119,7 +121,7 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 %{_datadir}/glib-2.0/gdb
 %{_datadir}/glib-2.0/gettext
 %{_datadir}/glib-2.0/schemas/gschema.dtd
-%{_sysconfdir}/bash_completion.d/gresource-bash-completion.sh
+%{_datadir/bash-completion/completions/gresource
 # %{_datadir}/glib-2.0/gdb/*.pyo
 # %{_datadir}/glib-2.0/gdb/*.pyc
 %{_bindir}/glib-genmarshal
