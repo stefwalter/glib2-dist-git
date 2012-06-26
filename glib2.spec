@@ -121,7 +121,7 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 %{_datadir}/glib-2.0/gdb
 %{_datadir}/glib-2.0/gettext
 %{_datadir}/glib-2.0/schemas/gschema.dtd
-%{_datadir/bash-completion/completions/gresource
+%{_datadir}/bash-completion/completions/gresource
 # %{_datadir}/glib-2.0/gdb/*.pyo
 # %{_datadir}/glib-2.0/gdb/*.pyc
 %{_bindir}/glib-genmarshal
