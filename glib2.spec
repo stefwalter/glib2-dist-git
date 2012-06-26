@@ -70,7 +70,7 @@ mv  $RPM_BUILD_ROOT%{_bindir}/gio-querymodules $RPM_BUILD_ROOT%{_bindir}/gio-que
 touch $RPM_BUILD_ROOT%{_libdir}/gio/modules/giomodule.cache
 
 # bash-completion scripts need not be executable
-chmod 644 $RPM_BUILD_ROOT%{_sysconfdir}/bash_completion.d/*.sh
+chmod 644 $RPM_BUILD_ROOT%{_datadir}/bash-completion/completions/*
 
 %find_lang glib20
 
