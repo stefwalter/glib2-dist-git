@@ -1,7 +1,7 @@
 Summary: A library of handy utility functions
 Name: glib2
 Version: 2.33.6
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
@@ -27,6 +27,8 @@ BuildRequires: elfutils-libelf-devel
 
 # required for GIO content-type support
 Requires: shared-mime-info
+# required for GUnixVolume
+Requires: eject
 
 %description
 GLib is the low-level core library that forms the basis for projects
@@ -149,6 +151,9 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 %{_datadir}/systemtap/tapset/*.stp
 
 %changelog
+* Fri Jul 20 2012 Tomas Bzatek <tbzatek@redhat.com> - 2.33.6-2
+- Add runtime dependency on eject (#748007)
+
 * Wed Jul 18 2012 Matthias Clasen <mclasen@redhat.com> - 2.33.6-1
 - Update to 2.33.6
 
