@@ -1,7 +1,7 @@
 Summary: A library of handy utility functions
 Name: glib2
 Version: 2.33.6
-Release: 2%{?dist}
+Release: 3%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
@@ -24,6 +24,7 @@ BuildRequires: gtk-doc
 BuildRequires: python-devel
 BuildRequires: libffi-devel
 BuildRequires: elfutils-libelf-devel
+BuildRequires: chrpath
 
 # required for GIO content-type support
 Requires: shared-mime-info
@@ -61,6 +62,7 @@ make %{?_smp_mflags}
 
 %install
 make install DESTDIR=$RPM_BUILD_ROOT
+chrpath --delete $RPM_BUILD_ROOT%{_libdir}/*.so
 
 rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 rm -f $RPM_BUILD_ROOT%{_libdir}/gio/modules/*.{a,la}
@@ -151,6 +153,9 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 %{_datadir}/systemtap/tapset/*.stp
 
 %changelog
+* Mon Aug 13 2012 Colin Walters <walters@verbum.org> - 2.33.6-3
+- Re-add code to strip RPATHs (#840414)
+
 * Fri Jul 20 2012 Tomas Bzatek <tbzatek@redhat.com> - 2.33.6-2
 - Add runtime dependency on eject (#748007)
 
