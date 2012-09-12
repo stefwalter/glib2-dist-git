@@ -1,7 +1,7 @@
 Summary: A library of handy utility functions
 Name: glib2
 Version: 2.33.12
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
@@ -27,8 +27,6 @@ BuildRequires: elfutils-libelf-devel
 
 # required for GIO content-type support
 Requires: shared-mime-info
-# required for GUnixVolume
-Requires: eject
 
 %description
 GLib is the low-level core library that forms the basis for projects
@@ -151,6 +149,9 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 %{_datadir}/systemtap/tapset/*.stp
 
 %changelog
+* Wed Sep 12 2012 Lennart Poettering <lpoetter@redhat.com> - 2.33.12-2
+- Drop explicit dependency on eject, as it is included in util-linux now, which is available in the base set
+
 * Tue Sep 04 2012 Richard Hughes <hughsient@gmail.com> - 2.33.12-1
 - Update to 2.33.12
 
@@ -398,7 +399,7 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 * Tue Jun  8 2010 Matthias Clasen <mclasen@redhat.com> - 2.25.8-1
 - Update to 2.25.8
 
-* Tue May 25 2010 Matthias Clasen <mclasen@redhat.com> - 2.25.7-2 
+* Tue May 25 2010 Matthias Clasen <mclasen@redhat.com> - 2.25.7-2
 - Require shared-mime-info
 
 * Mon May 24 2010 Matthias Clasen <mclasen@redhat.com> - 2.25.7-1
@@ -649,7 +650,7 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 * Tue Jan  8 2008 Matthias Clasen <mclasen@redhat.com> - 2.15.1-1
 - 2.15.1
 - add new BuildRequires
-- 
+
 * Sat Dec 22 2007 Matthias Clasen <mclasen@redhat.com> - 2.15.0-4
 - Another attempt
 
@@ -722,14 +723,14 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
  * install /etc/profile.d snipplets as 644
  * explain Conflict with libgnomeui
  * remove stale Conflict with glib-devel
- 
+
 * Sat Feb  3 2007 Matthias Clasen <mclasen@redhat.com> - 2.12.9-2
 - Incorporate package review feedback:
  * drop an obsolete Provides:
  * add a -static subpackage
  * explain %%check ppc exception
  * align summaries
- 
+
 * Tue Jan 16 2007 Matthias Clasen <mclasen@redhat.com> - 2.12.9-1
 - Update to 2.12.9
 
@@ -908,13 +909,13 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 
 * Mon Dec 21 2004 Matthias Clasen <mclasen@redhat.com> - 2.6.0-1
 - Upgrade to 2.6.0
- 
+
 * Mon Dec 06 2004 Matthias Clasen <mclasen@redhat.com> - 2.4.8-1
 - Upgrade to 2.4.8
- 
+
 * Wed Oct 13 2004 Matthias Clasen <mclasen@redhat.com> - 2.4.7-1
 - Upgrade to 2.4.7
- 
+
 * Fri Aug 13 2004 Matthias Clasen <mclasen@redhat.com> - 2.4.6-1
 - Update to 2.4.6
 
@@ -1100,7 +1101,7 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 - make -devel require pkgconfig
 
 * Tue Jun 12 2001 Havoc Pennington <hp@redhat.com>
-- either libtool or the bad libtool hacks caused link 
+- either libtool or the bad libtool hacks caused link
   against glib-gobject 1.3.2, rebuild
 
 * Tue Jun 12 2001 Havoc Pennington <hp@redhat.com>
@@ -1136,7 +1137,7 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 
 * Fri Jul 14 2000 Owen Taylor <otaylor@redhat.com>
 - Remove glib-config.1 manpage from build since
-  it conflicts with glib-devel. When we go to 
+  it conflicts with glib-devel. When we go to
   glib glib1.2 setup, we should add it back
 
 * Fri Jul 07 2000 Owen Taylor <otaylor@redhat.com>
@@ -1180,7 +1181,7 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 - version 1.2.0pre1
 
 * Tue Feb 23 1999 Cristian Gafton <gafton@redhat.com>
-- new description tags 
+- new description tags
 
 * Sun Feb 21 1999 Michael Fulbright <drmike@redhat.com>
 - removed libtoolize from %%build
@@ -1205,4 +1206,3 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 
 * Mon Apr 13 1998 Marc Ewing <marc@redhat.com>
 - Split out glib package
-
