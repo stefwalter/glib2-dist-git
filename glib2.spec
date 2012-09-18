@@ -1,7 +1,7 @@
 Summary: A library of handy utility functions
 Name: glib2
-Version: 2.33.12
-Release: 2%{?dist}
+Version: 2.33.14
+Release: 1%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
@@ -151,6 +151,9 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 %{_datadir}/systemtap/tapset/*.stp
 
 %changelog
+* Tue Sep 18 2012 Kalev Lember <kalevlember@gmail.com> - 2.33.14-1
+- Update to 2.33.14
+
 * Wed Sep 12 2012 Lennart Poettering <lpoetter@redhat.com> - 2.33.12-2
 - Drop explicit dependency on eject, as it is included in util-linux now, which is available in the base set
 
