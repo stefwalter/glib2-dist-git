@@ -1,15 +1,16 @@
 Summary: A library of handy utility functions
 Name: glib2
 Version: 2.34.0
-Release: 1%{?dist}
+Release: 3%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
 #VCS: git:git://git.gnome.org/glib
 Source: http://download.gnome.org/sources/glib/2.34/glib-%{version}.tar.xz
 
+Patch0: codegen-in-datadir.patch
+
 BuildRequires: pkgconfig
-BuildRequires: gamin-devel
 BuildRequires: gettext
 BuildRequires: libattr-devel
 BuildRequires: libselinux-devel
@@ -45,27 +46,55 @@ Obsoletes: glib2-static < 2.32.1-2
 %description devel
 The glib2-devel package includes the header files for the GLib library.
 
+%package doc
+Summary: A library of handy utility functions
+Group: Development/Libraries
+Requires: %{name} = %{version}-%{release}
+BuildArch: noarch
+
+%description doc
+The glib2-doc package includes documentation for the GLib library.
+
 %prep
 %setup -q -n glib-%{version}
+%patch0 -p1
 
 %build
+# Rerun autotools for the above patch
+rm -f configure
+
 # Support builds of both git snapshots and tarballs packed with autogoo
 (if ! test -x configure; then NOCONFIGURE=1 ./autogen.sh; CONFIGFLAGS=--enable-gtk-doc; fi;
  %configure $CONFIGFLAGS \
            --enable-systemtap \
+           --disable-fam \
            --disable-static
 )
 
 make %{?_smp_mflags}
 
 %install
-make install DESTDIR=$RPM_BUILD_ROOT
+# Use -p to preserve timestamps on .py files to ensure
+# they're not recompiled with different timestamps
+# to help multilib: https://bugzilla.redhat.com/show_bug.cgi?id=718404
+make install DESTDIR=$RPM_BUILD_ROOT INSTALL="install -p -c"
+# Also since this is a generated .py file, set it to a known timestamp,
+# otherwise it will vary by build time, and thus break multilib -devel
+# installs.
+touch -r gio/gdbus-2.0/codegen/config.py.in $RPM_BUILD_ROOT/%{_datadir}/glib-2.0/codegen/config.py
 chrpath --delete $RPM_BUILD_ROOT%{_libdir}/*.so
 
 rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 rm -f $RPM_BUILD_ROOT%{_libdir}/gio/modules/*.{a,la}
 rm -f $RPM_BUILD_ROOT%{_datadir}/glib-2.0/gdb/*.{pyc,pyo}
-rm -f $RPM_BUILD_ROOT%{_libdir}/gdbus-codegen/*.{pyc,pyo}
+rm -f $RPM_BUILD_ROOT%{_datadir}/glib-2.0/codegen/*.{pyc,pyo}
+
+# Multilib fixes for systemtap tapsets; see
+# https://bugzilla.redhat.com/718404
+for f in $RPM_BUILD_ROOT%{_datadir}/systemtap/tapset/*.stp; do
+    (dn=$(dirname ${f}); bn=$(basename ${f});
+     mv ${f} ${dn}/%{__isa_bits}-${bn})
+done
 
 mv  $RPM_BUILD_ROOT%{_bindir}/gio-querymodules $RPM_BUILD_ROOT%{_bindir}/gio-querymodules-%{__isa_bits}
 
@@ -124,8 +153,6 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 %{_datadir}/glib-2.0/gettext
 %{_datadir}/glib-2.0/schemas/gschema.dtd
 %{_datadir}/bash-completion/completions/gresource
-# %{_datadir}/glib-2.0/gdb/*.pyo
-# %{_datadir}/glib-2.0/gdb/*.pyc
 %{_bindir}/glib-genmarshal
 %{_bindir}/glib-gettextize
 %{_bindir}/glib-mkenums
@@ -134,9 +161,8 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 %{_bindir}/gdbus-codegen
 %{_bindir}/glib-compile-resources
 %{_bindir}/gresource
-%{_libdir}/gdbus-2.0/codegen
+%{_datadir}/glib-2.0/codegen
 %attr (0755, root, root) %{_bindir}/gtester-report
-%doc %{_datadir}/gtk-doc/html/*
 %doc %{_mandir}/man1/glib-genmarshal.1.gz
 %doc %{_mandir}/man1/glib-gettextize.1.gz
 %doc %{_mandir}/man1/glib-mkenums.1.gz
@@ -150,7 +176,21 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 %{_datadir}/gdb/auto-load%{_libdir}/libgobject-2.0.so.*-gdb.py*
 %{_datadir}/systemtap/tapset/*.stp
 
+%files doc
+%doc %{_datadir}/gtk-doc/html/*
+
 %changelog
+* Wed Oct 10 2012 Matthias Clasen <mclasen@redhat.com> - 2.34.0-3
+- Disable fam. We use the inotify implementation at runtime anyway.
+  See http://lists.fedoraproject.org/pipermail/devel/2012-October/172438.htm
+
+* Thu Sep 27 2012 Colin Walters <walters@verbum.org> - 2.34.0-2
+- Use install -p to preserve timestamps on .py files
+- Rename systemtap tapsets with architecture-specific prefix
+- Pull upstream patch to avoid conflict on /usr/bin/gdbus-codegen
+- Split gtk-doc off into -doc package to avoid multilib conflicts
+- Resolves: #718404
+
 * Mon Sep 24 2012 Kalev Lember <kalevlember@gmail.com> - 2.34.0-1
 - Update to 2.34.0
 
