@@ -133,7 +133,6 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 %dir %{_libdir}/gio
 %dir %{_libdir}/gio/modules
 %ghost %{_libdir}/gio/modules/giomodule.cache
-%{_libdir}/gio/modules/libgiofam.so
 %{_bindir}/gio-querymodules*
 %{_bindir}/glib-compile-schemas
 %{_bindir}/gsettings
