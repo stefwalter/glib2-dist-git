@@ -1,7 +1,7 @@
 Summary: A library of handy utility functions
 Name: glib2
 Version: 2.34.0
-Release: 3%{?dist}
+Release: 4%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
@@ -55,6 +55,15 @@ BuildArch: noarch
 %description doc
 The glib2-doc package includes documentation for the GLib library.
 
+%package fam
+Summary: FAM monitoring module for GIO
+Group: Development/Libraries
+Requires: %{name} = %{version}-%{release}
+BuildRequires: gamin-devel
+
+%description fam
+The glib2-fam package contains the FAM (File Alteration Monitor) module for GIO.
+
 %prep
 %setup -q -n glib-%{version}
 %patch0 -p1
@@ -67,7 +76,6 @@ rm -f configure
 (if ! test -x configure; then NOCONFIGURE=1 ./autogen.sh; CONFIGFLAGS=--enable-gtk-doc; fi;
  %configure $CONFIGFLAGS \
            --enable-systemtap \
-           --disable-fam \
            --disable-static
 )
 
@@ -178,7 +186,13 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 %files doc
 %doc %{_datadir}/gtk-doc/html/*
 
+%files fam
+%{_libdir}/gio/modules/libgiofam.so
+
 %changelog
+* Wed Oct 10 2012 Tomas Bzatek <tbzatek@redhat.com> - 2.34.0-4
+- Re-enable fam, put it in separate subpackage
+
 * Wed Oct 10 2012 Matthias Clasen <mclasen@redhat.com> - 2.34.0-3
 - Disable fam. We use the inotify implementation at runtime anyway.
   See http://lists.fedoraproject.org/pipermail/devel/2012-October/172438.htm
