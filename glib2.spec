@@ -1,7 +1,7 @@
 Summary: A library of handy utility functions
 Name: glib2
-Version: 2.34.0
-Release: 4%{?dist}
+Version: 2.34.1
+Release: 1%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
@@ -190,6 +190,9 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 %{_libdir}/gio/modules/libgiofam.so
 
 %changelog
+* Tue Oct 16 2012 Kalev Lember <kalevlember@gmail.com> - 2.34.1-1
+- Update to 2.34.1
+
 * Wed Oct 10 2012 Tomas Bzatek <tbzatek@redhat.com> - 2.34.0-4
 - Re-enable fam, put it in separate subpackage
 
