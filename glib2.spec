@@ -1,14 +1,12 @@
 Summary: A library of handy utility functions
 Name: glib2
-Version: 2.34.1
+Version: 2.35.1
 Release: 1%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
 #VCS: git:git://git.gnome.org/glib
-Source: http://download.gnome.org/sources/glib/2.34/glib-%{version}.tar.xz
-
-Patch0: codegen-in-datadir.patch
+Source: http://download.gnome.org/sources/glib/2.35/glib-%{version}.tar.xz
 
 BuildRequires: pkgconfig
 BuildRequires: gettext
@@ -66,12 +64,8 @@ The glib2-fam package contains the FAM (File Alteration Monitor) module for GIO.
 
 %prep
 %setup -q -n glib-%{version}
-%patch0 -p1
 
 %build
-# Rerun autotools for the above patch
-rm -f configure
-
 # Support builds of both git snapshots and tarballs packed with autogoo
 (if ! test -x configure; then NOCONFIGURE=1 ./autogen.sh; CONFIGFLAGS=--enable-gtk-doc; fi;
  %configure $CONFIGFLAGS \
@@ -190,6 +184,10 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 %{_libdir}/gio/modules/libgiofam.so
 
 %changelog
+* Thu Nov 08 2012 Kalev Lember <kalevlember@gmail.com> - 2.35.1-1
+- Update to 2.35.1
+- Drop upstreamed codegen-in-datadir.patch
+
 * Tue Oct 16 2012 Kalev Lember <kalevlember@gmail.com> - 2.34.1-1
 - Update to 2.34.1
 
