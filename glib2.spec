@@ -1,12 +1,12 @@
 Summary: A library of handy utility functions
 Name: glib2
-Version: 2.35.9
+Version: 2.36.0
 Release: 1%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
 #VCS: git:git://git.gnome.org/glib
-Source: http://download.gnome.org/sources/glib/2.35/glib-%{version}.tar.xz
+Source: http://download.gnome.org/sources/glib/2.36/glib-%{version}.tar.xz
 
 BuildRequires: pkgconfig
 BuildRequires: gettext
@@ -184,6 +184,9 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 %{_libdir}/gio/modules/libgiofam.so
 
 %changelog
+* Mon Mar 25 2013 Kalev Lember <kalevlember@gmail.com> - 2.36.0-1
+- Update to 2.36.0
+
 * Tue Mar 19 2013 Matthias Clasen <mclasen@redhat.com> - 2.35.9-1
 - Update to 2.35.9
 
