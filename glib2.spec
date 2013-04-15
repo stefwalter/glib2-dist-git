@@ -1,6 +1,6 @@
 Summary: A library of handy utility functions
 Name: glib2
-Version: 2.36.0
+Version: 2.36.1
 Release: 1%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
@@ -184,6 +184,9 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 %{_libdir}/gio/modules/libgiofam.so
 
 %changelog
+* Mon Apr 15 2013 Kalev Lember <kalevlember@gmail.com> - 2.36.1-1
+- Update to 2.36.1
+
 * Mon Mar 25 2013 Kalev Lember <kalevlember@gmail.com> - 2.36.0-1
 - Update to 2.36.0
 
