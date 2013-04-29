@@ -1,12 +1,15 @@
 Summary: A library of handy utility functions
 Name: glib2
 Version: 2.36.1
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
 #VCS: git:git://git.gnome.org/glib
 Source: http://download.gnome.org/sources/glib/2.36/glib-%{version}.tar.xz
+# patch0 was is commit eb860fd on master and f3b1054b in 2.36 
+# backgrounds: https://bugzilla.gnome.org/show_bug.cgi?id=698081
+Patch0: %{name}-partially_revert_merge_waitpid_from_g_spawn_sync_into_gmain.patch
 
 BuildRequires: pkgconfig
 BuildRequires: gettext
@@ -64,6 +67,7 @@ The glib2-fam package contains the FAM (File Alteration Monitor) module for GIO.
 
 %prep
 %setup -q -n glib-%{version}
+%patch0 -p1 -b .patch0
 
 %build
 # Support builds of both git snapshots and tarballs packed with autogoo
@@ -184,6 +188,9 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 %{_libdir}/gio/modules/libgiofam.so
 
 %changelog
+* Sat Apr 27 2013 Thorsten Leemhuis <fedora@leemhuis.info> - 2.36.1-2
+- Fix pidgin freezes by applying patch from master (#956872)
+
 * Mon Apr 15 2013 Kalev Lember <kalevlember@gmail.com> - 2.36.1-1
 - Update to 2.36.1
 
