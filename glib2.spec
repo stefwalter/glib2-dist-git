@@ -1,6 +1,6 @@
 Summary: A library of handy utility functions
 Name: glib2
-Version: 2.37.0
+Version: 2.37.1
 Release: 1%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
@@ -38,7 +38,7 @@ as an event loop, threads, dynamic loading, and an object system.
 %package devel
 Summary: A library of handy utility functions
 Group: Development/Libraries
-Requires: %{name} = %{version}-%{release}
+Requires: %{name}%{?_isa} = %{version}-%{release}
 Obsoletes: glib2-static < 2.32.1-2
 
 %description devel
@@ -56,11 +56,20 @@ The glib2-doc package includes documentation for the GLib library.
 %package fam
 Summary: FAM monitoring module for GIO
 Group: Development/Libraries
-Requires: %{name} = %{version}-%{release}
+Requires: %{name}%{?_isa} = %{version}-%{release}
 BuildRequires: gamin-devel
 
 %description fam
 The glib2-fam package contains the FAM (File Alteration Monitor) module for GIO.
+
+%package tests
+Summary: Tests for the glib2 package
+Group: Development/Libraries
+Requires: %{name}%{?_isa} = %{version}-%{release}
+
+%description tests
+The glib2-tests package contains tests that can be used to verify
+the functionality of the installed glib2 package.
 
 %prep
 %setup -q -n glib-%{version}
@@ -70,7 +79,8 @@ The glib2-fam package contains the FAM (File Alteration Monitor) module for GIO.
 (if ! test -x configure; then NOCONFIGURE=1 ./autogen.sh; CONFIGFLAGS=--enable-gtk-doc; fi;
  %configure $CONFIGFLAGS \
            --enable-systemtap \
-           --disable-static
+           --disable-static \
+           --enable-installed-tests
 )
 
 make %{?_smp_mflags}
@@ -183,7 +193,15 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 %files fam
 %{_libdir}/gio/modules/libgiofam.so
 
+%files tests
+%{_libexecdir}/glib/installed-tests
+%{_datadir}/installed-tests
+
 %changelog
+* Tue May 28 2013 Matthias Clasen <mclasen@redhat.com> - 2.37.1-1
+- Update to 2.37.1
+- Add a tests subpackage
+
 * Sat May 04 2013 Kalev Lember <kalevlember@gmail.com> - 2.37.0-1
 - Update to 2.37.0
 
