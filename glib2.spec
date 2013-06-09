@@ -1,3 +1,5 @@
+%global _changelog_trimtime %(date +%s -d "1 year ago")
+
 Summary: A library of handy utility functions
 Name: glib2
 Version: 2.37.1
