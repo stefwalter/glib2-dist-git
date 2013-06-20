@@ -2,7 +2,7 @@
 
 Summary: A library of handy utility functions
 Name: glib2
-Version: 2.37.1
+Version: 2.37.2
 Release: 1%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
@@ -196,10 +196,13 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 %{_libdir}/gio/modules/libgiofam.so
 
 %files tests
-%{_libexecdir}/glib/installed-tests
+%{_libexecdir}/installed-tests
 %{_datadir}/installed-tests
 
 %changelog
+* Thu Jun 20 2013 Debarshi Ray <rishi@fedoraproject.org> - 2.37.2-1
+- Update to 2.37.2
+
 * Tue May 28 2013 Matthias Clasen <mclasen@redhat.com> - 2.37.1-1
 - Update to 2.37.1
 - Add a tests subpackage
