@@ -76,6 +76,10 @@ the functionality of the installed glib2 package.
 %prep
 %setup -q -n glib-%{version}
 
+# Workaround wrong gtk-doc.make timestamp
+# https://bugzilla.gnome.org/show_bug.cgi?id=700350
+touch -r Makefile.am gtk-doc.make
+
 %build
 # Support builds of both git snapshots and tarballs packed with autogoo
 (if ! test -x configure; then NOCONFIGURE=1 ./autogen.sh; CONFIGFLAGS=--enable-gtk-doc; fi;
