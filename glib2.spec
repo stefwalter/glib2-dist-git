@@ -101,6 +101,7 @@ make install DESTDIR=$RPM_BUILD_ROOT INSTALL="install -p -c"
 # installs.
 touch -r gio/gdbus-2.0/codegen/config.py.in $RPM_BUILD_ROOT/%{_datadir}/glib-2.0/codegen/config.py
 chrpath --delete $RPM_BUILD_ROOT%{_libdir}/*.so
+chrpath --delete $RPM_BUILD_ROOT%{_libexecdir}/installed-tests/glib/gdbus-peer
 
 rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 rm -f $RPM_BUILD_ROOT%{_libdir}/gio/modules/*.{a,la}
