@@ -2,8 +2,8 @@
 
 Summary: A library of handy utility functions
 Name: glib2
-Version: 2.37.5
-Release: 2%{?dist}
+Version: 2.37.6
+Release: 1%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
@@ -205,6 +205,9 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 %{_datadir}/installed-tests
 
 %changelog
+* Wed Aug 21 2013 Debarshi Ray <rishi@fedoraproject.org> - 2.37.6-1
+- Update to 2.37.6
+
 * Sat Aug 03 2013 Petr Pisar <ppisar@redhat.com> - 2.37.5-2
 - Perl 5.18 rebuild
 
