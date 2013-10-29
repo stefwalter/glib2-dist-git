@@ -147,6 +147,7 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 %dir %{_datadir}/bash-completion/completions
 %{_datadir}/bash-completion/completions/gdbus
 %{_datadir}/bash-completion/completions/gsettings
+%{_datadir}/bash-completion/completions/gapplication
 %dir %{_datadir}/glib-2.0
 %dir %{_datadir}/glib-2.0/schemas
 %dir %{_libdir}/gio
@@ -156,10 +157,12 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 %{_bindir}/glib-compile-schemas
 %{_bindir}/gsettings
 %{_bindir}/gdbus
+%{_bindir}/gapplication
 %doc %{_mandir}/man1/gio-querymodules.1.gz
 %doc %{_mandir}/man1/glib-compile-schemas.1.gz
 %doc %{_mandir}/man1/gsettings.1.gz
 %doc %{_mandir}/man1/gdbus.1.gz
+%doc %{_mandir}/man1/gapplication.1.gz
 
 %files devel
 %{_libdir}/lib*.so
