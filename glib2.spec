@@ -3,12 +3,15 @@
 Summary: A library of handy utility functions
 Name: glib2
 Version: 2.39.1
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
 #VCS: git:git://git.gnome.org/glib
 Source: http://download.gnome.org/sources/glib/2.39/glib-%{version}.tar.xz
+
+# already upstream
+Patch0: 0001-GDBusObjectManagerClient-keep-the-manager-alive-whil.patch
 
 BuildRequires: pkgconfig
 BuildRequires: gettext
@@ -75,6 +78,7 @@ the functionality of the installed glib2 package.
 
 %prep
 %setup -q -n glib-%{version}
+%patch0 -p1 -b fix-gsd
 
 # Workaround wrong gtk-doc.make timestamp
 # https://bugzilla.gnome.org/show_bug.cgi?id=700350
@@ -208,6 +212,9 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 %{_datadir}/installed-tests
 
 %changelog
+* Mon Dec 09 2013 Richard Hughes <rhughes@redhat.com> - 2.39.1-2
+- Backport a patch from master to stop gnome-settings-daemon crashing.
+
 * Thu Nov 14 2013 Richard Hughes <rhughes@redhat.com> - 2.39.1-1
 - Update to 2.39.1
 
