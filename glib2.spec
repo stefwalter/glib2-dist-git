@@ -3,7 +3,7 @@
 Summary: A library of handy utility functions
 Name: glib2
 Version: 2.39.2
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
@@ -41,7 +41,6 @@ as an event loop, threads, dynamic loading, and an object system.
 Summary: A library of handy utility functions
 Group: Development/Libraries
 Requires: %{name}%{?_isa} = %{version}-%{release}
-Obsoletes: glib2-static < 2.32.1-2
 
 %description devel
 The glib2-devel package includes the header files for the GLib library.
@@ -64,6 +63,13 @@ BuildRequires: gamin-devel
 %description fam
 The glib2-fam package contains the FAM (File Alteration Monitor) module for GIO.
 
+%package static
+Summary: glib static
+Requires: %{name}-devel = %{version}-%{release}
+
+%description static
+The %{name}-static subpackage contains static libraries for %{name}.
+
 %package tests
 Summary: Tests for the glib2 package
 Group: Development/Libraries
@@ -85,7 +91,7 @@ touch -r Makefile.am gtk-doc.make
 (if ! test -x configure; then NOCONFIGURE=1 ./autogen.sh; CONFIGFLAGS=--enable-gtk-doc; fi;
  %configure $CONFIGFLAGS \
            --enable-systemtap \
-           --disable-static \
+           --enable-static \
            --enable-installed-tests
 )
 
@@ -203,11 +209,22 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 %files fam
 %{_libdir}/gio/modules/libgiofam.so
 
+%files static
+%{_libdir}/libgio-2.0.a
+%{_libdir}/libglib-2.0.a
+%{_libdir}/libgmodule-2.0.a
+%{_libdir}/libgobject-2.0.a
+%{_libdir}/libgthread-2.0.a
+
 %files tests
 %{_libexecdir}/installed-tests
 %{_datadir}/installed-tests
 
 %changelog
+* Sun Dec 22 2013 Richard W.M. Jones <rjones@redhat.com> - 2.39.2-2
+- Re-add static subpackage so that we can build static qemu as
+  an AArch64 binfmt.
+
 * Tue Dec 17 2013 Richard Hughes <rhughes@redhat.com> - 2.39.2-1
 - Update to 2.39.2
 
