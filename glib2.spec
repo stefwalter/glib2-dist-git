@@ -2,8 +2,8 @@
 
 Summary: A library of handy utility functions
 Name: glib2
-Version: 2.39.2
-Release: 2%{?dist}
+Version: 2.39.3
+Release: 1%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
@@ -221,6 +221,9 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 %{_datadir}/installed-tests
 
 %changelog
+* Tue Jan 14 2014 Richard Hughes <rhughes@redhat.com> - 2.39.3-1
+- Update to 2.39.3
+
 * Sun Dec 22 2013 Richard W.M. Jones <rjones@redhat.com> - 2.39.2-2
 - Re-add static subpackage so that we can build static qemu as
   an AArch64 binfmt.
