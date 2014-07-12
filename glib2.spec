@@ -3,7 +3,7 @@
 Summary: A library of handy utility functions
 Name: glib2
 Version: 2.41.1
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
@@ -143,7 +143,9 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 
 
 %files -f glib20.lang
-%doc AUTHORS COPYING NEWS README
+%{!?_licensedir:%global license %%doc}
+%license COPYING
+%doc AUTHORS NEWS README
 %{_libdir}/libglib-2.0.so.*
 %{_libdir}/libgthread-2.0.so.*
 %{_libdir}/libgmodule-2.0.so.*
@@ -221,6 +223,9 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 %{_datadir}/installed-tests
 
 %changelog
+* Sat Jul 12 2014 Tom Callaway <spot@fedoraproject.org> - 2.41.1-2
+- fix license handling
+
 * Tue Jun 24 2014 Richard Hughes <rhughes@redhat.com> - 2.41.1-1
 - Update to 2.41.1
 
