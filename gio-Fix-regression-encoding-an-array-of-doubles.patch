@@ -1,0 +1,29 @@
+From 869a5d38d6004d3f636f3a01e029a81e545c1c51 Mon Sep 17 00:00:00 2001
+From: Stef Walter <stefw@gnome.org>
+Date: Tue, 22 Jul 2014 21:29:27 +0200
+Subject: [PATCH] gio: Fix regression encoding an array of doubles
+
+Take the simple slow path in this case. Encoding a double
+takes special precautions as you can see in append_value_to_blob()
+and friends.
+
+https://bugzilla.gnome.org/show_bug.cgi?id=732754
+---
+ gio/gdbusmessage.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/gio/gdbusmessage.c b/gio/gdbusmessage.c
+index cd995b8..4173bcc 100644
+--- a/gio/gdbusmessage.c
++++ b/gio/gdbusmessage.c
+@@ -1219,7 +1219,7 @@ get_type_fixed_size (const GVariantType *type)
+       return 2;
+     case 'i': case 'u': case 'h':
+       return 4;
+-    case 'x': case 't': case 'd':
++    case 'x': case 't':
+       return 8;
+     default:
+       return 0;
+-- 
+1.9.3
