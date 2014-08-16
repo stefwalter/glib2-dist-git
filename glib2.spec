@@ -2,15 +2,13 @@
 
 Summary: A library of handy utility functions
 Name: glib2
-Version: 2.41.2
-Release: 3%{?dist}
+Version: 2.41.3
+Release: 1%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
 #VCS: git:git://git.gnome.org/glib
 Source: http://download.gnome.org/sources/glib/2.41/glib-%{version}.tar.xz
-
-Patch1: gio-Fix-regression-encoding-an-array-of-doubles.patch
 
 BuildRequires: pkgconfig
 BuildRequires: gettext
@@ -83,11 +81,6 @@ the functionality of the installed glib2 package.
 
 %prep
 %setup -q -n glib-%{version}
-%patch1 -p1
-
-# Workaround wrong gtk-doc.make timestamp
-# https://bugzilla.gnome.org/show_bug.cgi?id=700350
-touch -r Makefile.am gtk-doc.make
 
 %build
 # Support builds of both git snapshots and tarballs packed with autogoo
@@ -226,6 +219,9 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 %{_datadir}/installed-tests
 
 %changelog
+* Sat Aug 16 2014 Kalev Lember <kalevlember@gmail.com> - 2.41.3-1
+- Update to 2.41.3
+
 * Sat Aug 16 2014 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.41.2-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_21_22_Mass_Rebuild
 
