@@ -3,7 +3,7 @@
 Summary: A library of handy utility functions
 Name: glib2
 Version: 2.41.4
-Release: 2%{?dist}
+Release: 3%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
@@ -106,7 +106,6 @@ make install DESTDIR=$RPM_BUILD_ROOT INSTALL="install -p -c"
 # installs.
 touch -r gio/gdbus-2.0/codegen/config.py.in $RPM_BUILD_ROOT/%{_datadir}/glib-2.0/codegen/config.py
 chrpath --delete $RPM_BUILD_ROOT%{_libdir}/*.so
-chrpath --delete $RPM_BUILD_ROOT%{_libexecdir}/installed-tests/glib/gdbus-peer
 
 rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 rm -f $RPM_BUILD_ROOT%{_libdir}/gio/modules/*.{a,la}
@@ -222,6 +221,9 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 %{_datadir}/installed-tests
 
 %changelog
+* Thu Sep  4 2014 Matthias Clasen <mclasen@redhat.com> 2.41.4-3
+- Don't remove rpath from gdbus-peer test - it doesn't work without it
+
 * Thu Sep 04 2014 Bastien Nocera <bnocera@redhat.com> 2.41.4-2
 - Fix banshee getting selected as the default movie player
 
