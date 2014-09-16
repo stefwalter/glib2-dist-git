@@ -2,8 +2,8 @@
 
 Summary: A library of handy utility functions
 Name: glib2
-Version: 2.41.4
-Release: 3%{?dist}
+Version: 2.41.5
+Release: 1%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
@@ -29,8 +29,6 @@ BuildRequires: chrpath
 
 # required for GIO content-type support
 Requires: shared-mime-info
-
-Patch0: broken-default-apps.patch
 
 %description
 GLib is the low-level core library that forms the basis for projects
@@ -83,7 +81,6 @@ the functionality of the installed glib2 package.
 
 %prep
 %setup -q -n glib-%{version}
-%patch0 -p1
 
 %build
 # Support builds of both git snapshots and tarballs packed with autogoo
@@ -221,6 +218,9 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 %{_datadir}/installed-tests
 
 %changelog
+* Tue Sep 16 2014 Kalev Lember <kalevlember@gmail.com> - 2.41.5-1
+- Update to 2.41.5
+
 * Thu Sep  4 2014 Matthias Clasen <mclasen@redhat.com> 2.41.4-3
 - Don't remove rpath from gdbus-peer test - it doesn't work without it
 
