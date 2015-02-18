@@ -161,11 +161,11 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 %{_bindir}/gsettings
 %{_bindir}/gdbus
 %{_bindir}/gapplication
-%doc %{_mandir}/man1/gio-querymodules.1.gz
-%doc %{_mandir}/man1/glib-compile-schemas.1.gz
-%doc %{_mandir}/man1/gsettings.1.gz
-%doc %{_mandir}/man1/gdbus.1.gz
-%doc %{_mandir}/man1/gapplication.1.gz
+%{_mandir}/man1/gio-querymodules.1*
+%{_mandir}/man1/glib-compile-schemas.1*
+%{_mandir}/man1/gsettings.1*
+%{_mandir}/man1/gdbus.1*
+%{_mandir}/man1/gapplication.1*
 
 %files devel
 %{_libdir}/lib*.so
@@ -187,15 +187,15 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 %{_bindir}/gresource
 %{_datadir}/glib-2.0/codegen
 %attr (0755, root, root) %{_bindir}/gtester-report
-%doc %{_mandir}/man1/glib-genmarshal.1.gz
-%doc %{_mandir}/man1/glib-gettextize.1.gz
-%doc %{_mandir}/man1/glib-mkenums.1.gz
-%doc %{_mandir}/man1/gobject-query.1.gz
-%doc %{_mandir}/man1/gtester-report.1.gz
-%doc %{_mandir}/man1/gtester.1.gz
-%doc %{_mandir}/man1/gdbus-codegen.1.gz
-%doc %{_mandir}/man1/glib-compile-resources.1.gz
-%doc %{_mandir}/man1/gresource.1.gz
+%{_mandir}/man1/glib-genmarshal.1*
+%{_mandir}/man1/glib-gettextize.1*
+%{_mandir}/man1/glib-mkenums.1*
+%{_mandir}/man1/gobject-query.1*
+%{_mandir}/man1/gtester-report.1*
+%{_mandir}/man1/gtester.1*
+%{_mandir}/man1/gdbus-codegen.1*
+%{_mandir}/man1/glib-compile-resources.1*
+%{_mandir}/man1/gresource.1*
 %{_datadir}/gdb/auto-load%{_libdir}/libglib-2.0.so.*-gdb.py*
 %{_datadir}/gdb/auto-load%{_libdir}/libgobject-2.0.so.*-gdb.py*
 %{_datadir}/systemtap/tapset/*.stp
@@ -220,6 +220,7 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 %changelog
 * Wed Feb 18 2015 David King <amigadave@amigadave.com> - 2.43.90-1
 - Update to 2.43.90
+- Update man pages glob in files section
 
 * Tue Feb 10 2015 Matthias Clasen <mclasen@redhat.com> - 2.43.4-1
 - Update to 2.43.4
