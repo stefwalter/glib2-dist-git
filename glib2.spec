@@ -2,8 +2,8 @@
 
 Summary: A library of handy utility functions
 Name: glib2
-Version: 2.43.90
-Release: 2%{?dist}
+Version: 2.43.91
+Release: 1%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
@@ -218,6 +218,9 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 %{_datadir}/installed-tests
 
 %changelog
+* Mon Mar 02 2015 Kalev Lember <kalevlember@gmail.com> - 2.43.91-1
+- Update to 2.43.91
+
 * Sat Feb 21 2015 Till Maas <opensource@till.name> - 2.43.90-2
 - Rebuilt for Fedora 23 Change
   https://fedoraproject.org/wiki/Changes/Harden_all_packages_with_position-independent_code
