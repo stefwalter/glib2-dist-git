@@ -3,7 +3,7 @@
 Summary: A library of handy utility functions
 Name: glib2
 Version: 2.45.4
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
@@ -126,16 +126,21 @@ chmod 644 $RPM_BUILD_ROOT%{_datadir}/bash-completion/completions/*
 %find_lang glib20
 
 
-%post
-/sbin/ldconfig
+%post -p /sbin/ldconfig
+
+%postun -p /sbin/ldconfig
+
+%transfiletriggerin -- %{_libdir}/gio/modules
 gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 
-
-%postun
-/sbin/ldconfig
-[ ! -x %{_bindir}/gio-querymodules-%{__isa_bits} ] || \
+%transfiletriggerpostun -- %{_libdir}/gio/modules
 gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 
+%transfiletriggerin -- %{_datadir}/glib-2.0/schemas
+glib-compile-schemas %{_datadir}/glib-2.0/schemas
+
+%transfiletriggerpostun -- %{_datadir}/glib-2.0/schemas
+glib-compile-schemas %{_datadir}/glib-2.0/schemas
 
 %files -f glib20.lang
 %{!?_licensedir:%global license %%doc}
@@ -218,6 +223,9 @@ gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 %{_datadir}/installed-tests
 
 %changelog
+* Fri Aug 14 2015 Matthias Clasen <mclasen@redhat.com> - 2.45.4-2
+- Add file triggers for gio modules and gsettings schemas
+
 * Tue Jul 21 2015 David King <amigadave@amigadave.com> - 2.45.4-1
 - Update to 2.45.4
 
