@@ -2,8 +2,8 @@
 
 Summary: A library of handy utility functions
 Name: glib2
-Version: 2.45.4
-Release: 2%{?dist}
+Version: 2.45.5
+Release: 1%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
@@ -223,6 +223,9 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas
 %{_datadir}/installed-tests
 
 %changelog
+* Wed Aug 19 2015 Kalev Lember <klember@redhat.com> - 2.45.5-1
+- Update to 2.45.5
+
 * Fri Aug 14 2015 Matthias Clasen <mclasen@redhat.com> - 2.45.4-2
 - Add file triggers for gio modules and gsettings schemas
 
