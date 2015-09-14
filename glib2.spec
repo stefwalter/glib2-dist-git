@@ -2,7 +2,7 @@
 
 Summary: A library of handy utility functions
 Name: glib2
-Version: 2.45.7
+Version: 2.45.8
 Release: 1%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
@@ -223,6 +223,9 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas
 %{_datadir}/installed-tests
 
 %changelog
+* Mon Sep 14 2015 Kalev Lember <klember@redhat.com> - 2.45.8-1
+- Update to 2.45.8
+
 * Tue Sep 01 2015 Kalev Lember <klember@redhat.com> - 2.45.7-1
 - Update to 2.45.7
 
