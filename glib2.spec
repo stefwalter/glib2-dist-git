@@ -2,15 +2,13 @@
 
 Summary: A library of handy utility functions
 Name: glib2
-Version: 2.46.1
-Release: 2%{?dist}
+Version: 2.47.1
+Release: 1%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
 #VCS: git:git://git.gnome.org/glib
-Source: http://download.gnome.org/sources/glib/2.46/glib-%{version}.tar.xz
-# Backported from upstream
-Patch0: 0001-GDesktopAppInfo-Do-not-set-the-DISPLAY-in-gio.patch
+Source: http://download.gnome.org/sources/glib/2.47/glib-%{version}.tar.xz
 
 BuildRequires: pkgconfig
 BuildRequires: gettext
@@ -83,7 +81,6 @@ the functionality of the installed glib2 package.
 
 %prep
 %setup -q -n glib-%{version}
-%patch0 -p1
 
 %build
 # Support builds of both git snapshots and tarballs packed with autogoo
@@ -226,6 +223,9 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas
 %{_datadir}/installed-tests
 
 %changelog
+* Wed Oct 28 2015 Kalev Lember <klember@redhat.com> - 2.47.1-1
+- Update to 2.47.1
+
 * Mon Oct 19 2015 Kalev Lember <klember@redhat.com> - 2.46.1-2
 - Backport an upstream fix for app launching under wayland (#1273146)
 
