@@ -3,7 +3,7 @@
 Summary: A library of handy utility functions
 Name: glib2
 Version: 2.47.1
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
@@ -131,16 +131,16 @@ chmod 644 $RPM_BUILD_ROOT%{_datadir}/bash-completion/completions/*
 %postun -p /sbin/ldconfig
 
 %transfiletriggerin -- %{_libdir}/gio/modules
-gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
+/bin/gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules &> /dev/null || :
 
 %transfiletriggerpostun -- %{_libdir}/gio/modules
-gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
+/bin/gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules &> /dev/null || :
 
 %transfiletriggerin -- %{_datadir}/glib-2.0/schemas
-glib-compile-schemas %{_datadir}/glib-2.0/schemas
+/bin/glib-compile-schemas %{_datadir}/glib-2.0/schemas &> /dev/null || :
 
 %transfiletriggerpostun -- %{_datadir}/glib-2.0/schemas
-glib-compile-schemas %{_datadir}/glib-2.0/schemas
+/bin/glib-compile-schemas %{_datadir}/glib-2.0/schemas &> /dev/null || :
 
 %files -f glib20.lang
 %{!?_licensedir:%global license %%doc}
@@ -223,6 +223,9 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas
 %{_datadir}/installed-tests
 
 %changelog
+* Mon Nov 09 2015 Kevin Fenzi <kevin@scrye.com> - 2.47.1-2
+- Add full path redirect output to null and || : to triggers.
+
 * Wed Oct 28 2015 Kalev Lember <klember@redhat.com> - 2.47.1-1
 - Update to 2.47.1
 
