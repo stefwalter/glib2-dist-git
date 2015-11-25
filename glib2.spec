@@ -2,8 +2,8 @@
 
 Summary: A library of handy utility functions
 Name: glib2
-Version: 2.47.1
-Release: 2%{?dist}
+Version: 2.47.2
+Release: 1%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
@@ -223,6 +223,9 @@ chmod 644 $RPM_BUILD_ROOT%{_datadir}/bash-completion/completions/*
 %{_datadir}/installed-tests
 
 %changelog
+* Wed Nov 25 2015 Kalev Lember <klember@redhat.com> - 2.47.2-1
+- Update to 2.47.2
+
 * Mon Nov 09 2015 Kevin Fenzi <kevin@scrye.com> - 2.47.1-2
 - Add full path redirect output to null and || : to triggers.
 
