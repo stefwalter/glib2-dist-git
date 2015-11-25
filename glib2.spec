@@ -2,7 +2,7 @@
 
 Summary: A library of handy utility functions
 Name: glib2
-Version: 2.47.2
+Version: 2.47.3
 Release: 1%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
@@ -223,6 +223,9 @@ chmod 644 $RPM_BUILD_ROOT%{_datadir}/bash-completion/completions/*
 %{_datadir}/installed-tests
 
 %changelog
+* Wed Nov 25 2015 Kalev Lember <klember@redhat.com> - 2.47.3-1
+- Update to 2.47.3
+
 * Wed Nov 25 2015 Kalev Lember <klember@redhat.com> - 2.47.2-1
 - Update to 2.47.2
 
