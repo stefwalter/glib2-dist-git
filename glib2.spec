@@ -4,7 +4,7 @@ Summary: A library of handy utility functions
 Name: glib2
 # git snapshot to work around https://bugzilla.gnome.org/show_bug.cgi?id=762637
 Version: 2.49.4
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
@@ -25,7 +25,7 @@ BuildRequires: systemtap-sdt-devel
 # Bootstrap build requirements
 BuildRequires: automake autoconf libtool
 BuildRequires: gtk-doc
-BuildRequires: python-devel
+BuildRequires: python3-devel
 BuildRequires: libffi-devel
 BuildRequires: elfutils-libelf-devel
 BuildRequires: chrpath
@@ -89,7 +89,7 @@ the functionality of the installed glib2 package.
 # Support builds of both git snapshots and tarballs packed with autogoo
 (if ! test -x configure; then NOCONFIGURE=1 ./autogen.sh; CONFIGFLAGS=--enable-gtk-doc; fi;
  %configure $CONFIGFLAGS \
-           --with-python=/usr/bin/python \
+           --with-python=%{__python3} \
            --with-pcre=system \
            --enable-systemtap \
            --enable-static \
@@ -231,6 +231,9 @@ chmod 644 $RPM_BUILD_ROOT%{_datadir}/bash-completion/completions/*
 %{_datadir}/installed-tests
 
 %changelog
+* Wed Jul 27 2016 Ville Skyttä <ville.skytta@iki.fi> - 2.49.4-2
+- Switch to Python 3 (#1286284)
+
 * Thu Jul 21 2016 Kalev Lember <klember@redhat.com> - 2.49.4-1
 - Update to 2.49.4
 
