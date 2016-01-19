@@ -2,7 +2,7 @@
 
 Summary: A library of handy utility functions
 Name: glib2
-Version: 2.47.4
+Version: 2.47.5
 Release: 1%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
@@ -203,6 +203,7 @@ chmod 644 $RPM_BUILD_ROOT%{_datadir}/bash-completion/completions/*
 %{_mandir}/man1/gresource.1*
 %{_datadir}/gdb/auto-load%{_libdir}/libglib-2.0.so.*-gdb.py*
 %{_datadir}/gdb/auto-load%{_libdir}/libgobject-2.0.so.*-gdb.py*
+%{_datadir}/gettext/
 %{_datadir}/systemtap/tapset/*.stp
 
 %files doc
@@ -223,6 +224,9 @@ chmod 644 $RPM_BUILD_ROOT%{_datadir}/bash-completion/completions/*
 %{_datadir}/installed-tests
 
 %changelog
+* Tue Jan 19 2016 David King <amigadave@amigadave.com> - 2.47.5-1
+- Update to 2.47.5
+
 * Wed Dec 16 2015 Kalev Lember <klember@redhat.com> - 2.47.4-1
 - Update to 2.47.4
 
