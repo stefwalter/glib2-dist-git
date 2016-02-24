@@ -2,8 +2,9 @@
 
 Summary: A library of handy utility functions
 Name: glib2
-Version: 2.47.6
-Release: 1%{?dist}
+# git snapshot to work around https://bugzilla.gnome.org/show_bug.cgi?id=762637
+Version: 2.47.6.19.gad2092b
+Release: 2%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
@@ -86,6 +87,7 @@ the functionality of the installed glib2 package.
 # Support builds of both git snapshots and tarballs packed with autogoo
 (if ! test -x configure; then NOCONFIGURE=1 ./autogen.sh; CONFIGFLAGS=--enable-gtk-doc; fi;
  %configure $CONFIGFLAGS \
+           --with-python=/usr/bin/python \
            --enable-systemtap \
            --enable-static \
            --enable-installed-tests
@@ -224,6 +226,12 @@ chmod 644 $RPM_BUILD_ROOT%{_datadir}/bash-completion/completions/*
 %{_datadir}/installed-tests
 
 %changelog
+* Wed Feb 24 2016 Colin Walters <walters@redhat.com> - 2.47.6.19.gad2092b-2
+- git snapshot to work around https://bugzilla.gnome.org/show_bug.cgi?id=762637
+- Add --with-python=/usr/bin/python explicitly to hopefully fix a weird
+  issue I am seeing where librepo fails to build in epel7 with this due to
+  us requiring /bin/python.
+
 * Wed Feb 17 2016 Richard Hughes <rhughes@redhat.com> - 2.47.6-1
 - Update to 2.47.6
 
