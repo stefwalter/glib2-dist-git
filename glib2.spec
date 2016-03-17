@@ -93,6 +93,9 @@ the functionality of the installed glib2 package.
            --enable-installed-tests
 )
 
+# workaround the missing stp file
+touch gobject/gobject.stp.in
+
 make %{?_smp_mflags}
 
 %install
