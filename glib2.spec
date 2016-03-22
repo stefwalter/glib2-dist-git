@@ -3,13 +3,13 @@
 Summary: A library of handy utility functions
 Name: glib2
 # git snapshot to work around https://bugzilla.gnome.org/show_bug.cgi?id=762637
-Version: 2.47.92
+Version: 2.48.0
 Release: 1%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
 #VCS: git:git://git.gnome.org/glib
-Source: http://download.gnome.org/sources/glib/2.47/glib-%{version}.tar.xz
+Source: http://download.gnome.org/sources/glib/2.48/glib-%{version}.tar.xz
 
 BuildRequires: pkgconfig
 BuildRequires: gettext
@@ -229,6 +229,9 @@ chmod 644 $RPM_BUILD_ROOT%{_datadir}/bash-completion/completions/*
 %{_datadir}/installed-tests
 
 %changelog
+* Tue Mar 22 2016 Kalev Lember <klember@redhat.com> - 2.48.0-1
+- Update to 2.48.0
+
 * Thu Mar 17 2016 Richard Hughes <rhughes@redhat.com> - 2.47.92-1
 - Update to 2.47.92
 
