@@ -3,8 +3,8 @@
 Summary: A library of handy utility functions
 Name: glib2
 # git snapshot to work around https://bugzilla.gnome.org/show_bug.cgi?id=762637
-Version: 2.48.0
-Release: 2%{?dist}
+Version: 2.48.1
+Release: 1%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
@@ -94,9 +94,6 @@ the functionality of the installed glib2 package.
            --enable-static \
            --enable-installed-tests
 )
-
-# workaround the missing stp file
-touch gobject/gobject.stp.in
 
 make %{?_smp_mflags}
 
@@ -231,6 +228,9 @@ chmod 644 $RPM_BUILD_ROOT%{_datadir}/bash-completion/completions/*
 %{_datadir}/installed-tests
 
 %changelog
+* Tue May 10 2016 Kalev Lember <klember@redhat.com> - 2.48.1-1
+- Update to 2.48.1
+
 * Wed Apr 06 2016 Colin Walters <walters@redhat.com> - 2.48.0-2
 - Explicitly require system pcre, though we happened to default to this now
   anyways due to something else pulling PCRE into the buildroot
