@@ -4,7 +4,7 @@ Summary: A library of handy utility functions
 Name: glib2
 # git snapshot to work around https://bugzilla.gnome.org/show_bug.cgi?id=762637
 Version: 2.49.1
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
@@ -29,8 +29,8 @@ BuildRequires: libffi-devel
 BuildRequires: elfutils-libelf-devel
 BuildRequires: chrpath
 
-# required for GIO content-type support
-Requires: shared-mime-info
+# for GIO content-type support
+Recommends: shared-mime-info
 
 %description
 GLib is the low-level core library that forms the basis for projects
@@ -228,6 +228,9 @@ chmod 644 $RPM_BUILD_ROOT%{_datadir}/bash-completion/completions/*
 %{_datadir}/installed-tests
 
 %changelog
+* Wed Jun 01 2016 Yaakov Selkowitz <yselkowi@redhat.com> - 2.49.1-2
+- Soften shared-mime-info dependency (#1266118)
+
 * Fri May 27 2016 Florian Müllner <fmuellner@redhat.com> - 2.49.1-1
 - Update to 2.49.1
 
