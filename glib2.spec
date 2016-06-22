@@ -3,8 +3,8 @@
 Summary: A library of handy utility functions
 Name: glib2
 # git snapshot to work around https://bugzilla.gnome.org/show_bug.cgi?id=762637
-Version: 2.49.1
-Release: 2%{?dist}
+Version: 2.49.2
+Release: 1%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtk.org
@@ -228,6 +228,9 @@ chmod 644 $RPM_BUILD_ROOT%{_datadir}/bash-completion/completions/*
 %{_datadir}/installed-tests
 
 %changelog
+* Wed Jun 22 2016 Richard Hughes <rhughes@redhat.com> - 2.49.2-1
+- Update to 2.49.2
+
 * Wed Jun 01 2016 Yaakov Selkowitz <yselkowi@redhat.com> - 2.49.1-2
 - Soften shared-mime-info dependency (#1266118)
 
