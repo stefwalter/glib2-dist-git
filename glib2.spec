@@ -11,6 +11,7 @@ URL: http://www.gtk.org
 #VCS: git:git://git.gnome.org/glib
 Source: http://download.gnome.org/sources/glib/2.49/glib-%{version}.tar.xz
 
+BuildRequires: perl-generators
 BuildRequires: pkgconfig
 BuildRequires: gettext
 BuildRequires: libattr-devel
