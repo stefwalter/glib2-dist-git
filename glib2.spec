@@ -3,7 +3,7 @@
 Summary: A library of handy utility functions
 Name: glib2
 # git snapshot to work around https://bugzilla.gnome.org/show_bug.cgi?id=762637
-Version: 2.49.3
+Version: 2.49.4
 Release: 1%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
@@ -231,6 +231,9 @@ chmod 644 $RPM_BUILD_ROOT%{_datadir}/bash-completion/completions/*
 %{_datadir}/installed-tests
 
 %changelog
+* Thu Jul 21 2016 Kalev Lember <klember@redhat.com> - 2.49.4-1
+- Update to 2.49.4
+
 * Sun Jul 17 2016 Kalev Lember <klember@redhat.com> - 2.49.3-1
 - Update to 2.49.3
 
