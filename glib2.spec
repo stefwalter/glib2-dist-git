@@ -210,12 +210,9 @@ chmod 644 $RPM_BUILD_ROOT%{_datadir}/bash-completion/completions/*
 %{_mandir}/man1/gdbus-codegen.1*
 %{_mandir}/man1/glib-compile-resources.1*
 %{_mandir}/man1/gresource.1*
-%{_datadir}/gdb/auto-load%{_libdir}/libglib-2.0.so.*-gdb.py
-%{_datadir}/gdb/auto-load%{_libdir}/libgobject-2.0.so.*-gdb.py
-# Let's own the directory, as it was not there
-%{_datadir}/gdb/auto-load%{_libdir}/__pycache__
+%{_datadir}/gdb/
 %{_datadir}/gettext/
-%{_datadir}/systemtap/tapset/*.stp
+%{_datadir}/systemtap/
 
 %files doc
 %doc %{_datadir}/gtk-doc/html/*
@@ -237,6 +234,7 @@ chmod 644 $RPM_BUILD_ROOT%{_datadir}/bash-completion/completions/*
 %changelog
 * Thu Aug 18 2016 Kalev Lember <klember@redhat.com> - 2.49.5-1
 - Update to 2.49.5
+- Own /usr/share/gdb and /usr/share/systemtap directories
 
 * Tue Aug 16 2016 Miro Hrončok <mhroncok@redhat.com> - 2.49.4-3
 - Use Python 3 for the RPM Python byte compilation
