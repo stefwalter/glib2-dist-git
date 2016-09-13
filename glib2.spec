@@ -3,14 +3,14 @@
 # See https://fedoraproject.org/wiki/Packaging:Python_Appendix#Manual_byte_compilation
 %global __python %{__python3}
 
-Summary: A library of handy utility functions
 Name: glib2
 Version: 2.49.7
 Release: 1%{?dist}
+Summary: A library of handy utility functions
+
 License: LGPLv2+
 URL: http://www.gtk.org
-#VCS: git:git://git.gnome.org/glib
-Source: http://download.gnome.org/sources/glib/2.49/glib-%{version}.tar.xz
+Source0: http://download.gnome.org/sources/glib/2.49/glib-%{version}.tar.xz
 
 BuildRequires: perl-generators
 BuildRequires: pkgconfig
