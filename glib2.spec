@@ -8,7 +8,6 @@ Name: glib2
 Version: 2.49.7
 Release: 1%{?dist}
 License: LGPLv2+
-Group: System Environment/Libraries
 URL: http://www.gtk.org
 #VCS: git:git://git.gnome.org/glib
 Source: http://download.gnome.org/sources/glib/2.49/glib-%{version}.tar.xz
@@ -44,7 +43,6 @@ as an event loop, threads, dynamic loading, and an object system.
 
 %package devel
 Summary: A library of handy utility functions
-Group: Development/Libraries
 Requires: %{name}%{?_isa} = %{version}-%{release}
 
 %description devel
@@ -52,7 +50,6 @@ The glib2-devel package includes the header files for the GLib library.
 
 %package doc
 Summary: A library of handy utility functions
-Group: Development/Libraries
 Requires: %{name} = %{version}-%{release}
 BuildArch: noarch
 
@@ -61,7 +58,6 @@ The glib2-doc package includes documentation for the GLib library.
 
 %package fam
 Summary: FAM monitoring module for GIO
-Group: Development/Libraries
 Requires: %{name}%{?_isa} = %{version}-%{release}
 BuildRequires: gamin-devel
 
@@ -77,7 +73,6 @@ The %{name}-static subpackage contains static libraries for %{name}.
 
 %package tests
 Summary: Tests for the glib2 package
-Group: Development/Libraries
 Requires: %{name}%{?_isa} = %{version}-%{release}
 
 %description tests
@@ -234,6 +229,7 @@ chmod 644 $RPM_BUILD_ROOT%{_datadir}/bash-completion/completions/*
 %changelog
 * Tue Sep 13 2016 Kalev Lember <klember@redhat.com> - 2.49.7-1
 - Update to 2.49.7
+- Don't set group tags
 
 * Sun Aug 28 2016 Kalev Lember <klember@redhat.com> - 2.49.6-1
 - Update to 2.49.6
