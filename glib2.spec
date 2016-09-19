@@ -4,18 +4,19 @@
 %global __python %{__python3}
 
 Name: glib2
-Version: 2.49.7
+Version: 2.50.0
 Release: 1%{?dist}
 Summary: A library of handy utility functions
 
 License: LGPLv2+
 URL: http://www.gtk.org
-Source0: http://download.gnome.org/sources/glib/2.49/glib-%{version}.tar.xz
+Source0: http://download.gnome.org/sources/glib/2.50/glib-%{version}.tar.xz
 
 BuildRequires: perl-generators
 BuildRequires: pkgconfig
 BuildRequires: gettext
 BuildRequires: libattr-devel
+BuildRequires: libmount-devel
 BuildRequires: libselinux-devel
 BuildRequires: pkgconfig(libpcre)
 # for sys/inotify.h
@@ -227,6 +228,9 @@ chmod 644 $RPM_BUILD_ROOT%{_datadir}/bash-completion/completions/*
 %{_datadir}/installed-tests
 
 %changelog
+* Mon Sep 19 2016 Kalev Lember <klember@redhat.com> - 2.50.0-1
+- Update to 2.50.0
+
 * Tue Sep 13 2016 Kalev Lember <klember@redhat.com> - 2.49.7-1
 - Update to 2.49.7
 - Don't set group tags
