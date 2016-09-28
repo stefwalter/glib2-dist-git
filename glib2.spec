@@ -146,7 +146,6 @@ chmod 644 $RPM_BUILD_ROOT%{_datadir}/bash-completion/completions/*
 /bin/glib-compile-schemas %{_datadir}/glib-2.0/schemas &> /dev/null || :
 
 %files -f glib20.lang
-%{!?_licensedir:%global license %%doc}
 %license COPYING
 %doc AUTHORS NEWS README
 %{_libdir}/libglib-2.0.so.*
