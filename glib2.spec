@@ -4,7 +4,7 @@
 %global __python %{__python3}
 
 Name: glib2
-Version: 2.50.0
+Version: 2.50.1
 Release: 1%{?dist}
 Summary: A library of handy utility functions
 
@@ -227,6 +227,9 @@ chmod 644 $RPM_BUILD_ROOT%{_datadir}/bash-completion/completions/*
 %{_datadir}/installed-tests
 
 %changelog
+* Wed Oct 12 2016 Kalev Lember <klember@redhat.com> - 2.50.1-1
+- Update to 2.50.1
+
 * Mon Sep 19 2016 Kalev Lember <klember@redhat.com> - 2.50.0-1
 - Update to 2.50.0
 
