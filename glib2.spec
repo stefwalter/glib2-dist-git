@@ -5,7 +5,7 @@
 
 Name: glib2
 Version: 2.51.0
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: A library of handy utility functions
 
 License: LGPLv2+
@@ -227,6 +227,9 @@ chmod 644 $RPM_BUILD_ROOT%{_datadir}/bash-completion/completions/*
 %{_datadir}/installed-tests
 
 %changelog
+* Mon Dec 19 2016 Miro Hrončok <mhroncok@redhat.com> - 2.51.0-2
+- Rebuild for Python 3.6
+
 * Sun Oct 30 2016 Kalev Lember <klember@redhat.com> - 2.51.0-1
 - Update to 2.51.0
 
