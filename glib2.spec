@@ -185,6 +185,7 @@ chmod 644 $RPM_BUILD_ROOT%{_datadir}/bash-completion/completions/*
 %{_datadir}/glib-2.0/gdb
 %{_datadir}/glib-2.0/gettext
 %{_datadir}/glib-2.0/schemas/gschema.dtd
+%{_datadir}/glib-2.0/valgrind/glib.supp
 %{_datadir}/bash-completion/completions/gresource
 %{_bindir}/glib-genmarshal
 %{_bindir}/glib-gettextize
