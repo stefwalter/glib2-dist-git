@@ -4,8 +4,8 @@
 %global __python %{__python3}
 
 Name: glib2
-Version: 2.51.0
-Release: 3%{?dist}
+Version: 2.51.1
+Release: 1%{?dist}
 Summary: A library of handy utility functions
 
 License: LGPLv2+
@@ -227,6 +227,9 @@ chmod 644 $RPM_BUILD_ROOT%{_datadir}/bash-completion/completions/*
 %{_datadir}/installed-tests
 
 %changelog
+* Mon Feb 13 2017 Richard Hughes <rhughes@redhat.com> - 2.51.1-1
+- Update to 2.51.1
+
 * Fri Feb 10 2017 Fedora Release Engineering <releng@fedoraproject.org> - 2.51.0-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_26_Mass_Rebuild
 
