@@ -32,6 +32,9 @@ BuildRequires: libffi-devel
 BuildRequires: elfutils-libelf-devel
 BuildRequires: chrpath
 
+# Needed for get_session_address_dbus_launch() in gio/gdbusaddress.c
+# https://bugzilla.redhat.com/show_bug.cgi?id=927212
+Requires:   /usr/bin/dbus-launch
 # for GIO content-type support
 Recommends: shared-mime-info
 
@@ -230,6 +233,7 @@ chmod 644 $RPM_BUILD_ROOT%{_datadir}/bash-completion/completions/*
 %changelog
 * Wed Mar 01 2017 David King <amigadave@amigadave.com> - 2.51.4-1
 - Update to 2.51.4
+- Add a Requires on dbus-launch (#927212)
 
 * Tue Feb 14 2017 Richard Hughes <rhughes@redhat.com> - 2.51.2-1
 - Update to 2.51.2
