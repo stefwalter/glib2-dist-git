@@ -12,25 +12,24 @@ License: LGPLv2+
 URL: http://www.gtk.org
 Source0: http://download.gnome.org/sources/glib/2.51/glib-%{version}.tar.xz
 
-BuildRequires: perl-generators
-BuildRequires: pkgconfig
+BuildRequires: chrpath
 BuildRequires: gettext
-BuildRequires: libattr-devel
-BuildRequires: libmount-devel
-BuildRequires: libselinux-devel
-BuildRequires: pkgconfig(libpcre)
+BuildRequires: perl-generators
 # for sys/inotify.h
 BuildRequires: glibc-devel
-BuildRequires: zlib-devel
+BuildRequires: libattr-devel
+BuildRequires: libselinux-devel
 # for sys/sdt.h
 BuildRequires: systemtap-sdt-devel
+BuildRequires: pkgconfig(libelf)
+BuildRequires: pkgconfig(libffi)
+BuildRequires: pkgconfig(libpcre)
+BuildRequires: pkgconfig(mount)
+BuildRequires: pkgconfig(zlib)
 # Bootstrap build requirements
 BuildRequires: automake autoconf libtool
 BuildRequires: gtk-doc
 BuildRequires: python3-devel
-BuildRequires: libffi-devel
-BuildRequires: elfutils-libelf-devel
-BuildRequires: chrpath
 
 # Needed for get_session_address_dbus_launch() in gio/gdbusaddress.c
 # https://bugzilla.redhat.com/show_bug.cgi?id=927212
@@ -234,6 +233,7 @@ chmod 644 $RPM_BUILD_ROOT%{_datadir}/bash-completion/completions/*
 * Wed Mar 01 2017 David King <amigadave@amigadave.com> - 2.51.4-1
 - Update to 2.51.4
 - Add a Requires on dbus-launch (#927212)
+- Use pkgconfig for BuildRequires
 
 * Tue Feb 14 2017 Richard Hughes <rhughes@redhat.com> - 2.51.2-1
 - Update to 2.51.2
