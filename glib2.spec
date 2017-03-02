@@ -5,7 +5,7 @@
 
 Name: glib2
 Version: 2.51.4
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: A library of handy utility functions
 
 License: LGPLv2+
@@ -31,9 +31,6 @@ BuildRequires: automake autoconf libtool
 BuildRequires: gtk-doc
 BuildRequires: python3-devel
 
-# Needed for get_session_address_dbus_launch() in gio/gdbusaddress.c
-# https://bugzilla.redhat.com/show_bug.cgi?id=927212
-Requires:   /usr/bin/dbus-launch
 # for GIO content-type support
 Recommends: shared-mime-info
 
@@ -230,6 +227,9 @@ chmod 644 $RPM_BUILD_ROOT%{_datadir}/bash-completion/completions/*
 %{_datadir}/installed-tests
 
 %changelog
+* Thu Mar 02 2017 Kalev Lember <klember@redhat.com> - 2.51.4-2
+- Remove the dependency on dbus-launch again (#927212)
+
 * Wed Mar 01 2017 David King <amigadave@amigadave.com> - 2.51.4-1
 - Update to 2.51.4
 - Add a Requires on dbus-launch (#927212)
