@@ -4,8 +4,8 @@
 %global __python %{__python3}
 
 Name: glib2
-Version: 2.51.4
-Release: 2%{?dist}
+Version: 2.51.5
+Release: 1%{?dist}
 Summary: A library of handy utility functions
 
 License: LGPLv2+
@@ -227,6 +227,9 @@ chmod 644 $RPM_BUILD_ROOT%{_datadir}/bash-completion/completions/*
 %{_datadir}/installed-tests
 
 %changelog
+* Thu Mar 16 2017 Kalev Lember <klember@redhat.com> - 2.51.5-1
+- Update to 2.51.5
+
 * Thu Mar 02 2017 Kalev Lember <klember@redhat.com> - 2.51.4-2
 - Remove the dependency on dbus-launch again (#927212)
 
