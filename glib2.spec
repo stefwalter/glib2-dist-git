@@ -4,13 +4,13 @@
 %global __python %{__python3}
 
 Name: glib2
-Version: 2.51.5
+Version: 2.52.0
 Release: 1%{?dist}
 Summary: A library of handy utility functions
 
 License: LGPLv2+
 URL: http://www.gtk.org
-Source0: http://download.gnome.org/sources/glib/2.51/glib-%{version}.tar.xz
+Source0: http://download.gnome.org/sources/glib/2.52/glib-%{version}.tar.xz
 
 BuildRequires: chrpath
 BuildRequires: gettext
@@ -227,6 +227,9 @@ chmod 644 $RPM_BUILD_ROOT%{_datadir}/bash-completion/completions/*
 %{_datadir}/installed-tests
 
 %changelog
+* Mon Mar 20 2017 Kalev Lember <klember@redhat.com> - 2.52.0-1
+- Update to 2.52.0
+
 * Thu Mar 16 2017 Kalev Lember <klember@redhat.com> - 2.51.5-1
 - Update to 2.51.5
 
