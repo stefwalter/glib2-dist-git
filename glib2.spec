@@ -133,16 +133,16 @@ chmod 644 $RPM_BUILD_ROOT%{_datadir}/bash-completion/completions/*
 %postun -p /sbin/ldconfig
 
 %transfiletriggerin -- %{_libdir}/gio/modules
-/bin/gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules &> /dev/null || :
+gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules &> /dev/null || :
 
 %transfiletriggerpostun -- %{_libdir}/gio/modules
-/bin/gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules &> /dev/null || :
+gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules &> /dev/null || :
 
 %transfiletriggerin -- %{_datadir}/glib-2.0/schemas
-/bin/glib-compile-schemas %{_datadir}/glib-2.0/schemas &> /dev/null || :
+glib-compile-schemas %{_datadir}/glib-2.0/schemas &> /dev/null || :
 
 %transfiletriggerpostun -- %{_datadir}/glib-2.0/schemas
-/bin/glib-compile-schemas %{_datadir}/glib-2.0/schemas &> /dev/null || :
+glib-compile-schemas %{_datadir}/glib-2.0/schemas &> /dev/null || :
 
 %files -f glib20.lang
 %license COPYING
