@@ -4,7 +4,7 @@
 %global __python %{__python3}
 
 Name: glib2
-Version: 2.52.0
+Version: 2.52.1
 Release: 1%{?dist}
 Summary: A library of handy utility functions
 
@@ -227,6 +227,9 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &> /dev/null || :
 %{_datadir}/installed-tests
 
 %changelog
+* Tue Apr 11 2017 Kalev Lember <klember@redhat.com> - 2.52.1-1
+- Update to 2.52.1
+
 * Mon Mar 20 2017 Kalev Lember <klember@redhat.com> - 2.52.0-1
 - Update to 2.52.0
 
