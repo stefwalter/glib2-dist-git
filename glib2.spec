@@ -5,12 +5,15 @@
 
 Name: glib2
 Version: 2.52.1
-Release: 2%{?dist}
+Release: 3%{?dist}
 Summary: A library of handy utility functions
 
 License: LGPLv2+
 URL: http://www.gtk.org
 Source0: http://download.gnome.org/sources/glib/2.52/glib-%{version}.tar.xz
+
+# https://bugzilla.gnome.org/show_bug.cgi?id=761102
+Patch0: gmain-wakeup.patch
 
 BuildRequires: chrpath
 BuildRequires: gettext
@@ -229,6 +232,10 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &> /dev/null || :
 %{_datadir}/installed-tests
 
 %changelog
+* Tue Apr 11 2017 Colin Walters <walters@verbum.org> - 2.52.1-3
+- Backport patches for gmain wakeup for qemu
+  See: https://bugzilla.gnome.org/show_bug.cgi?id=761102
+
 * Tue Apr 11 2017 Colin Walters <walters@verbum.org> - 2.52.1-2
 - Explictly remove PCRE sources
 - Related: https://bugzilla.redhat.com/show_bug.cgi?id=1324770

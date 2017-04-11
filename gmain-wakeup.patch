@@ -1,0 +1,130 @@
+From d26e8979891d549214c955104529177576cd9de0 Mon Sep 17 00:00:00 2001
+From: Colin Walters <walters@verbum.org>
+Date: Fri, 31 Mar 2017 16:19:58 -0400
+Subject: [PATCH 1/2] main: Create a helper function for "owner wakeup"
+ optimization
+
+The original patch really should have introduced a helper - among
+other things it deserves a code comment.  We're likely to make
+further changes too, so it's obviously better to only do it in one
+place.
+
+See: https://bugzilla.gnome.org/show_bug.cgi?id=761102
+---
+ glib/gmain.c | 28 +++++++++++++++++++---------
+ 1 file changed, 19 insertions(+), 9 deletions(-)
+
+diff --git a/glib/gmain.c b/glib/gmain.c
+index 4f90574..88b57fd 100644
+--- a/glib/gmain.c
++++ b/glib/gmain.c
+@@ -1118,6 +1118,19 @@ source_remove_from_context (GSource      *source,
+     }
+ }
+ 
++/* See https://bugzilla.gnome.org/show_bug.cgi?id=761102 for
++ * the introduction of this.
++ *
++ * The main optimization is to avoid waking up the main
++ * context if a change is made by the current owner.
++ */
++static void
++conditional_wakeup (GMainContext *context)
++{
++  if (context->owner && context->owner != G_THREAD_SELF)
++    g_wakeup_signal (context->wakeup);
++}
++
+ static guint
+ g_source_attach_unlocked (GSource      *source,
+                           GMainContext *context,
+@@ -1164,8 +1177,8 @@ g_source_attach_unlocked (GSource      *source,
+   /* If another thread has acquired the context, wake it up since it
+    * might be in poll() right now.
+    */
+-  if (do_wakeup && context->owner && context->owner != G_THREAD_SELF)
+-    g_wakeup_signal (context->wakeup);
++  if (do_wakeup)
++    conditional_wakeup (context);
+ 
+   return source->source_id;
+ }
+@@ -1839,8 +1852,7 @@ g_source_set_ready_time (GSource *source,
+     {
+       /* Quite likely that we need to change the timeout on the poll */
+       if (!SOURCE_BLOCKED (source))
+-        if (context->owner && context->owner != G_THREAD_SELF)
+-          g_wakeup_signal (context->wakeup);
++        conditional_wakeup (context);
+       UNLOCK_CONTEXT (context);
+     }
+ }
+@@ -4352,8 +4364,7 @@ g_main_context_add_poll_unlocked (GMainContext *context,
+   context->poll_changed = TRUE;
+ 
+   /* Now wake up the main loop if it is waiting in the poll() */
+-  if (context->owner && context->owner != G_THREAD_SELF)
+-    g_wakeup_signal (context->wakeup);
++  conditional_wakeup (context);
+ }
+ 
+ /**
+@@ -4411,10 +4422,9 @@ g_main_context_remove_poll_unlocked (GMainContext *context,
+     }
+ 
+   context->poll_changed = TRUE;
+-  
++
+   /* Now wake up the main loop if it is waiting in the poll() */
+-  if (context->owner && context->owner != G_THREAD_SELF)
+-    g_wakeup_signal (context->wakeup);
++  conditional_wakeup (context);
+ }
+ 
+ /**
+-- 
+2.9.3
+
+
+From c4b3fd1487dad9dece67453cef4954b07dd3bdc1 Mon Sep 17 00:00:00 2001
+From: Paolo Bonzini <bonzini@gnu.org>
+Date: Mon, 3 Apr 2017 13:32:32 -0400
+Subject: [PATCH 2/2] gmain: Signal wakeups if context has never been acquired
+ as well
+
+Should address backwards compatibility with how qemu is using
+`GMainContext`.
+
+See https://bugzilla.gnome.org/show_bug.cgi?id=761102#c14
+
+Input-into-keyboard-by: Colin Walters <walters@verbum.org>
+---
+ glib/gmain.c | 12 +++++++++++-
+ 1 file changed, 11 insertions(+), 1 deletion(-)
+
+diff --git a/glib/gmain.c b/glib/gmain.c
+index 88b57fd..f390c46 100644
+--- a/glib/gmain.c
++++ b/glib/gmain.c
+@@ -1127,7 +1127,17 @@ source_remove_from_context (GSource      *source,
+ static void
+ conditional_wakeup (GMainContext *context)
+ {
+-  if (context->owner && context->owner != G_THREAD_SELF)
++  /* We want to signal wakeups in two cases:
++   *  1 When the context is owned by another thread
++   *  2 When the context owner is NULL (two subcases)
++   *   2a Possible if the context has never been acquired
++   *   2b Or if the context has no current owner
++   *
++   * At least case 2a) is necessary to ensure backwards compatibility with
++   * qemu's use of GMainContext.
++   * https://bugzilla.gnome.org/show_bug.cgi?id=761102#c14
++   */
++  if (context->owner != G_THREAD_SELF)
+     g_wakeup_signal (context->wakeup);
+ }
+ 
+-- 
+2.9.3
+
