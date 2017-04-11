@@ -5,7 +5,7 @@
 
 Name: glib2
 Version: 2.52.1
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: A library of handy utility functions
 
 License: LGPLv2+
@@ -83,6 +83,8 @@ the functionality of the installed glib2 package.
 %setup -q -n glib-%{version}
 
 %build
+# Bug 1324770: Also explicitly remove PCRE sources since we use --with-pcre=system
+rm glib/pcre/*.[ch]
 # Support builds of both git snapshots and tarballs packed with autogoo
 (if ! test -x configure; then NOCONFIGURE=1 ./autogen.sh; CONFIGFLAGS=--enable-gtk-doc; fi;
  %configure $CONFIGFLAGS \
@@ -227,6 +229,10 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &> /dev/null || :
 %{_datadir}/installed-tests
 
 %changelog
+* Tue Apr 11 2017 Colin Walters <walters@verbum.org> - 2.52.1-2
+- Explictly remove PCRE sources
+- Related: https://bugzilla.redhat.com/show_bug.cgi?id=1324770
+
 * Tue Apr 11 2017 Kalev Lember <klember@redhat.com> - 2.52.1-1
 - Update to 2.52.1
 
