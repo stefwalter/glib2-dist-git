@@ -1,0 +1,4 @@
+---
+- name: Install the test subject RPMs
+  package: name={{item}} state=latest
+  with_items: "{{ subjects }}"

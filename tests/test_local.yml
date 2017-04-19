@@ -1,0 +1,26 @@
+---
+- hosts: localhost
+  vars:
+    artifacts: ./artifacts
+  tasks:
+  - name: Install the glib2-test requirements
+    package: name={{item}} state=latest
+    with_items:
+    - glib2-tests
+    - gnome-desktop-testing
+    - dbus-x11
+    - xorg-x11-server-Xvfb
+    - which
+    tags:
+    - prepare
+
+  - block:
+    - name: Execute test-simple
+      shell: /bin/sh -c "mkdir -p {{artifacts}}; exec 2>>{{artifacts}}/test.log 1>>{{artifacts}}/test.log; export GIO_USE_VFS=local; export GIO_USE_VOLUME_MONITOR=unix; export XDG_RUNTIME_DIR={{artifacts}}; dbus-run-session -- xvfb-run -a gnome-desktop-testing-runner glib"
+
+    always:
+    - name: Pull out the logs
+      fetch:
+        dest: "{{artifacts}}/"
+        src: "{{artifacts}}/test.log"
+        flat: yes
